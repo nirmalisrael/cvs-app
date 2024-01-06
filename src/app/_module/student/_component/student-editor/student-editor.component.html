@@ -12,23 +12,26 @@
                 <button onclick="">LOG OUT</button>
             </div>
             <div class="content-container">
-                <button class="add-student-btn">+ Add Student</button>
-                <button class="modify-student-btn">Modify Student</button>
-                <button class="remove-student-btn">- Remove Student</button>
-                <select class="option-picker" id="degreeType" aria-placeholder="Degree Type">
-                    <option value="" disabled selected>Degree Type</option>
-                    <option *ngFor="let type of degreeTypeOptions" [value]="type">{{ type }}</option>            </select>
-                <select class="option-picker" id="department">
-                    <option value="" disabled selected>Department</option>
-                    <option *ngFor="let dept of departmentOptions" [value]="dept">{{ dept }}</option>
-                </select>
-                <select class="option-picker" id="admissionYear">
-                    <option value="" disabled selected>Admission Year</option>
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-               </select>
-                <button class="search-btn">Search</button>
+                <div class="btn-container">
+                    <button class="add-student-btn">+ Add Student</button>
+                   
+                </div>
+                <div class="option-container">
+                    <select class="option-picker" id="degreeType" aria-placeholder="Degree Type">
+                        <option value="" disabled selected>Degree Type</option>
+                        <option *ngFor="let type of degreeTypeOptions" [value]="type">{{ type }}</option>            </select>
+                    <select class="option-picker" id="department">
+                        <option value="" disabled selected>Department</option>
+                        <option *ngFor="let dept of departmentOptions" [value]="dept">{{ dept }}</option>
+                    </select>
+                    <select class="option-picker" id="admissionYear">
+                        <option value="" disabled selected>Admission Year</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                   </select>
+                    <button class="search-btn">Search</button>
+                </div>
             </div>
             <div *ngIf="studentList.length > 0; else noStudents" class="student-table-container" #tableContainer>
 
@@ -63,17 +66,23 @@
                                     <td>{{student.emailId}}</td>
                                     <td>{{student.phoneNumber}}</td>
                                     <td  style="text-align: left;"><address>{{student.address}}</address></td>
+                                    <td>
+                                        <button class="modify-student-btn"><img src="assets/student-editor/modify.png" alt="del"></button>
+                                        <button class="remove-student-btn"><img src="assets/student-editor/delete.png" alt="mod"></button>
+                                    </td>
                                 </tr>
                         </ng-container>
+                        
                     </tbody>
                 </table>
                 <br>
+        
             </div>
             <div *ngIf="showPagination" class="pagination">
-                <button class="prev-btn" (click)="prevPage()" [disabled]="currentPage === 1"> < Previous</button>
-                <span class="page-number"> {{currentPage}} </span>
-                <button class="next-btn" (click)="nextPage()" [disabled]="studentsToShow.length < studentsPerPage">Next ></button>
-            </div>
+                <ng-container *ngFor="let page of pages">
+                  <button class="page-btn" (click)="goToPage(page)" [class.active]="page === currentPage">{{ page }}</button>
+                </ng-container>
+              </div>
             <ng-template #noStudents>
                 <p>No students found.</p>
             </ng-template>

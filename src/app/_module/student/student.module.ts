@@ -9,7 +9,7 @@ import { StudentEditorComponent } from './_component/student-editor/student-edit
     StudentEditorComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ]
 })
 export class StudentModule { }
