@@ -1,0 +1,82 @@
+<html>
+    <body>
+        <div class="container">
+            <div class="left-navbar">
+                <a href="/admin-page/student-editor">Student Details</a>
+                <a href="/admin-page/auth-editor">Authentication Details</a>
+                <a href="/admin-page/election-editor">Election Details</a>
+                <a href="/admin-page/result-editor">Election Result Details</a>
+            </div>
+            <div class="top-navbar">
+                <a href="/admin-page"><h1>Admin Dashboard</h1></a>
+                <button onclick="">LOG OUT</button>
+            </div>
+            <div class="content-container">
+                <button class="add-student-btn">+ Add Student</button>
+                <button class="modify-student-btn">Modify Student</button>
+                <button class="remove-student-btn">- Remove Student</button>
+                <select class="option-picker" id="degreeType" aria-placeholder="Degree Type">
+                    <option value="" disabled selected>Degree Type</option>
+                    <option *ngFor="let type of degreeTypeOptions" [value]="type">{{ type }}</option>            </select>
+                <select class="option-picker" id="department">
+                    <option value="" disabled selected>Department</option>
+                    <option *ngFor="let dept of departmentOptions" [value]="dept">{{ dept }}</option>
+                </select>
+                <select class="option-picker" id="admissionYear">
+                    <option value="" disabled selected>Admission Year</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+               </select>
+                <button class="search-btn">Search</button>
+            </div>
+            <div *ngIf="studentList.length > 0; else noStudents" class="student-table-container" #tableContainer>
+
+                <table class="student-table">
+                    <thead>
+                        <tr>
+                            <th>S. No</th>
+                            <th>Dept. No.</th>
+                            <th>Name</th>
+                            <th>Date Of Birth</th>
+                            <th>Gender</th>
+                            <th>Admission Year</th>
+                            <th>Degree Type</th>
+                            <th>Department</th>
+                            <th>Email-Id</th>
+                            <th>Phone Number</th>
+                            <th>Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let student of studentsToShow; let i = index">
+                             
+                                <tr>
+                                    <td>{{((currentPage - 1) * studentsPerPage) + i + 1 }}</td>
+                                    <td>{{ student.deptNo }}</td>
+                                    <td style="text-align: left;">{{student.studentName}}</td>
+                                    <td>2004-06-12</td>
+                                    <td>{{student.gender}}</td>
+                                    <td>{{ student.admissionYear }}</td>
+                                    <td>{{ student.degreeType }}</td>
+                                    <td>{{student.department}}</td>
+                                    <td>{{student.emailId}}</td>
+                                    <td>{{student.phoneNumber}}</td>
+                                    <td  style="text-align: left;"><address>{{student.address}}</address></td>
+                                </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <br>
+            </div>
+            <div *ngIf="showPagination" class="pagination">
+                <button class="prev-btn" (click)="prevPage()" [disabled]="currentPage === 1"> < Previous</button>
+                <span class="page-number"> {{currentPage}} </span>
+                <button class="next-btn" (click)="nextPage()" [disabled]="studentsToShow.length < studentsPerPage">Next ></button>
+            </div>
+            <ng-template #noStudents>
+                <p>No students found.</p>
+            </ng-template>
+        </div>
+    </body>
+</html>
