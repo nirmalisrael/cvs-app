@@ -273,7 +273,7 @@ td:last-child {
     align-items: center;
     justify-content: center;
     padding: 10px;
-    z-index: 3;
+    z-index: 2;
     background-color: #fff;
     /* box-shadow: 0px 0px 10px rgb(0, 0, 0); */
     display: flex;
@@ -295,6 +295,147 @@ td:last-child {
 .pagination button.active {
     background-color: #0351a5;
     border: none;
+}
+
+/* Delete Confirmation Styles */
+.delete-confirmation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
     }
 
-/* ... existing styles ... */
+    .confirmation-box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    }
+
+    .confirmation-box p {
+    margin-bottom: 10px;
+    font-weight: bold;
+    }
+
+    .confirmation-box button {
+    margin: 10px;
+    margin-bottom: 0;
+    padding: 8px 16px;
+    cursor: pointer;
+    }
+
+/* Add Student Form Styles */
+.add-student-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    max-width: 80%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+  }
+  
+  .scrollable-container {
+    overflow-y: auto;
+    max-height: 80vh;
+  }
+  
+  .form-box {
+    text-align: left; /* Align form controls to the left */
+  }
+  
+  /* Add some basic styling to the form container */
+.add-student-form {
+    width: 50%; /* Adjust the width as needed */
+    margin: auto; /* Center the form on the page */
+}
+
+/* Style the form-box */
+.form-box {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style labels */
+label {
+    display: inline-block;
+    width: 150px; /* Adjust the width as needed */
+    text-align: right;
+    margin-right: 10px;
+}
+
+/* Style input fields */
+input, select {
+    width: 200px; /* Adjust the width as needed */
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+/* Style radio buttons */
+div[for="gender"] {
+    margin-bottom: 10px;
+}
+
+/* Style buttons */
+button {
+    padding: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* Clearfix to handle floating elements */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* 
+ .form-box input,
+  .form-box select {
+    display: inline-block;
+    width: fit-content;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+ .add-student-form .option-picker {
+    display: inline-block;
+    width: fit-content;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    appearance: none;
+  }
+  .add-student-form button {
+    padding: 12px 24px;
+    margin: 10px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+   */

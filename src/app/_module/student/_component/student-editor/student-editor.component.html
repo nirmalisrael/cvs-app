@@ -13,13 +13,14 @@
             </div>
             <div class="content-container">
                 <div class="btn-container">
-                    <button class="add-student-btn">+ Add Student</button>
+                    <button class="add-student-btn" (click)="openAddStudentForm()">+ Add Student</button>
                    
                 </div>
                 <div class="option-container">
                     <select class="option-picker" id="degreeType" aria-placeholder="Degree Type">
                         <option value="" disabled selected>Degree Type</option>
-                        <option *ngFor="let type of degreeTypeOptions" [value]="type">{{ type }}</option>            </select>
+                        <option *ngFor="let type of degreeTypeOptions" [value]="type">{{ type }}</option>            
+                    </select>
                     <select class="option-picker" id="department">
                         <option value="" disabled selected>Department</option>
                         <option *ngFor="let dept of departmentOptions" [value]="dept">{{ dept }}</option>
@@ -68,7 +69,9 @@
                                     <td  style="text-align: left;"><address>{{student.address}}</address></td>
                                     <td>
                                         <button class="modify-student-btn"><img src="assets/student-editor/modify.png" alt="del"></button>
-                                        <button class="remove-student-btn"><img src="assets/student-editor/delete.png" alt="mod"></button>
+                                        <button class="remove-student-btn" (click)="openDeleteConfirmation(student.deptNo)">
+                                            <img src="assets/student-editor/delete.png" alt="modify">
+                                        </button>
                                     </td>
                                 </tr>
                         </ng-container>
@@ -82,10 +85,75 @@
                 <ng-container *ngFor="let page of pages">
                   <button class="page-btn" (click)="goToPage(page)" [class.active]="page === currentPage">{{ page }}</button>
                 </ng-container>
-              </div>
+            </div>
             <ng-template #noStudents>
                 <p>No students found.</p>
             </ng-template>
+            <!-- Add student form -->
+            <div class="add-student-form" *ngIf="showAddStudentForm">
+                <div class="scrollable-container">
+                    <div class="form-box">
+                        <h2>New Student</h2>
+                        <form (ngSubmit)="submitAddStudentForm()">
+                            <label for="studentName">Student Name : </label>
+                            <input type="text" name="studentName" [(ngModel)]="studentRequest.studentName" id="studentName" required>
+                            <br><br>
+                            <label for="dateOfBirth">Date Of Birth : </label>
+                            <input type="date" name="dateOfBirth" [(ngModel)]="studentRequest.dateOfBirth" id="dateOfBirth" required>
+                            <br><br>
+                            <label for="gender">Gender</label>
+                            <div *ngFor="let gender of genderOptions">
+                                <label>
+                                    <input
+                                    type="radio"
+                                    name="gender"
+                                    [(ngModel)]="studentRequest.gender"
+                                    [value]="gender"
+                                    />
+                                    {{ gender }}
+                                </label>
+                            </div>
+                            <br><br>
+                            <label for="admissionYear">Admission Year : </label>
+                            <select class="option-picker" id="admissionYear">
+                                <option value="" disabled selected>Admission Year</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                           </select>
+                           <br><br>
+                            <label for="degreeType">Degree Type : </label>
+                            <select class="option-picker" id="degreeType" aria-placeholder="Degree Type">
+                                <option value="" disabled selected>Degree Type</option>
+                                <option *ngFor="let type of degreeTypeOptions" [value]="type">{{ type }}</option>            
+                            </select>
+                            <br><br>
+                            <label for="department">Department: </label>
+                            <select class="option-picker" id="department">
+                                <option value="" disabled selected>Department</option>
+                                <option *ngFor="let dept of departmentOptions" [value]="dept">{{ dept }}</option>
+                            </select>
+                            <br><br>
+                            <label for="emailId">E-mail Id : </label>
+                            <input type="email" name="emailId" [(ngModel)]="studentRequest.emailId" id="emailId" required>
+                            <br><br>
+                            <label for="phoneNumber">Phone Number : </label>
+                            <input type="phoneNumber" name="phoneNumber" [(ngModel)]="studentRequest.phoneNumber" id="phoneNumber" required>
+                            <br><br>
+                            <button type="button" (click)="cancelAddStudentForm()">Cancel</button>
+                            <button type="submit">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Delete Confirmation Popup -->
+            <div class="delete-confirmation" *ngIf="showDeleteConfirmation">
+                <div class="confirmation-box">
+                    <p>Are you sure you want to delete this student {{studentDeptNo}}?</p>
+                    <button (click)="cancelDelete()">Cancel</button>
+                    <button (click)="confirmDelete()">Delete</button>
+                </div>
+            </div>
         </div>
     </body>
 </html>
