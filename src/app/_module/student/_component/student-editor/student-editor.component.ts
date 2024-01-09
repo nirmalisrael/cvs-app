@@ -11,7 +11,8 @@ import { StudentRequest } from '../../_dto/student-request';
   styleUrls: ['./student-editor.component.css']
 })
 export class StudentEditorComponent {
-  degreeTypeOptions: string[] = [];
+
+  degreeTypeOptions = Object.values(DegreeType);
   departmentOptions: string[] = [];
 
   currentPage: number = 1;
@@ -19,12 +20,17 @@ export class StudentEditorComponent {
   pages: number[] = [];
   genderOptions = Object.values(Gender);
 
+  showDeptNo = false;
   showDeleteConfirmation = false;
   studentDeptNo: string = '';
+  formHeading: string = '';
+  formButton: string = '';
+  deptNo?: string;
 
   selectedDateOfBirth?: Date;
   selectedDegreeType?: DegreeType;
   selectedDepartment?: Department;
+  selectedAdmissionYear?: number;
 
   showPagination: boolean = false;
   showAddStudentForm = false;
@@ -90,9 +96,14 @@ export class StudentEditorComponent {
 
   ]
   studentRequest: StudentRequest = new StudentRequest();
+  studentResponse: StudentResponse = new StudentResponse();
+
 
   ngOnInit() {
-    this.populateDegreeTypeOptings();
+    this.studentRequest = {
+      degreeType: undefined // Set an initial value to undefined or a valid DegreeType enum value
+    };    
+    // this.populateDegreeTypeOptings();
     this.populateDepartmentOptings();
     this.calculatePages();
     console.log(this.studentList.length)
@@ -142,8 +153,6 @@ export class StudentEditorComponent {
   }
 
   confirmDelete(): void {
-    // this.studentService.removeStudent(this.studentIdToDelete);
-    // this.students = this.studentService.getStudents();
     this.closeDeleteConfirmation();
   }
 
@@ -156,19 +165,35 @@ export class StudentEditorComponent {
   }
 
   openAddStudentForm(): void {
+    this.formHeading = 'New Student';
+    this.formButton = 'Save';
     this.showAddStudentForm = true;
   }
 
-  submitAddStudentForm(): void {
+  opentModifyStudentForm(studentResponse: StudentResponse) {
+    this.studentRequest = studentResponse;
+    this.deptNo = studentResponse.deptNo;
+    this.formHeading = 'Modify Student';
+    this.formButton = 'Update';
+    this.showDeptNo = true;
+    this.openAddStudentForm();
+
+  }
+
+  submitAddStudentForm(studentRequest: StudentRequest): void {
     // Call your service method to add the new student with this.newStudentRequest
     // Reset the form and close the popup
-    this.studentRequest = new StudentRequest();
+    this.studentRequest = studentRequest;
+    console.log(studentRequest);
     this.showAddStudentForm = false;
+    this.showDeptNo = false;
+
   }
 
   cancelAddStudentForm(): void {
     // Reset the form and close the popup
     this.studentRequest = new StudentRequest();
     this.showAddStudentForm = false;
+    this.showDeptNo = false;
   }
 }

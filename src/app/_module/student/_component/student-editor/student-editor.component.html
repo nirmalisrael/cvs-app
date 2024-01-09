@@ -17,16 +17,19 @@
                    
                 </div>
                 <div class="option-container">
-                    <select class="option-picker" id="degreeType" aria-placeholder="Degree Type">
-                        <option value="" disabled selected>Degree Type</option>
-                        <option *ngFor="let type of degreeTypeOptions" [value]="type">{{ type }}</option>            
+                   <!-- your-component.component.html -->
+                    <select [(ngModel)]="selectedDegreeType" class="option-picker" name="degreeType">
+                        <option [ngValue]="undefined" disabled selected>Degree Type</option>
+                        <option *ngFor="let type of degreeTypeOptions" [value]="type">{{ type }}</option>
                     </select>
-                    <select class="option-picker" id="department">
-                        <option value="" disabled selected>Department</option>
+  
+                    
+                    <select class="option-picker" id="department" [(ngModel)]="selectedDepartment">
+                        <option [ngValue]="undefined" disabled selected>Department</option>
                         <option *ngFor="let dept of departmentOptions" [value]="dept">{{ dept }}</option>
                     </select>
-                    <select class="option-picker" id="admissionYear">
-                        <option value="" disabled selected>Admission Year</option>
+                    <select class="option-picker" id="admissionYear"[(ngModel)]="selectedAdmissionYear">
+                        <option [ngValue]="undefined" disabled selected>Admission Year</option>
                         <option value="2021">2021</option>
                         <option value="2022">2022</option>
                         <option value="2023">2023</option>
@@ -68,7 +71,9 @@
                                     <td>{{student.phoneNumber}}</td>
                                     <td  style="text-align: left;"><address>{{student.address}}</address></td>
                                     <td>
-                                        <button class="modify-student-btn"><img src="assets/student-editor/modify.png" alt="del"></button>
+                                        <button class="modify-student-btn" (click)="opentModifyStudentForm(student)">
+                                            <img src="assets/student-editor/modify.png" alt="del">
+                                        </button>
                                         <button class="remove-student-btn" (click)="openDeleteConfirmation(student.deptNo)">
                                             <img src="assets/student-editor/delete.png" alt="modify">
                                         </button>
@@ -93,23 +98,30 @@
             <div class="add-student-form" *ngIf="showAddStudentForm">
                 
                 <div class="scrollable-container">
-                    <h2>New Student</h2>
+                    
                     <div class="form-box">
                         
-                        <form (ngSubmit)="submitAddStudentForm()">
+                        <form (ngSubmit)="submitAddStudentForm(studentRequest)">
+                            <h1>{{formHeading}}</h1>
+                            <div *ngIf="showDeptNo">
+                                <label for="deptNo" id="label">Dept. Number : </label>
+                                <input type="text" name="deptNo" placeholder="Dept No" [(ngModel)]="deptNo" id="deptNo" required>    
+                            </div>
+                            <br>
                             <label for="studentName" id="label">Student Name : </label>
-                            <input type="text" name="studentName" [(ngModel)]="studentRequest.studentName" id="studentName" required>
+                            <input type="text" name="studentName" placeholder="Student Name" [(ngModel)]="studentRequest.studentName" id="studentName" required>
                             <br>
                             <label for="dateOfBirth"id="label">Date Of Birth : </label>
                             <input type="date" name="dateOfBirth" [(ngModel)]="studentRequest.dateOfBirth" id="dateOfBirth" required>
                             <br>
                             <div class="gender-options">
-                                <label for="gender">Gender</label>
+                                <label for="gender" id="genderLable">Gender : </label>
                                 <div *ngFor="let gender of genderOptions" class="gender">
-                                    <label>
+                                    <label style="font-weight: bold;">
                                         <input
                                             type="radio"
                                             name="gender"
+                                            class="genderInput"
                                             [(ngModel)]="studentRequest.gender"
                                             [value]="gender"
                                         />
@@ -120,33 +132,33 @@
                             
                             <br>
                             <label for="admissionYear"id="label">Admission Year : </label>
-                            <select class="option-picker" id="admissionYear">
-                                <option value="" disabled selected>Admission Year</option>
+                            <select class="option-picker" id="admissionYear" [(ngModel)]="studentRequest.admissionYear" name="admissionYear">
+                                <option [ngValue]="undefined"  disabled selected id="defaultOption">Admission Year</option>
                                 <option value="2021">2021</option>
                                 <option value="2022">2022</option>
                                 <option value="2023">2023</option>
                            </select>
                            <br>
                             <label for="degreeType"id="label">Degree Type : </label>
-                            <select class="option-picker" id="degreeType" aria-placeholder="Degree Type">
-                                <option value="" disabled selected>Degree Type</option>
+                            <select class="option-picker" id="degreeType" placeholder="Degree Type" [(ngModel)]="studentRequest.degreeType" name="degreeType">
+                                <option [ngValue]="undefined" disabled selected>Degree Type</option>
                                 <option *ngFor="let type of degreeTypeOptions" [value]="type">{{ type }}</option>            
-                            </select>
+                            </select>                            
                             <br>
                             <label for="department"id="label">Department: </label>
-                            <select class="option-picker" id="department">
-                                <option value="" disabled selected>Department</option>
+                            <select class="option-picker" id="department" [(ngModel)]="studentRequest.department" name="department">
+                                <option [ngValue]="undefined" disabled selected>Department</option>
                                 <option *ngFor="let dept of departmentOptions" [value]="dept">{{ dept }}</option>
                             </select>
                             <br>
                             <label for="emailId"id="label">E-mail Id : </label>
-                            <input type="email" name="emailId" [(ngModel)]="studentRequest.emailId" id="emailId" required>
+                            <input type="email" placeholder="Email-Id" name="emailId" [(ngModel)]="studentRequest.emailId" id="emailId" required>
                             <br>
                             <label for="phoneNumber"id="label">Phone Number : </label>
-                            <input type="phoneNumber" name="phoneNumber" [(ngModel)]="studentRequest.phoneNumber" id="phoneNumber" required>
+                            <input type="number" placeholder="Phone Number" name="phoneNumber" [(ngModel)]="studentRequest.phoneNumber" id="phoneNumber" required>
                             <br>
-                            <button type="button" (click)="cancelAddStudentForm()">Cancel</button>
-                            <button type="submit">Save</button>
+                            <a (click)="cancelAddStudentForm()"><img src="assets/student-editor/close-icon.png" alt="close-icon"></a>
+                            <button type="submit" class="save-button">{{formButton}}</button>
                         </form>
                     </div>
                 </div>
@@ -155,8 +167,8 @@
             <div class="delete-confirmation" *ngIf="showDeleteConfirmation">
                 <div class="confirmation-box">
                     <p>Are you sure you want to delete this student {{studentDeptNo}}?</p>
-                    <button (click)="cancelDelete()">Cancel</button>
-                    <button (click)="confirmDelete()">Delete</button>
+                    <button (click)="cancelDelete()" class="cancelButton">Cancel</button>
+                    <button (click)="confirmDelete()" class="deleteButton">Delete</button>
                 </div>
             </div>
         </div>
