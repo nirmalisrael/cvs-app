@@ -127,11 +127,6 @@ button:hover {
     box-shadow: 0px 0px 5px green;
 }
 
-
-/* .option-container {
-    position: fixed;
-    right: 110px;
-} */
 .option-picker {
     margin-right: 10px;
     padding: 9px;
@@ -169,12 +164,9 @@ button:hover {
     top: 150px;
     left: 220px;
     margin-bottom: 25px;
-    flex-grow: 1; /* This ensures that the table container takes the remaining space */
+    flex-grow: 1; 
     padding-top: 20px;
     padding-left: 10px;
-    /* margin-top: 150px;
-    margin-left: 220px; */
-    /* margin-bottom: 40px; */
     z-index: -2;
 }
 
@@ -207,17 +199,16 @@ button:hover {
 td:last-child {
     position: sticky;
     right: 0;
-    background-color: #fff; /* Adjust background color as needed */
-    z-index: 2; /* Ensure the sticky column is visually behind the buttons */
-  }
+    background-color: #fff; 
+    z-index: 2; 
+}
   
-  td:last-child button {
+td:last-child button {
     border: none;
-    position: relative; /* Adjust button position within the sticky column */
-    z-index: 3; /* Ensure the buttons are above the sticky column */
+    position: relative;
+    z-index: 3;
     transition: box-shadow 0.3s;
-
-  }
+}
 
 
 
@@ -264,10 +255,6 @@ td:last-child {
     box-shadow: 0px 0px 5px red;
 }
 
-
-
-  /* ... existing styles ... */
-
 .pagination {
     position: fixed;
     bottom: 0;
@@ -279,7 +266,6 @@ td:last-child {
     padding: 10px;
     z-index: 2;
     background-color: #fff;
-    /* box-shadow: 0px 0px 10px rgb(0, 0, 0); */
     display: flex;
 }
 
@@ -301,65 +287,6 @@ td:last-child {
     border: none;
 }
 
-/* Delete Confirmation Styles */
-.delete-confirmation {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 3;
-}
-
-    .confirmation-box {
-        background-color: wheat;
-        font-size: 25px;
-        padding: 20px;
-        border-radius: 8px;
-        text-align: center;
-        justify-content: center;
-    }
-
-    .confirmation-box p {
-        margin-bottom: 10px;
-        font-weight: bold;
-        color: darkred;
-        padding: 30px;
-    }
-
-    .confirmation-box button {
-        margin: 20px;
-        width: 100px;
-        height: 40px;
-        margin-bottom: 30px;
-        padding: 8px 16px;
-        font-size: 15px;
-        background-color: #fff;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: box-shadow 0.3s;
-        transition: all 0.3s;
-        border-width: 1px;
-        font-weight: bold;
-    }
-
-    .confirmation-box .deleteButton:hover {
-        box-shadow: 0px 0px 10px black;
-        background-color: red;
-        color: white;
-        border: none;
-    }
-    .confirmation-box .cancelButton:hover {
-        box-shadow: 0px 0px 10px black;
-        background-color: lightgreen;
-        border: none;
-    }
-/* Add Student Form Styles */
 .add-student-form {
     position: fixed;
     top: 0;
@@ -373,43 +300,34 @@ td:last-child {
     align-items: center;
     z-index: 3;
     transition: 100000ms;
-  }
+}
   
-  .scrollable-container {
-
+.scrollable-container {
+    overflow-y: auto;
     height: 100%;
     width: 100%;
-  }
+}
   
-  .form-box {
-    text-align: left;
-     /* Align form controls to the left */
-  }
-  
-  /* Add some basic styling to the form container */
-
-/* Style the form-box */
 .form-box {
+    text-align: left;
+}
+
+.form-box {
+    position: relative;
     height: 100vh;
     border: 1px solid #ccc;
     border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* margin-top: 200px; */
-    position: relative;
 }
-.form-box form {
-    position: fixed;
-    top: 30px;
-}
- .form-box form h1 {
+
+.form-box form h1 {
     text-align: center;
-    /* font-sizepx; */
+    margin-top: 40px;
     margin-bottom: 20px;
 }
 
-/* Style labels */
 .form-box #label {
     display: inline-block;
     width: 200px;
@@ -422,11 +340,8 @@ td:last-child {
     letter-spacing: 1px;
 }
 
-
-
-/* Style input fields */
 .form-box input, select {
-    width: 230px; /* Adjust the width as needed */
+    width: 230px;
     padding: 10px;
     margin-bottom: 10px;
     border-width: 1px;
@@ -457,8 +372,6 @@ td:last-child {
     font-weight: bold;
 }
 
-
-/* Style radio buttons */
 div[for="gender"] {
     margin-bottom: 0px;
 }
@@ -469,7 +382,7 @@ div[for="gender"] {
 
 .gender {
     margin-right: 10px;
-    margin-top: 20px; /* Adjust this value as needed for spacing */
+    margin-top: 20px;
 }
 
 .gender input {
@@ -483,16 +396,24 @@ div[for="gender"] {
     margin-bottom: 0px;
     text-align: right;
 }
-/* Style buttons */
-.form-box form .save-button {
+
+.form-box .save-button {
+    position: absolute;
     height: fit-content;
     width: 100px;
+    bottom: 0;
+    right: 30px;
     padding: 10px;
-    margin: 15px;
+    margin: 20px;
+    margin-bottom: 20px;
     cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    font-size: 15px;
+    color: white;
     background-color: rgb(5, 150, 5);
-    position: fixed;
-    left: 47%;
 }
 
 
@@ -502,9 +423,9 @@ div[for="gender"] {
     top: 0;
     right: 0;
     width: 20px;
-    /* height: 20px; */
     cursor: pointer;
     padding: 10px;
+    margin: 20px;
 }
 
 .form-box form img:hover {

@@ -10,6 +10,7 @@ import { AdminLoginComponent } from './_component/admin-login/admin-login.compon
 import { UserLoginComponent } from './_component/user-login/user-login.component';
 import { StudentModule } from './_module/student/student.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [

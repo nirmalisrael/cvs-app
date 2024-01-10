@@ -4,6 +4,8 @@ import { Department } from 'src/app/_module/student/_dto/department';
 import { StudentResponse } from '../../_dto/student-response';
 import { Gender } from '../../_dto/gender';
 import { StudentRequest } from '../../_dto/student-request';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-student-editor',
@@ -21,11 +23,10 @@ export class StudentEditorComponent {
   genderOptions = Object.values(Gender);
 
   showDeptNo = false;
-  showDeleteConfirmation = false;
-  studentDeptNo: string = '';
   formHeading: string = '';
   formButton: string = '';
   deptNo?: string;
+  successMessage?: string;
 
   selectedDateOfBirth?: Date;
   selectedDegreeType?: DegreeType;
@@ -35,7 +36,6 @@ export class StudentEditorComponent {
   showPagination: boolean = false;
   showAddStudentForm = false;
   @ViewChild('tableContainer') tableContainer!: ElementRef;
-
 
 
   studentList: StudentResponse[] = [
@@ -148,25 +148,33 @@ export class StudentEditorComponent {
   }
 
   openDeleteConfirmation(studentDeptNo: string): void {
-    this.studentDeptNo = studentDeptNo;
-    this.showDeleteConfirmation = true;
-  }
-
-  confirmDelete(): void {
-    this.closeDeleteConfirmation();
-  }
-
-  cancelDelete(): void {
-    this.closeDeleteConfirmation();
-  }
-
-  closeDeleteConfirmation(): void {
-    this.showDeleteConfirmation = false;
+    this.deptNo = studentDeptNo;
+    Swal.fire({
+      html: 'Are you sure you want to delete this student ' + this.deptNo,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+      confirmButtonColor: 'red',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.value) {
+        //call delete method in service
+        Swal.fire(
+          'Deleted',
+          this.deptNo + ' Student Deleted Successfully!',
+          'success'
+        );
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire('Cancelled', this.deptNo + ' is safe!', 'error');
+      }
+    });
   }
 
   openAddStudentForm(): void {
-    this.formHeading = 'New Student';
+    if(this.formHeading === '' && this.formButton === '') {
+      this.formHeading = 'New Student';
     this.formButton = 'Save';
+    }
     this.showAddStudentForm = true;
   }
 
@@ -176,24 +184,34 @@ export class StudentEditorComponent {
     this.formHeading = 'Modify Student';
     this.formButton = 'Update';
     this.showDeptNo = true;
+    this.successMessage = this.deptNo + ' Student Updated Successfully!'
     this.openAddStudentForm();
 
   }
 
   submitAddStudentForm(studentRequest: StudentRequest): void {
-    // Call your service method to add the new student with this.newStudentRequest
-    // Reset the form and close the popup
     this.studentRequest = studentRequest;
     console.log(studentRequest);
-    this.showAddStudentForm = false;
     this.showDeptNo = false;
-
+    if(this.successMessage !== null) {
+      this.successMessage = this.deptNo + " Student Saved Successfully!";
+    }
+    Swal.fire({
+      title: this.formButton +'d', 
+      html: this.successMessage, 
+      icon: 'success',
+      confirmButtonColor: 'rgb(5, 150, 5)'
+    });
+    this.cancelAddStudentForm()
   }
 
   cancelAddStudentForm(): void {
-    // Reset the form and close the popup
     this.studentRequest = new StudentRequest();
     this.showAddStudentForm = false;
     this.showDeptNo = false;
+    this.formHeading = '';
+    this.formButton = '';
   }
+
+  
 }
