@@ -22,7 +22,7 @@
             </div>
         </div>
         <div *ngIf="showUserSide" class="users-find-btn">
-            <button class="view-users">View Users</button>
+            <button class="view-users" (click)="openAllUsers()">View Users</button>
 
             <div class="remove-user">
                 <input type="text" name="username" id="username" placeholder="Username" required>
@@ -64,6 +64,114 @@
                         <b>Role Description : </b>For administrative</p>
                     </div>
                 </form>
+            </div>
+
+            <div class="view-all-users" *ngIf="showAllUsers">
+                <h1>Users</h1>
+                <div class="filter-container">
+                    <select name="role" id="role">
+                        <option value="">ADMIN</option>
+                        <option value="">STUDENT</option>
+                    </select>
+                    <a href=""><img src="\assets\auth-editor\search-icon.png" alt="serach-icon"></a>
+                </div>
+                <div class="users-table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>admin</td>
+                                <td>ADMIN</td>
+                            </tr>
+                            <tr>
+                                <td>admin</td>
+                                <td>ADMIN</td>
+                            </tr>
+                            <tr>
+                                <td>admin</td>
+                                <td>ADMIN</td>
+                            </tr>
+                            <tr>
+                                <td>admin</td>
+                                <td>ADMIN</td>
+                            </tr>
+                            <tr>
+                                <td>admin</td>
+                                <td>ADMIN</td>
+                            </tr>
+                            <tr>
+                                <td>admin</td>
+                                <td>ADMIN</td>
+                            </tr>
+                            <tr>
+                                <td>admin</td>
+                                <td>ADMIN</td>
+                            </tr>
+                            <tr>
+                                <td>admin</td>
+                                <td>ADMIN</td>
+                            </tr>
+                            <tr>
+                                <td>admin</td>
+                                <td>ADMIN</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    
+                </div>
+                <a (click)="closeAllUsers()"><img class="close-icon" src="assets/student-editor/close-icon.png" alt="close-icon"></a>
+            </div>
+        </div>
+        <div class="role-side" *ngIf="showRoleSide">
+            <div class="add-role-container">
+                <form action="" class="add-role-form">
+                    <h2>Create Role</h2>
+
+                    <input type="text" name="roleName" id="roleName" placeholder="Role Name" required>
+                    <input type="text" name="roleDescription" id="roleDescription" placeholder="Role Description " required>
+                    <button class="save-btn">Save</button>
+                </form>
+            </div>
+            <div class="remove-role-container">
+                <form action="" class="remove-role-form">
+                    <h2>Remove Role</h2>
+                    <input type="text" name="roleName" id="removeRoleName" placeholder="Role Name" required>
+                    <button class="remove-btn">Remove</button>
+                </form>
+            </div>
+            <div class="all-roles-container">
+                <h2>Active Roles</h2>
+                <div class="roles-table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Role Name</th>
+                                <th>Role Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>admin</td>
+                                <td>for administrative</td>
+                            </tr>
+                            <tr>
+                                <td>admin</td>
+                                <td>for administrative</td>
+                            </tr>
+                            <tr>
+                                <td>admin</td>
+                                <td>for administrative</td>
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </body>

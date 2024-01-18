@@ -6,10 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./auth-editor.component.css']
 })
 export class AuthEditorComponent {
+
   activeTab: string = 'users';
 
   showUserSide = true;
   showRoleSide = false;
+  showAllUsers = false;
 
   setActiveTab(tab: string) {
     this.activeTab = tab;
@@ -20,5 +22,12 @@ export class AuthEditorComponent {
       this.showUserSide = false;
       this.showRoleSide = true;
     }
+  }
+
+  openAllUsers(){
+    this.showAllUsers = true;
+  }
+  closeAllUsers() {
+    this.showAllUsers = false;
   }
 }

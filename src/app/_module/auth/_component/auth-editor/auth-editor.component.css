@@ -126,7 +126,8 @@ body {
     margin-left: 10px;
     margin-right: 10px;
     border: black;
-    background-color: #ffffff;
+    color: white;
+    background-color: #333;
     border-radius: 15px;
     font-size: 18px;
     letter-spacing: 2px;
@@ -154,9 +155,9 @@ body {
 
 .clicked button{
     color: black;
-    background-color: lightgrey;
+    background-color: white;
     box-shadow: 0 0 2px white;
-    text-shadow: 0 0 5px white;
+    /* text-shadow: 0 0 2px black; */
 }
 
 .user-side{
@@ -189,16 +190,17 @@ body {
 
 .users-find-btn .view-users {
     position: absolute;
-    background-color: rgb(22, 166, 214);
+    background-color: rgb(27, 188, 241);
     width: 28%;
     left: 30px;
     padding: 20px;
     border: none;
     outline: none;
     border-radius: 5px;
-    /* color: white; */
+    color: white;
+    letter-spacing: 2px;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
     cursor: pointer;
 }
 
@@ -210,6 +212,9 @@ body {
     padding-left: 20px;
     border-radius: 5px;
     box-shadow: 0 0 5px black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .remove-user button {
@@ -243,7 +248,8 @@ body {
 .user-side form {
     position: absolute;
     width: 30%;
-    height: calc( 90% - 60px);   
+    height: fit-content;
+    padding-bottom: 50px;   
     top: calc(50vh - 249px);
     border-radius: 10px;
     display: flex;
@@ -254,7 +260,7 @@ body {
     /* justify-content: center; */
 }
 
-.user-side form:hover {
+form:hover {
     box-shadow: 0 0 10px black;
 }
 .user-side .add-user-form-container form {
@@ -273,7 +279,7 @@ body {
     margin-top: 20px;
     text-align: center;
     padding: 20px;
-    text-shadow: 0px 0px 2px black;
+    /* text-shadow: 0px 0px 2px black; */
 }
 
 .user-side form input,select {
@@ -342,7 +348,7 @@ button:hover {
     margin: 0;
     background-color: rgb(25, 103, 204);
     color: #ffffff;
-    width: fit-content;
+    width: 100px;
     height: fit-content;
     padding: 10px;
 }
@@ -356,5 +362,248 @@ button:hover {
     line-height:1cm;
     letter-spacing:1px;
     margin-left: 20px;
-    /* margin-right: 20px; */
+    margin-top: 50px;
+    margin-bottom: 55px;
+}
+.view-all-users {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    z-index: 3;
+    transition: 100000ms;
+  }
+
+.view-all-users a>.close-icon {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 20px;
+    cursor: pointer;
+    padding: 10px;
+    margin: 20px;
+}
+
+.view-all-users a>img:hover {
+    box-shadow: 0 0 5px #333;
+}
+
+.view-all-users .users-table-container {
+    font-family:  'Roboto', 'Lato', 'Open Sans';
+    width: 40%;
+    position: absolute;
+    top: 25%;
+    margin-bottom: 25px;
+    flex-grow: 1;
+    padding-top: 20px;
+    padding-left: 10px;
+}
+
+.view-all-users table {
+    width: 100%;
+    border-collapse: collapse;
+    z-index: -1;
+}
+
+.view-all-users table th, td {
+    /* width: 200px; */
+    border: 1px solid black;
+    color: whitesmoke;
+    white-space: nowrap;
+    letter-spacing: 1px;
+    padding: 10px;
+    text-align: center;
+}
+
+.view-all-users table th {
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    /* text-shadow: 0 0 5px black; */
+}
+
+.view-all-users h1 {
+    position: absolute;
+    padding: 30px;
+}
+
+.view-all-users .filter-container {
+    position: relative;
+    top: 15%;
+    width: 40%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.view-all-users .filter-container a>img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+    margin-left: 0;
+}
+
+.view-all-users .filter-container select {
+    background-color: transparent;
+    position: absolute;
+    right: 70px;
+    width: fit-content;
+    color: whitesmoke;
+    box-shadow: 0 0 5px black;
+}
+
+.view-all-users .filter-container select option {
+    background-color: transparent;
+    color:black;
+}
+
+
+.role-side {
+    position: relative;
+    width: calc(100% - 220px);
+    height: calc(100vh - 140PX);
+    left: 220px;
+    display: flex;
+    background: transparent;
+    align-items: center;
+    justify-content: center;
+}
+
+.role-side form {
+    position: absolute;
+    height: 40%;
+    width: 30%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    margin: 3%;
+    background-color: grey;
+    transition: 300ms;
+}
+.role-side .add-role-form {
+    top: 0;
+    left: 0;
+    background-color: lightgreen;
+}
+
+.role-side .remove-role-form {
+    bottom: 0;
+    left: 0;
+    justify-content: start;
+    background-color: rgb(243, 88, 88);
+}
+
+button {
+    transition: box-shadow 0.3s ease;
+}
+.role-side .all-roles-container {
+    position: absolute;
+    right: 0;
+    height: 85%;
+    width: 55%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5%;
+    background-color: rgb(207, 124, 64);
+    transition: 300ms;
+}
+
+.role-side form h2 {
+    margin-top: 10px;
+    text-align: center;
+    padding: 10px;
+    /* text-shadow: 0px 0px 2px black; */
+}
+
+.role-side form #removeRoleName {
+    margin-top: 10%;
+}
+
+.role-side form input {
+    padding: 10px;
+    width: 50%;
+    margin: 8px;
+    border-radius: 5px;
+    border-color: black;
+    font-size: 14px;
+    text-align: left;
+    letter-spacing: 1px;
+    border: none;
+    outline: none;
+    font-weight: bold;
+
+    color: rgb(13, 13, 54);
+    transition: box-shadow 0.3s ease;
+}
+
+/* .role-side form select:first-child {
+    color: grey;
+} */
+
+
+/* .role-side form select, option {
+    width: 66%;
+    font-size: 16px;
+    text-align: left;
+} */
+
+.role-side form button {
+    width: 28%;
+    height: 40px;
+    font-size: 18px;
+    margin-top: 10px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.role-side form .save-btn {
+    background-color: rgb(34, 189, 34);
+    color: #ffffff;
+}
+.role-side form .remove-btn {
+    background-color: red;
+    color: #ffffff;
+}
+
+.role-side .all-roles-container h2 {
+    padding: 20px;
+}
+.role-side .all-roles-container table{
+    position: absolute;
+    left: 5%;
+    top: 70px;
+    width: 90%;
+    margin: 0px;
+    border-collapse: collapse;
+}
+
+
+.role-side .all-roles-container td {
+    color: whitesmoke;
+}
+.role-side .all-roles-container th {
+    color: wheat;
+    padding: 10px;
+
+}
+
+.role-side .all-roles-container:hover {
+    box-shadow: 0 0 10px black;
 }
