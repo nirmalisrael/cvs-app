@@ -6,5 +6,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./auth-editor.component.css']
 })
 export class AuthEditorComponent {
+  activeTab: string = 'users';
 
+  showUserSide = true;
+  showRoleSide = false;
+
+  setActiveTab(tab: string) {
+    this.activeTab = tab;
+    if(this.activeTab === 'users') {
+      this.showRoleSide = false;
+      this.showUserSide = true;
+    } else if(this.activeTab === 'roles') {
+      this.showUserSide = false;
+      this.showRoleSide = true;
+    }
+  }
 }

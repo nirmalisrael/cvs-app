@@ -14,8 +14,57 @@
         </div>
 
         <div class="user-role-nav">
-            <div class="users"><button>Users</button></div>
-            <div class="roles"><button>Roles</button></div>
+            <div class="users" (click)="setActiveTab('users')" [class.clicked]="activeTab === 'users'">
+                <button>Users</button>
+            </div>
+            <div class="roles" (click)="setActiveTab('roles')" [class.clicked]="activeTab === 'roles'">
+                <button>Roles</button>
+            </div>
+        </div>
+        <div *ngIf="showUserSide" class="users-find-btn">
+            <button class="view-users">View Users</button>
+
+            <div class="remove-user">
+                <input type="text" name="username" id="username" placeholder="Username" required>
+                <button>Remove</button>
+            </div>
+        </div>
+        <div class="user-side" *ngIf="showUserSide">
+           
+            <div class="add-user-form-container">
+                <form action="" class="add-user-form" id="grid-item">
+                    <h2>CREATE USER</h2>
+                    <input type="text" name="username" placeholder="Username" id="username" required>
+                    <input type="text" name="password" id="password" placeholder="Password" required>
+                    <select class="roles-option" id="roles-option" name="roles-option" required>
+                        <option value=""  disabled selected>< Select Role ></option>
+                        <option value="">ADMIN</option>
+                        <option value="">STUDENT</option>
+                    </select>
+                    <button class="save-btn">Save</button>
+                </form>
+            </div>
+            <div class="update-user-form-container">
+                <form action="" class="update-user-form"id="grid-item">
+                    <h2>CHANGE PASSWORD</h2>
+                    <input type="text" name="username" placeholder="Username" id="username" required>
+                    <input type="text" name="password" id="password" placeholder="New Password" required>
+                    <input type="text" name="password" id="password" placeholder="Confirm Password" required>
+                    <button class="save-btn">Update</button>
+                </form>
+            </div>
+            <div class="find-user-form-container">
+                <form action="" class="find-user-form"id="grid-item">
+                    <h2>FIND USER</h2>
+                    <input type="text" name="username" placeholder="Username" id="find-username"  required>
+                    <button class="find-btn">Find</button>
+                    <div class="find-user-para">
+                        <p><b>Username : </b>admin<br>
+                        <b>Role : </b>ADMIN <br>
+                        <b>Role Description : </b>For administrative</p>
+                    </div>
+                </form>
+            </div>
         </div>
     </body>
 </html>

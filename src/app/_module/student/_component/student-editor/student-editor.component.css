@@ -184,9 +184,14 @@ button:hover {
     z-index: -1;
 }
 
+.student-table th {
+    font-weight: bold;
+
+}
 .student-table th, .student-table td {
     border: 1px solid #ddd;
     white-space: nowrap;
+    letter-spacing: 1px;
     padding: 8px;
     text-align: center;
 }

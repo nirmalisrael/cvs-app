@@ -11,6 +11,7 @@ import { UserLoginComponent } from './_component/user-login/user-login.component
 import { StudentModule } from './_module/student/student.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AuthModule } from './_module/auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     BrowserModule,
     AppRoutingModule,
     StudentModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

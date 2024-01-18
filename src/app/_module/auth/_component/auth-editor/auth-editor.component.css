@@ -2,8 +2,10 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    display: flex;
+    /* display: flex; */
+    /* background-color: lightgrey; */
 }
+
 
 .nav-bar {
     display: flex;
@@ -21,7 +23,8 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1;
+    height: 40px;
+    z-index: 2;
 }
 
 .top-navbar a {
@@ -98,32 +101,260 @@ body {
   }
 
 .user-role-nav {
-    position: relative;
+    position: sticky;
+    top: 70px;
     width: calc(100% - 220px);
-    height: 50px;
-    margin-top: 78px;
+    height: 70px;
+    margin-top: 70px;
     margin-left: 220px;
-    background-color: #C3ACD0;
+    background-color: #333;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1;
+    box-shadow: 0 0 5px black;
 }
 .users, .roles{
     position: absolute;
-    height: 100%;
-    width: 50%;
+    height: 50px;
+    width: 48.5%;
+    flex: 1;
 }
 .user-role-nav button {
     width: 100%;
     height: 100%;
-    border: none;
-    padding: 5px;
-    background: transparent;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: black;
+    background-color: #ffffff;
+    border-radius: 15px;
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 5px black;
+
 }
+
 .user-role-nav button:hover {
-    background-color: blueviolet;
+    box-shadow: 0 0 5px grey;
 }
+
+
 .users {
+    /* box-shadow: 5px 0 -5px -4px rgba(0, 0, 0, 0.5); */
     left: 0;
+    margin-right: 5px;
 }
-.roles{right: 0;}
+.roles{
+    /* box-shadow: -5px 0 5px -4px rgba(0, 0, 0, 0.5); */
+    right: 20px ;    margin-left: 5px;
+
+}
+
+.clicked button{
+    color: black;
+    background-color: lightgrey;
+    box-shadow: 0 0 2px white;
+    text-shadow: 0 0 5px white;
+}
+
+.user-side{
+    position: relative;
+    width: calc(100% - 220px);
+    height: 100vh;
+    left: 220px;
+    display: flex;
+    background: transparent;
+    align-items: center;
+    justify-content: center;
+    /* display: none; */
+    /* width: calc(100% - 220px);
+    
+    background-color: lightcoral;
+    position: fixed;
+    left: 220px;   */
+}
+
+.users-find-btn {
+    position: relative;
+    /* width: calc(100% - 220px); */
+    height: 70px;
+    margin-left: 220px;
+    /* background-color: lightskyblue; */
+    display: flex;
+    align-items: center;
+    top: 20px;
+}
+
+.users-find-btn .view-users {
+    position: absolute;
+    background-color: rgb(22, 166, 214);
+    width: 28%;
+    left: 30px;
+    padding: 20px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    /* color: white; */
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.remove-user {
+    position: absolute;
+    right: 25px;
+    /* background-color: rgb(252, 40, 40); */
+    width: 28%;
+    padding-left: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px black;
+}
+
+.remove-user button {
+    padding: 10px;
+    margin: 20px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    color: white;
+    background-color: red;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+}
+.remove-user input {
+    padding: 12px;
+    width: 130px;
+    border-radius: 5px;
+    border-color: black;
+    font-size: 15px;
+    text-align: left;
+    letter-spacing: 1px;
+    /* border: none; */
+    outline: none;
+    border-color: lightgrey;
+    border-width: 1px;
+    font-weight: bold;
+    color: rgb(13, 13, 54);
+    transition: box-shadow 0.3s ease;
+}
+.user-side form {
+    position: absolute;
+    width: 30%;
+    height: calc( 90% - 60px);   
+    top: calc(50vh - 249px);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(10px);
+    align-items: center;
+    transition: 300ms;
+    /* justify-content: center; */
+}
+
+.user-side form:hover {
+    box-shadow: 0 0 10px black;
+}
+.user-side .add-user-form-container form {
+    left: 25px;
+    background-color: lightgreen;
+}
+.user-side .update-user-form-container form {
+    left: 35%;
+    background-color: lightblue;
+}
+.user-side .find-user-form-container form {
+    right: 25px;
+    background-color: rgb(248, 123, 101);
+}
+.user-side form h2 {
+    margin-top: 20px;
+    text-align: center;
+    padding: 20px;
+    text-shadow: 0px 0px 2px black;
+}
+
+.user-side form input,select {
+    padding: 10px;
+    width: 60%;
+    margin: 20px;
+    border-radius: 5px;
+    border-color: black;
+    font-size: 16px;
+    text-align: left;
+    letter-spacing: 1px;
+    border: none;
+    outline: none;
+    font-weight: bold;
+
+    color: rgb(13, 13, 54);
+    transition: box-shadow 0.3s ease;
+}
+
+.user-side form select:first-child {
+    color: grey;
+}
+
+input:focus {
+    box-shadow: 0 0 10px rgb(13, 13, 54);
+}
+
+.user-side form select, option {
+    width: 66%;
+    font-size: 16px;
+    text-align: left;
+}
+
+.user-side form #username {
+    margin-top: 12%;
+}
+
+.user-side form button {
+    width: 28%;
+    height: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    margin-top: 55px;
+}
+
+.user-side form .save-btn {
+    background-color: rgb(34, 189, 34);
+    color: #ffffff;
+}
+
+button:hover {
+    box-shadow: 0px 0px 5px black;
+    cursor: pointer;
+}
+
+.user-side .find-user-form-container #find-username {
+    margin-top: 12%;   
+    margin-bottom: 10px;
+}
+
+
+.user-side form .find-btn {
+    margin: 0;
+    background-color: rgb(25, 103, 204);
+    color: #ffffff;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+}
+
+.find-user-para {
+    width: 95%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height:1cm;
+    letter-spacing:1px;
+    margin-left: 20px;
+    /* margin-right: 20px; */
+}
