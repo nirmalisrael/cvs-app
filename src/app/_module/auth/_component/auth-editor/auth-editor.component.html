@@ -25,39 +25,39 @@
             <button class="view-users" (click)="openAllUsers()">View Users</button>
 
             <div class="remove-user">
-                <input type="text" name="username" id="username" placeholder="Username" required>
-                <button>Remove</button>
+                <input type="text" name="username" id="username" placeholder="Username" [(ngModel)]="username" required>
+                <button (click)="openDeleteConfirmation(username, 'user')">Remove</button>
             </div>
         </div>
         <div class="user-side" *ngIf="showUserSide">
            
             <div class="add-user-form-container">
-                <form action="" class="add-user-form" id="grid-item">
+                <form (ngSubmit)="saveUser(userRequest)" class="add-user-form" id="grid-item">
                     <h2>CREATE USER</h2>
-                    <input type="text" name="username" placeholder="Username" id="username" required>
-                    <input type="text" name="password" id="password" placeholder="Password" required>
-                    <select class="roles-option" id="roles-option" name="roles-option" required>
-                        <option value=""  disabled selected>< Select Role ></option>
-                        <option value="">ADMIN</option>
-                        <option value="">STUDENT</option>
+                    <input type="text" name="username" placeholder="Username" id="username" [(ngModel)]="userRequest.username" required>
+                    <input type="text" name="password" id="password" placeholder="Password" [(ngModel)]="userRequest.password" required>
+                    <select class="roles-option" id="roles-option" name="roles-option" [(ngModel)]="role.roleName" required>
+                        <option [ngValue]="undefined"  disabled selected>Select Role</option>
+                        <option>ADMIN</option>
+                        <option>STUDENT</option>
                     </select>
-                    <button class="save-btn">Save</button>
+                    <button class="save-btn" type="submit">Save</button>
                 </form>
             </div>
             <div class="update-user-form-container">
-                <form action="" class="update-user-form"id="grid-item">
+                <form (ngSubmit)="updatePassword(updateUsername.value, newPassword.value, confirmPassword.value)" class="update-user-form"id="grid-item">
                     <h2>CHANGE PASSWORD</h2>
-                    <input type="text" name="username" placeholder="Username" id="username" required>
-                    <input type="text" name="password" id="password" placeholder="New Password" required>
-                    <input type="text" name="password" id="password" placeholder="Confirm Password" required>
-                    <button class="save-btn">Update</button>
+                    <input type="text" #updateUsername name="username" placeholder="Username" id="username" required>
+                    <input type="text" name="password" id="password" #newPassword placeholder="New Password" required>
+                    <input type="text" name="password" id="password" #confirmPassword placeholder="Confirm Password" required>
+                    <button class="save-btn" type="submit">Update</button>
                 </form>
             </div>
             <div class="find-user-form-container">
-                <form action="" class="find-user-form"id="grid-item">
+                <form class="find-user-form" (ngSubmit)="findUser(findUsername.value)" id="grid-item">
                     <h2>FIND USER</h2>
-                    <input type="text" name="username" placeholder="Username" id="find-username"  required>
-                    <button class="find-btn">Find</button>
+                    <input type="text" name="username" placeholder="Username" #findUsername id="find-username"  required>
+                    <button class="find-btn" type="submit">Find</button>
                     <div class="find-user-para">
                         <p><b>Username : </b>admin<br>
                         <b>Role : </b>ADMIN <br>
@@ -130,19 +130,19 @@
         </div>
         <div class="role-side" *ngIf="showRoleSide">
             <div class="add-role-container">
-                <form action="" class="add-role-form">
+                <form (ngSubmit)="createRole(roleName, roleDescription.value)" class="add-role-form">
                     <h2>Create Role</h2>
 
-                    <input type="text" name="roleName" id="roleName" placeholder="Role Name" required>
-                    <input type="text" name="roleDescription" id="roleDescription" placeholder="Role Description " required>
+                    <input type="text" name="roleName" id="roleName" (input)="convertToUppercase($event)" placeholder="Role Name" [(ngModel)]="roleName" required>
+                    <input type="text" name="roleDescription" #roleDescription id="roleDescription" placeholder="Role Description " required>
                     <button class="save-btn">Save</button>
                 </form>
             </div>
             <div class="remove-role-container">
-                <form action="" class="remove-role-form">
+                <form (ngSubmit)="openDeleteConfirmation(roleName, 'role ')" class="remove-role-form">
                     <h2>Remove Role</h2>
-                    <input type="text" name="roleName" id="removeRoleName" placeholder="Role Name" required>
-                    <button class="remove-btn">Remove</button>
+                    <input type="text" name="roleName" id="removeRoleName" (input)="convertToUppercase($event)" placeholder="Role Name" [(ngModel)]="roleName" required>
+                    <button type="submit" mat-raised-button  class="remove-btn" >Remove</button>
                 </form>
             </div>
             <div class="all-roles-container">

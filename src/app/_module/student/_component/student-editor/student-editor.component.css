@@ -336,8 +336,8 @@ td:last-child button {
 
 .form-box form h1 {
     text-align: center;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .form-box #label {
@@ -357,7 +357,7 @@ td:last-child button {
     padding: 10px;
     margin-bottom: 10px;
     border-width: 1px;
-    border: none;
+    /* border: none; */
     font-size: 15px;
     border-radius: 5px;
     border-color: black;
@@ -368,6 +368,9 @@ td:last-child button {
     font-weight: bold;
 }
 
+.form-box #address {
+    width: 400px;
+}
 .form-box input:focus, select:focus {
     box-shadow: 0 0 10px rgb(13, 13, 54);
 }
@@ -417,7 +420,7 @@ div[for="gender"] {
     right: 30px;
     padding: 10px;
     margin: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     cursor: pointer;
     border-radius: 5px;
     border: none;
