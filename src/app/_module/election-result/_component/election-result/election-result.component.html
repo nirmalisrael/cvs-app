@@ -17,7 +17,7 @@
             </div>
         </div>
 
-        <div class="election-result-container">
+        <div class="election-result-container" *ngIf="showElectionPage">
             <div class="result-nav">
                 <div class="heading">
                     <h1>Elections</h1>
@@ -61,6 +61,43 @@
             </div>
 
 
+        </div>
+
+        <div class="candidate-result-container">
+            <div class="candidates-nav">
+                <div class="heading">
+                    <h1>Candidates</h1>
+                </div>
+
+                <div class="filter-and-btn">
+                    <select name="electionNames"  id="electionNames" (change)="onSelectOption($event)">
+                        <option [ngValue]="undefined" selected disabled>Select Election</option>
+                        <option *ngFor="let electionName of electionNames" [value]="electionName">{{electionName}}</option>
+                    </select>|
+                    <input type="text" name="candidateId" id="candidateId" placeholder="Candidate ID.." required>
+                    <a href=""><img src="assets/candidate-editor/search-icon.png" alt="search-icon"></a>
+                </div>
+            </div>
+            <div class="candidates-table-container" *ngIf="showCandidatePage">
+                <table class="candidates-table">
+                    <tr>
+                        <th style="width: 7%;" >Serial No.</th>
+                        <th>Candidate ID</th>
+                        <th>Candidate Dept. No.</th>
+                        <th>Canidate Name</th>
+                        <th style="width: 10%;">Vote Count</th>
+                    </tr>
+                    <ng-container *ngFor="let candidate of candidates; let i = index">
+                        <tr>
+                            <td>{{i+1}}</td>
+                            <td>{{candidate.candidateId}}</td>
+                            <td>{{candidate.candidateDeptNo}}</td>
+                            <td>{{candidate.candidateName}}</td>
+                            <td>{{candidate.voteCount}}</td>
+                        </tr>
+                    </ng-container>
+                </table>    
+            </div>
         </div>
     </body>
 </html>

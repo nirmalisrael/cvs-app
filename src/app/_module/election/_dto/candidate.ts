@@ -7,4 +7,6 @@ export class Candidate {
     electionName?: string;
 
     candidateName?: string;
+
+    voteCount?: number;
 }

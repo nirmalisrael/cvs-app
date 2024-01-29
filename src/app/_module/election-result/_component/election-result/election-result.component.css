@@ -102,11 +102,13 @@ body {
     font-weight: bold;
 }
 
-.election-result-container {
+.election-result-container, .candidate-result-container {
+    /* background-image: url('/assets/election-result/result-bg.png'); */
+    background-size: cover;
     background-color: rgba(105, 48, 129, 0.651);
 }
 
-.result-nav {
+.result-nav, .candidates-nav {
     position: sticky;
     top: 70px;
     left: 220px;
@@ -161,7 +163,7 @@ body {
 }
 
 
-.result-election-table-container {
+.result-election-table-container, .candidates-table-container {
     width: calc(100% - 220px);
     height: calc(100vh);
     margin-top: 100px;
@@ -170,7 +172,7 @@ body {
     justify-content: center;
 }
 
-.elections-table {
+.elections-table, .candidates-table {
     font-family:  'Roboto', 'Lato', 'Open Sans';
     width: 80%;
     margin-top: 0px;
@@ -180,7 +182,7 @@ body {
     border-spacing: 0;
 }
 
-.elections-table th {
+.elections-table th, .candidates-table th {
     padding: 20px;
     color: black;
     border-top: 2px solid;
@@ -188,13 +190,13 @@ body {
     border-right: 2px solid;
 }
 
-.elections-table th {
+.elections-table th, .candidates-table th {
     position: sticky;
     top: 147px;
     background-color:wheat;
 }
 
-.elections-table td {
+.elections-table td, .candidates-table td {
     /* font-size: 16px; */
     /* color: white; */
     text-align: center;
@@ -204,16 +206,16 @@ body {
     border-right: 1px solid black;
 }
 
-.elections-table th:first-child {
+.elections-table th:first-child, .candidates-table th:first-child {
     border-left: 2px solid ;
 }
-.elections-table td:first-child {
+.elections-table td:first-child,.candidates-table td:first-child {
   border-left: 2px solid black;
 }
-.elections-table tbody tr:last-child td{
+.elections-table tr:last-child td, .candidates-table tr:last-child td{
     border-bottom: 2px solid black;
 }
-.elections-table tbody td:last-child {
+.elections-table td:last-child, .candidates-table td:last-child {
     border-right: 2px solid black;
     padding: 0;
     margin: 0;
@@ -221,12 +223,19 @@ body {
 .elections-table td button {
     border-radius: 5px;
     border: 1px solid grey;
-    color: white;
+    /* color: white; */
+    /* font-size: 14px; */
     outline: none;
     white-space: nowrap;
     background-color: rgb(35, 133, 245);
     padding: 10px;
     cursor: pointer;
-    /* font-weight: bold; */
+    font-weight: bold;
     transition: 300ms;
+}
+
+.elections-table td button:hover{
+    box-shadow: 0 0 5px black;
+    border: none;
+    outline: none;
 }
