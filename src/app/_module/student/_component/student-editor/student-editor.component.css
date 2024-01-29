@@ -99,6 +99,7 @@ button:hover {
 }
 
 .content-container {
+    position: relative;
     display: flex;
     width: 100%;
     height: 90px;
@@ -142,30 +143,44 @@ button:hover {
     border-radius: 5px;
     font-weight: bold;
 }
-
+.option-picker:last-child {
+    margin-right: 80px;
+}
 .search-btn {
+    position: absolute;
+    right: 20px;
+    bottom: 30px;
     color: white;
-    background-color: #007bff;
+    background-color: transparent;
     border: none;
     width: fit-content;
     height: fit-content;
     font-weight: bold;
     font-size: 15px;
     text-decoration: none;
-    padding: 10px 15px;
+    /* padding: 10px 15px; */
     border-radius: 5px;
     transition: background-color 0.3s;
-    margin-right: 20px;
+
+}
+
+.search-btn img {
+    width: 40px;
+    height: 35px;
+    transition: 200ms;
 }
 
 .search-btn:hover {
-    background-color: #0056b3;
+    /* background-color: #0056b3; */
     cursor: pointer;
     box-shadow: none;
 }
 
-.student-table-container {
+.search-btn img:hover {
+    filter: brightness(0) contrast(1);
+}
 
+.student-table-container {
     font-family:  'Roboto', 'Lato', 'Open Sans';
     position: absolute;
     top: 150px;

@@ -1,4 +1,4 @@
-import { Role } from './role';
+import { Role } from '../../auth/_dto/role';
 
 describe('Role', () => {
   it('should create an instance', () => {

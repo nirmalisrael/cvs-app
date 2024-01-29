@@ -10,8 +10,9 @@ import { AdminLoginComponent } from './_component/admin-login/admin-login.compon
 import { UserLoginComponent } from './_component/user-login/user-login.component';
 import { StudentModule } from './_module/student/student.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthModule } from './_module/auth/auth.module';
+import { ElectionModule } from './_module/election/election.module';
+import { ElectionResultModule } from './_module/election-result/election-result.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { AuthModule } from './_module/auth/auth.module';
     AppRoutingModule,
     StudentModule,
     BrowserAnimationsModule,
-    AuthModule
+    AuthModule,
+    ElectionModule,
+    ElectionResultModule
   ],
   providers: [],
   bootstrap: [AppComponent]

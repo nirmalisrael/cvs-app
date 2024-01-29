@@ -1,0 +1,480 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('/assets/election-editor/election-bg.jpeg');
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+}
+
+
+.nav-bar {
+    display: flex;
+    position: relative;
+}
+
+.top-navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    align-items: center;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 40px;
+    z-index: 2;
+}
+
+.top-navbar a {
+    text-decoration: none;
+}
+.top-navbar h1 {
+    color: rgb(5, 5, 70);
+    margin-left: 40px;
+    padding: 5px;
+}
+.top-navbar h1:hover {
+    text-shadow: 0px 0px 3px rgb(97, 97, 97);;
+}
+
+.top-navbar button {
+    color: white;
+    background-color: red;
+    border: none;
+    font-weight: bold;
+    font-size: 15px;
+    text-decoration: none;
+    margin-right: 2%;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: box-shadow 0.3s;
+}
+
+.top-navbar button:hover {
+    text-decoration: double;
+    font-weight: bold;
+    box-shadow: 0px 0px 10px black;
+    cursor: pointer;
+}
+
+.left-navbar {
+    width: 220px;
+    height: 100vh;
+    background-color: #333;
+    position: fixed;
+    color: white;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    z-index: 1;
+}
+
+.left-navbar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    width: 90%;
+    margin-left: 10px;
+    text-align: center;
+    line-height: 1.5;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    border-radius: 2px;
+    transition: box-shadow 0.3s;
+}
+
+.left-navbar a:first-child {
+    margin-top: 98px;
+}
+.left-navbar a:hover {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    color: rgb(5, 5, 70);
+    font-weight: bold;
+}
+.left-navbar a[href="/admin-page/election-editor"] {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    color: rgb(5, 5, 70);
+    font-weight: bold;
+}
+
+.table-nav {
+    position: sticky;
+    top: 70px;
+    height: 100px;
+    width: calc(100% - 220px);
+    margin-top: 70px;
+    margin-left: 220px;
+    /* background-color: rgba(245, 222, 179, 0.733); */
+    background: url('/assets/election-editor/election-bg.jpeg');
+    backdrop-filter: background-color rgba(245, 222, 179, 0.733);
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.table-nav .add-election-btn {
+    position: absolute;
+    left: 5%;
+    padding: 10px;
+    /* margin-right: 2%; */
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    /* background-color: rgb(9, 211, 9); */
+    /* color: white; */
+    transition: 300ms;
+}
+
+.table-nav .add-election-btn:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px green;
+}
+
+.table-nav select {
+    padding: 9px;
+    margin-right: 2%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.search-btn {
+    color: white;
+    background-color: transparent;
+    border: none;
+    width: fit-content;
+    height: fit-content;
+    margin-right: 6%;
+    font-weight: bold;
+    font-size: 15px;
+    text-decoration: none;
+    /* padding: 10px 15px; */
+    border-radius: 5px;
+    transition: background-color 0.3s;
+
+}
+
+.search-btn img {
+    width: 32px;
+    transition: 200ms;
+}
+
+.search-btn:hover {
+    /* background-color: #0056b3; */
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.search-btn img:hover {
+    filter: brightness(0) contrast(1);
+}
+
+/* .election-details-container {
+    background-color: tomato;
+} */
+
+.election-table-container {
+    width: calc(100% - 220px);
+    height: 100vh;
+    margin-left: 220px;
+    display: flex;
+    justify-content: center;
+    padding-top: 0px;
+    background-color: rgba(252, 96, 68, 0.397);
+
+}
+
+.election-table-container table {
+    font-family:  'Roboto', 'Lato', 'Open Sans';
+    width: 90%;
+    height: fit-content;
+    table-layout: fixed;
+    /* border: 1px solid black; */
+    border-collapse: separate;
+    background-color: rgba(245, 222, 179, 0.733);
+    border-spacing: 0;
+}
+
+.election-table-container table th {
+    padding: 20px;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+}
+
+.election-table-container table th {
+    position: sticky;
+    top: 170px;
+    background-color: lightgrey;
+}
+
+.election-table-container table td {
+    /* color: white; */
+    text-align: center;
+    padding: 40px;
+    /* border-top: 1px solid; */
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+}
+
+.election-table-container table th:first-child {
+    border-left: 2px solid;
+}
+.election-table-container table td:first-child {
+  border-left: 2px solid;
+}
+.election-table-container table tbody tr:last-child td{
+    border-bottom: 2px solid;
+}
+.election-table-container table tbody td:last-child {
+    border-right: 2px solid;
+    padding: 0;
+    margin: 0;
+}
+.election-table-container table td button {
+    border-radius: 5px;
+    border: 1px solid grey;
+    outline: none;
+    white-space: nowrap;
+    background-color: rgb(35, 133, 245);
+    /* font-size: 16px; */
+    padding: 10px;
+    /* letter-spacing: 1px; */
+    cursor: pointer;
+    font-weight: bold;
+    transition: 300ms;
+}
+
+.election-table-container table td .view-candidates-btn:hover {
+    box-shadow: 0px 0px 3px blue;
+}
+.election-table-container table td .modify-election-btn , 
+.election-table-container table td .remove-election-btn {
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border-radius: 50%;
+    display:inline-flex;
+    justify-content: space-between;
+    /* align-items: center; */
+}
+
+.election-table-container table td .modify-election-btn img, 
+.election-table-container table td .remove-election-btn img {
+    width: 40px;
+}
+
+.election-table-container table td .modify-election-btn:hover , 
+.election-table-container table td .remove-election-btn:hover {
+    box-shadow: 0 0 4px black;
+}
+
+.modify-election-btn {
+    margin-right: 5px;
+}
+
+.add-election-container, .modify-election-container {
+    position: relative;
+    margin-top: 70px;
+    left: 220px;
+    width: calc(100% - 220px);
+    height: calc(100vh - 70px);
+    /* background-image: url('/assets/election-editor/election-bg.jpeg'); */
+    background-color: rgba(161, 159, 155, 0.733);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-election-form form input[type=text],
+.add-election-form form input[type=date],
+.add-election-form form select, textarea,
+.add-candidate-btn {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+.add-candidate-btn:hover {
+    background-color: white;
+    cursor: pointer;
+}  
+input[type=submit], .add-candidate, .save-btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+  
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+  
+.add-election-form {
+    position: absolute;
+    width: 40%;
+    display: flex;
+    transition: transform 500ms ease-out;
+}
+.add-election-form form{
+    width: 100%;
+    min-height: fit-content;
+    max-height: 75vh;
+    overflow: auto;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+    background-color: white;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #8a8888;
+}
+
+.add-candidate-table {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+}
+
+.add-candidate-table table {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    border-collapse: collapse;
+    margin: 10px;
+}
+
+.add-candidate-table table th {
+    padding: 5px;
+    border: 1px solid;
+
+}
+
+
+.add-candidate-table table td {
+    /* color: white; */
+    text-align: center;
+    padding: 5px;
+    border: 1px solid;
+
+}
+
+.add-candidate-table table td button {
+    border-radius: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+    border: none;
+    box-sizing: border-box;
+}
+.add-candidate-table table td img {
+    width: 19px;
+    padding: 0px !important;
+    margin: 0;
+    cursor: pointer;
+}
+
+.add-candidate-table table tr td:last-child {
+    border: none;
+    /* border-radius: 100%; */
+    padding-left: 5px;
+    margin: 0;
+}
+.add-candidate-table table td button:hover {
+    box-shadow: 0 0 4px black;
+}
+
+.add-candidate-form form input[type=text],
+.add-candidate-form form input[type=date],
+.add-candidate-form form select, textarea,
+.modify-election-form form input[type=text],
+.modify-election-form form input[type=date],
+.modify-election-form form select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+  
+.add-candidate-form{
+    position: absolute;
+    width: 40%;
+    right: 5%;
+    display: flex;  
+    transition: transform 300ms ease-out;
+}
+.modify-election-form {
+    width: 40%;
+    display: flex;  
+    transition: transform 300ms ease-out;
+}
+.add-candidate-form form, .modify-election-form form{
+    width: 100%;
+    min-height: fit-content;
+    max-height: 75vh;
+    overflow: auto;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.add-election-container .add-election-form h1, .add-candidate-form h1,.modify-election-form h1 {
+    padding: 10px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.close-icon img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 50%;
+    background-color: rgba(161, 159, 155, 0.733);
+    transition: 300ms;
+    cursor: pointer;
+}
+
+.close-icon img:hover {
+    box-shadow:0 0 6px darkred;
+    background-color: rgb(248, 154, 154);
+}

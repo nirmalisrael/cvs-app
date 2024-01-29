@@ -1,7 +1,7 @@
 import { Conditional } from '@angular/compiler';
 import { Component } from '@angular/core';
-import { Role } from 'src/app/_module/student/_dto/role';
-import { User } from 'src/app/_module/student/_dto/user';
+import { Role } from 'src/app/_module/auth/_dto/role';
+import { User } from 'src/app/_module/auth/_dto/user';
 import Swal from 'sweetalert2';
 
 @Component({

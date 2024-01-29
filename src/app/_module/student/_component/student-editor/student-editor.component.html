@@ -5,7 +5,7 @@
                 <a href="/admin-page/student-editor">Student Details</a>
                 <a href="/admin-page/auth-editor">Authentication Details</a>
                 <a href="/admin-page/election-editor">Election Details</a>
-                <a href="/admin-page/result-editor">Election Result Details</a>
+                <a href="/admin-page/election-result">Election Result Details</a>
             </div>
             <div class="top-navbar">
                 <a href="/admin-page"><h1>Admin Dashboard</h1></a>
@@ -34,8 +34,8 @@
                         <option value="2022">2022</option>
                         <option value="2023">2023</option>
                    </select>
-                    <button class="search-btn">Search</button>
                 </div>
+                <button class="search-btn"><img src="assets/student-editor/filter-icon.jpg" alt="filter-icon"></button>
             </div>
             <div *ngIf="studentList.length > 0; else noStudents" class="student-table-container" #tableContainer>
 
