@@ -1,169 +1,25 @@
 <html>
-    <body>
-        <div class="container">
-            <div class="left-navbar">
-                <a href="/admin-page/student-editor">Student Details</a>
-                <a href="/admin-page/auth-editor">Authentication Details</a>
-                <a href="/admin-page/election-editor">Election Details</a>
-                <a href="/admin-page/election-result">Election Result Details</a>
-            </div>
-            <div class="top-navbar">
-                <a href="/admin-page"><h1>Admin Dashboard</h1></a>
-                <button onclick="">LOG OUT</button>
-            </div>
-            <div class="content-container">
-                <div class="btn-container">
-                    <button class="add-student-btn" (click)="openAddStudentForm()">+ Add Student</button>
-                   
-                </div>
-                <div class="option-container">
-                   <!-- your-component.component.html -->
-                    <select [(ngModel)]="selectedDegreeType" class="option-picker" name="degreeType">
-                        <option [ngValue]="undefined" disabled selected>Degree Type</option>
-                        <option *ngFor="let type of degreeTypeOptions" [value]="type">{{ type }}</option>
-                    </select>
-  
-                    
-                    <select class="option-picker" id="department" [(ngModel)]="selectedDepartment">
-                        <option [ngValue]="undefined" disabled selected>Department</option>
-                        <option *ngFor="let dept of departmentOptions" [value]="dept">{{ dept }}</option>
-                    </select>
-                    <select class="option-picker" id="admissionYear"[(ngModel)]="selectedAdmissionYear">
-                        <option [ngValue]="undefined" disabled selected>Admission Year</option>
-                        <option value="2021">2021</option>
-                        <option value="2022">2022</option>
-                        <option value="2023">2023</option>
-                   </select>
-                </div>
-                <button class="search-btn"><img src="assets/student-editor/filter-icon.jpg" alt="filter-icon"></button>
-            </div>
-            <div *ngIf="studentList.length > 0; else noStudents" class="student-table-container" #tableContainer>
+    <head>
+        <title>Loyola College | Admin Dashboard | Student Details</title>
+    </head>
 
-                <table class="student-table">
-                    <thead>
-                        <tr>
-                            <th>S. No</th>
-                            <th>Dept. No.</th>
-                            <th>Name</th>
-                            <th>Date Of Birth</th>
-                            <th>Gender</th>
-                            <th>Admission Year</th>
-                            <th>Degree Type</th>
-                            <th>Department</th>
-                            <th>Email-Id</th>
-                            <th>Phone Number</th>
-                            <th>Address</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <ng-container *ngFor="let student of studentsToShow; let i = index">
-                             
-                                <tr>
-                                    <td>{{((currentPage - 1) * studentsPerPage) + i + 1 }}</td>
-                                    <td>{{ student.deptNo }}</td>
-                                    <td style="text-align: left;">{{student.studentName}}</td>
-                                    <td>2004-06-12</td>
-                                    <td>{{student.gender}}</td>
-                                    <td>{{ student.admissionYear }}</td>
-                                    <td>{{ student.degreeType }}</td>
-                                    <td>{{student.department}}</td>
-                                    <td>{{student.emailId}}</td>
-                                    <td>{{student.phoneNumber}}</td>
-                                    <td  style="text-align: left;"><address>{{student.address}}</address></td>
-                                    <td>
-                                        <button class="modify-student-btn" (click)="opentModifyStudentForm(student)">
-                                            <img src="assets/student-editor/modify.png" alt="del">
-                                        </button>
-                                        <button class="remove-student-btn" (click)="openDeleteConfirmation(student.deptNo)">
-                                            <img src="assets/student-editor/delete.png" alt="modify">
-                                        </button>
-                                    </td>
-                                </tr>
-                        </ng-container>
-                        
-                    </tbody>
-                </table>
-                <br>
-        
+    <div class="nav-bar">
+        <div class="left-navbar">
+            <a href="/admin-page/student-editor">Student Details</a>
+            <a href="/admin-page/auth-editor">Authentication Details</a>
+            <a href="/admin-page/election-editor">Election Details</a>
+            <a href="/admin-page/candidate-editor">Candidates Details</a>
+            <a href="/admin-page/election-result">Election Result Details</a>
+        </div>
+        <div class="top-navbar">
+            <div class="top-nav-heading">
+                <a href="/admin-page"><h1>Admin Dashboard</h1></a>
             </div>
-            <div *ngIf="showPagination" class="pagination">
-                <ng-container *ngFor="let page of pages">
-                  <button class="page-btn" (click)="goToPage(page)" [class.active]="page === currentPage">{{ page }}</button>
-                </ng-container>
-            </div>
-            <ng-template #noStudents>
-                <p>No students found.</p>
-            </ng-template>
-            <!-- Add student form -->
-            <div class="add-student-form" *ngIf="showAddStudentForm">
-                
-                <div class="scrollable-container">
-                    
-                    <div class="form-box">
-                        
-                        <form (ngSubmit)="submitAddStudentForm(studentRequest)">
-                            <h1>{{formHeading}}</h1>
-                            <div *ngIf="showDeptNo">
-                                <label for="deptNo" id="label">Dept. Number : </label>
-                                <input type="text" name="deptNo" placeholder="Dept No" [(ngModel)]="deptNo" id="deptNo" required>    
-                            </div>
-                            <label for="studentName" id="label">Student Name : </label>
-                            <input type="text" name="studentName" placeholder="Student Name" [(ngModel)]="studentRequest.studentName" id="studentName" required>
-                            <br>
-                            <label for="dateOfBirth"id="label">Date Of Birth : </label>
-                            <input type="date" name="dateOfBirth" [(ngModel)]="studentRequest.dateOfBirth" id="dateOfBirth" required>
-                            <br>
-                            <div class="gender-options">
-                                <label for="gender" id="genderLable">Gender : </label>
-                                <div *ngFor="let gender of genderOptions" class="gender">
-                                    <label style="font-weight: bold;">
-                                        <input
-                                            type="radio"
-                                            name="gender"
-                                            class="genderInput"
-                                            [(ngModel)]="studentRequest.gender"
-                                            [value]="gender"
-                                        />
-                                        {{ gender }}
-                                    </label>
-                                </div>
-                            </div>
-                            
-                            <label for="admissionYear"id="label">Admission Year : </label>
-                            <select class="option-picker" id="admissionYear" [(ngModel)]="studentRequest.admissionYear" name="admissionYear">
-                                <option [ngValue]="undefined"  disabled selected id="defaultOption">Admission Year</option>
-                                <option value="2021">2021</option>
-                                <option value="2022">2022</option>
-                                <option value="2023">2023</option>
-                           </select>
-                           <br>
-                            <label for="degreeType"id="label">Degree Type : </label>
-                            <select class="option-picker" id="degreeType" placeholder="Degree Type" [(ngModel)]="studentRequest.degreeType" name="degreeType">
-                                <option [ngValue]="undefined" disabled selected>Degree Type</option>
-                                <option *ngFor="let type of degreeTypeOptions" [value]="type">{{ type }}</option>            
-                            </select>                            
-                            <br>
-                            <label for="department"id="label">Department: </label>
-                            <select class="option-picker" id="department" [(ngModel)]="studentRequest.department" name="department">
-                                <option [ngValue]="undefined" disabled selected>Department</option>
-                                <option *ngFor="let dept of departmentOptions" [value]="dept">{{ dept }}</option>
-                            </select>
-                            <br>
-                            <label for="emailId"id="label">E-mail Id : </label>
-                            <input type="email" placeholder="Email-Id" name="emailId" [(ngModel)]="studentRequest.emailId" id="emailId" required>
-                            <br>
-                            <label for="phoneNumber"id="label">Phone Number : </label>
-                            <input type="number" placeholder="Phone Number" name="phoneNumber" [(ngModel)]="studentRequest.phoneNumber" id="phoneNumber" required>
-                            <br>
-                            <label for="address" id="label">Address : </label>
-                            <input type="text" name="address" id="address" placeholder="Address" [(ngModel)]="studentRequest.address">
-                            <br>
-                            <a (click)="cancelAddStudentForm()"><img src="assets/student-editor/close-icon.png" alt="close-icon"></a>
-                            <button type="submit" mat-raised-button class="save-button">{{formButton}}</button>
-                        </form>
-                    </div>
-                </div>
+
+            <div class="top-nav-btns">
+                <a href="/home" class="home-btn">HOME</a>
+            <a href="/home" class="logout-btn">LOGOUT</a>
             </div>
         </div>
-    </body>
+    </div>
 </html>

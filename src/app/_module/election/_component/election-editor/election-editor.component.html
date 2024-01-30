@@ -16,15 +16,29 @@
                 <button onclick="">LOG OUT</button>
             </div>
         </div>
-        <div class="electon-page-container">
-            <div class="table-nav" *ngIf="showElectionPage">
+        <div class="election-page-container">
+            <!-- <div class="table-nav" *ngIf="showElectionPage">
                 <button class="add-election-btn" (click)="openAddElectionPage()">Add Election</button>
-                <!-- <label for="status">Election Status : </label> -->
                 <select name="status-option" id="status-option">
                     <option [ngValue]="undefined" selected disabled>Select Status</option>
                     <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
                 </select>
                 <button class="search-btn"><img src="assets/student-editor/filter-icon.jpg" alt="filter-icon"></button>
+            </div> -->
+
+            <div class="table-nav" *ngIf="showElectionPage">
+                <div class="election-name">
+                    <h1>Elections</h1>
+                </div>
+                <div  class="btns-and-option">
+                    <button class="add-election-btn" (click)="openAddElectionPage()">Add Election</button>
+                    <select name="status-option" id="status-option">
+                        <option [ngValue]="undefined" selected disabled>Select Status</option>
+                        <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+                    </select>  |
+                    <input type="text" name="electionName" id="electionName" placeholder="Election name.." required>
+                    <a href=""><img src="assets/candidate-editor/search-icon.png" alt="search-icon"></a>             
+                </div>
             </div>
 
             <div class="election-table-container" *ngIf="showElectionPage">
