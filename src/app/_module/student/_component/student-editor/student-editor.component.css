@@ -103,3 +103,87 @@ a {
     color: rgb(5, 5, 70);
     font-weight: bold;
 }
+
+.students-page-cantainer {
+    background-color: lightblue;
+}
+
+.students-nav {
+    position: sticky;
+    top: 70px;
+    left: 220px;
+    width: calc(100% - 260px);
+    /* margin-left: 220px; */
+    background-color: lightsalmon;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 0 10px black;
+}
+.filter-and-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter-and-btn button, .filter-and-btn select {
+    font-size: 15px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    outline: none;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.filter-and-btn input {
+    width: 130px;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 8px;
+    outline: none;
+    margin-right: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+
+.filter-and-btn input:focus {
+    box-shadow: 0 0 3px black;
+    border: 1px solid white;
+}
+.filter-and-btn a img{
+    width: 25px;
+}
+
+.filter-and-btn a img:hover {
+    filter: brightness(0) contrast(1);
+}
+
+.students-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.students-grid-container{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+}
+
+.section {
+    padding: 20px;
+    border: 2px solid black;
+}
+
+.student-profile img {
+    width: 30%;
+    /* max-height: 150px; */
+    object-fit: cover;
+}
+
+.studnet-info {
+    flex: 1;
+    padding: 20px;
+}
