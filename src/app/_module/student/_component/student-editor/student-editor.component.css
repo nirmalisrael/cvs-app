@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-image: url('/assets/election-result/result-bg.png');
+    background-image: url('/assets/student-editor/students-bg.jpg');
     background-attachment: fixed;
     background-size: cover;
     height: 100%;
@@ -105,12 +105,12 @@ a {
 }
 
 .students-page-cantainer {
-    background-color: lightblue;
+    background-color: rgba(15, 95, 199, 0.411);
 }
 
 .students-nav {
     position: sticky;
-    top: 70px;
+    top: 74px;
     left: 220px;
     width: calc(100% - 260px);
     /* margin-left: 220px; */
@@ -162,28 +162,80 @@ a {
 }
 
 .students-container {
-    display: flex;
-    justify-content: space-around;
 }
 
 .students-grid-container{
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-left: 220px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    min-height: calc(100vh - 151px);
+    width: calc(100% - 220px);
+}
+
+.student-grid {
+    /* position: relative; */
+    display: flex;
+    width: 25%;
+    height: 20vh;
+    align-items: center;
+    background-color: lightgray;
+    padding: 20px;
+    margin: 20px;
+    transition: 0.3s;
+    border-radius: 4px;
+}
+.student-profile {
+    box-sizing: border-box;
+    width: 40%;
+    height: 100%;
+    padding: 5px;
+    /* align-items: center;
+    justify-content: center; */
+    /* display: flex; */
+    text-align: center;
+}
+
+.student-info {
+    box-sizing: border-box;
+    width: 60%;
+}
+.profile-img {
+    /* margin-top: 5%; */
+    /* padding: 10px; */
+    margin: 0;
+    padding: 0;
+    padding-bottom: 10px;
+    width: 90%;
+    height: 60%;
+    border-radius: 60%;
+}
+
+.info-container {
+    display: flex;
     flex-direction: column;
-    width: 500px;
-}
+  }
+  
+  .info-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5%;
+  }
+  
+  .label {
+    font-weight: bold;
+    width: 50%; /* Adjust the width as needed */
+  }
+  
+  .value {
+    margin: 0;
+    margin-left: 5px;
+    text-align: left;
+  }
 
-.section {
-    padding: 20px;
-    border: 2px solid black;
-}
-
-.student-profile img {
-    width: 30%;
-    /* max-height: 150px; */
-    object-fit: cover;
-}
-
-.studnet-info {
-    flex: 1;
-    padding: 20px;
-}
+  .student-grid:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px black;
+  }

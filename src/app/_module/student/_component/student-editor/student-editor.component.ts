@@ -10,7 +10,11 @@ import { Gender } from '../../_dto/gender';
   styleUrls: ['./student-editor.component.css']
 })
 export class StudentEditorComponent {
+
   showStudentDetailsPage = true;
+
+  showAllStudents = true;
+
 
   degreeTypeOptions = Object.values(DegreeType);
   departmentOptions = Object.values(Department);
@@ -78,4 +82,10 @@ export class StudentEditorComponent {
     {deptNo: '21UCS01', studentName: 'Durai', dateOfBirth: new Date('2000-09-21'), admissionYear: 2021, gender: Gender.MALE, degreeType: DegreeType.UG, department: Department.COMPUTER_SCIENCE, emailId: 'nirmalmeenu111@gmail.com',phoneNumber: 8754271092, address: '220, madha kovil street, alliyanthal, tiruvannaamali.'},
 
   ];
+
+  openStudent(student: StudentResponse) {
+    console.log(student);
+    this.showAllStudents = false
+  }
+
 }

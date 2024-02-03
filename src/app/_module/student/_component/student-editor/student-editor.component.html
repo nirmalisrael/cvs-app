@@ -3,6 +3,7 @@
         <title>Loyola College | Admin Dashboard | Student Details</title>
     </head>
 
+   <body>
     <div class="nav-bar">
         <div class="left-navbar">
             <a href="/admin-page/student-editor">Student Details</a>
@@ -50,23 +51,39 @@
                 </div>
             </div>
             <div class="students-container">
-                <div class="students-grid-container">
-                    <ng-container>
-                        <div class=" student-grid">
-                            <div class="section student-profile">
-                                <img src="assets/student-editor/student-profile.png" alt="profile-img" class="profile-img">
-                                <p>Department No: {{studentResponse.deptNo}}</p>
+                <div class="students-grid-container" *ngIf="showAllStudents">
+                    <ng-container *ngFor="let student of studentList">
+                        <div class="student-grid" (click)="openStudent(student)">
+                            <div class="sub-div student-profile">
+                                <img src="https://source.unsplash.com/600x300/?student" alt="profile-img" class="profile-img">
+                                <!-- <img src="assets/student-editor/student-profile.jpg" alt="profile-img" class="profile-img"> -->
+                                <p style="font-weight: bold;">{{student.deptNo}}</p>
                             </div>
-                            <div class="section student-info">
-                                <p>Name:{{studentResponse.studentName}}</p>
-                                <p>Date of Birth: {{studentResponse.dateOfBirth}}</p>
-                                <p></p>
-                                <p></p>
+                            <div class="sub-div student-info">
+                                <div class="info-container">
+                                    <div class="info-line">
+                                      <span class="label">Name</span>: 
+                                      <span class="value">{{student.studentName}}</span>
+                                    </div>
+                                    <div class="info-line">
+                                      <span class="label">Date of Birth</span>: 
+                                      <span class="value">{{student.dateOfBirth | date:'dd-MM-yyyy'}}</span>
+                                    </div>
+                                    <div class="info-line">
+                                      <span class="label">Admission Year</span>: 
+                                      <span class="value">{{student.admissionYear}}</span>
+                                    </div>
+                                    <div class="info-line" style="font-weight: bold;">
+                                      <span class="">{{student.degreeType}} - {{student.department}}</span>
+                                    </div>
+                                  </div>                  
                             </div>                            
-                        </div>
+                        </div>  
                     </ng-container>
                 </div>
             </div>
         </div>
     </div>
+
+   </body>
 </html>
