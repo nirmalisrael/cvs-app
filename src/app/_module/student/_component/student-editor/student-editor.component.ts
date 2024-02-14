@@ -11,9 +11,9 @@ import { Gender } from '../../_dto/gender';
 })
 export class StudentEditorComponent {
 
-  showStudentDetailsPage = true;
+  showStudentPage = true;
 
-  showAllStudents = true;
+  showAllStudents = false;
 
 
   degreeTypeOptions = Object.values(DegreeType);
@@ -85,7 +85,7 @@ export class StudentEditorComponent {
 
   openStudent(student: StudentResponse) {
     console.log(student);
-    this.showAllStudents = false
+    this.showAllStudents = false;
   }
 
 }

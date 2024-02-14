@@ -1,101 +1,107 @@
 <html>
-    <head>
-        <title>Loyola College | Admin | Election Results</title>
-    </head>
-    <body>
-        <div class="nav-bar">
-            <div class="left-navbar">
-                <a href="/admin-page/student-editor">Student Details</a>
-                <a href="/admin-page/auth-editor">Authentication Details</a>
-                <a href="/admin-page/election-editor">Election Details</a>
-                <a href="/admin-page/candidate-editor">Candidates Details</a>
-                <a href="/admin-page/election-result">Election Result Details</a>
+
+<head>
+    <title>Loyola College | Admin | Election Results</title>
+</head>
+
+<body>
+    <div class="nav-bar">
+        <div class="left-navbar">
+            <a href="/admin-page/student-editor">Student Details</a>
+            <a href="/admin-page/auth-editor">Authentication Details</a>
+            <a href="/admin-page/election-editor">Election Details</a>
+            <a href="/admin-page/candidate-editor">Candidates Details</a>
+            <a href="/admin-page/election-result">Election Result Details</a>
+        </div>
+        <div class="top-navbar">
+            <a href="/admin-page">
+                <h1>Admin Dashboard</h1>
+            </a>
+            <button onclick="">LOG OUT</button>
+        </div>
+    </div>
+
+    <div class="election-result-container" *ngIf="showElectionPage">
+        <div class="result-nav">
+            <div class="heading">
+                <h1>Elections</h1>
             </div>
-            <div class="top-navbar">
-                <a href="/admin-page"><h1>Admin Dashboard</h1></a>
-                <button onclick="">LOG OUT</button>
+
+            <div class="filter-and-btn">
+                <select name="status-option" id="status-option">
+                    <option [ngValue]="undefined" selected disabled>Select Status</option>
+                    <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+                </select>
+                <input type="text" name="electionName" id="electionName" placeholder="Election name.." required>
+                <a href=""><img src="assets/candidate-editor/search-icon.png" alt="search-icon"></a>
             </div>
         </div>
 
-        <div class="election-result-container" *ngIf="showElectionPage">
-            <div class="result-nav">
-                <div class="heading">
-                    <h1>Elections</h1>
-                </div>
-
-                <div class="filter-and-btn">
-                    <select name="status-option" id="status-option">
-                        <option [ngValue]="undefined" selected disabled>Select Status</option>
-                        <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
-                    </select>
-                    <input type="text" name="electionName" id="electionName" placeholder="Election name.." required>
-                    <a href=""><img src="assets/candidate-editor/search-icon.png" alt="search-icon"></a>
-                </div>
-            </div>
-
-            <div class="result-election-table-container">
-                <table class="elections-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 7%;">Serial Number</th>
-                            <th>Election Name</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                            <th>Winner</th>
-                            <th>Result Details</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <ng-container *ngFor="let election of elections; let i = index">
-                            <tr>
-                                <td>{{i +1}}</td>
-                                <td>{{election.electionName}}</td>
-                                <td>{{election.electionDate | date:'dd-MM-yyyy'}}</td>
-                                <td>{{election.electionStatus}}</td>
-                                <td>{{getWinnerByElectionName(election.electionName)}}</td>
-                                <td><button class="view-candidates-btn" >View Result</button></td>
-                            </tr>
-                        </ng-container>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="candidate-result-container">
-            <div class="candidates-nav">
-                <div class="heading">
-                    <h1>Candidates</h1>
-                </div>
-
-                <div class="filter-and-btn">
-                    <select name="electionNames"  id="electionNames" (change)="onSelectOption($event)">
-                        <option [ngValue]="undefined" selected disabled>Select Election</option>
-                        <option *ngFor="let electionName of electionNames" [value]="electionName">{{electionName}}</option>
-                    </select>|
-                    <input type="text" name="candidateId" id="candidateId" placeholder="Candidate ID.." required>
-                    <a href=""><img src="assets/candidate-editor/search-icon.png" alt="search-icon"></a>
-                </div>
-            </div>
-            <div class="candidates-table-container" *ngIf="showCandidatePage">
-                <table class="candidates-table">
+        <div class="result-election-table-container">
+            <table class="elections-table">
+                <thead>
                     <tr>
-                        <th style="width: 7%;" >Serial No.</th>
-                        <th>Candidate ID</th>
-                        <th>Candidate Dept. No.</th>
-                        <th>Canidate Name</th>
-                        <th style="width: 10%;">Vote Count</th>
+                        <th style="width: 7%;">Serial Number</th>
+                        <th>Election Name</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Winner</th>
+                        <th>Result Details</th>
                     </tr>
-                    <ng-container *ngFor="let candidate of candidates; let i = index">
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let election of elections; let i = index">
                         <tr>
-                            <td>{{i+1}}</td>
-                            <td>{{candidate.candidateId}}</td>
-                            <td>{{candidate.candidateDeptNo}}</td>
-                            <td>{{candidate.candidateName}}</td>
-                            <td>{{candidate.voteCount}}</td>
+                            <td>{{i +1}}</td>
+                            <td>{{election.electionName}}</td>
+                            <td>{{election.electionDate | date:'dd-MM-yyyy'}}</td>
+                            <td>{{election.electionStatus}}</td>
+                            <td>{{getWinnerByElectionName(election.electionName)}}</td>
+                            <td><button class="view-candidates-btn" (click)="getResultByElection(election.electionName)">View Result</button></td>
                         </tr>
                     </ng-container>
-                </table>    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="candidate-result-container" *ngIf="showCandidatePage">
+        <div class="candidates-nav">
+            <div class="heading">
+                <h1>{{selectedElection}} Result</h1>
+            </div>
+
+            <div class="filter-and-btn">
+                <button class="back-btn" (click)="backToElectionResult()">Back</button>
+                <select name="electionNames" id="electionNames" [(ngModel)]="selectedElection" (change)="onSelectOption($event)">
+                    <option [ngValue]="undefined" selected disabled>Select Election</option>
+                    <option *ngFor="let electionName of electionNames" [value]="electionName">{{electionName}}</option>
+                </select>|
+                <input type="text" name="candidateId" id="candidateId" placeholder="Candidate ID.." required>
+                <a href=""><img src="assets/candidate-editor/search-icon.png" alt="search-icon"></a>
             </div>
         </div>
-    </body>
+        <div class="candidates-table-container">
+            <table class="candidates-table">
+                <tr>
+                    <th style="width: 7%;">Serial No.</th>
+                    <th>Candidate ID</th>
+                    <th>Candidate Dept. No.</th>
+                    <th>Canidate Name</th>
+                    <th style="width: 10%;">Vote Count</th>
+                </tr>
+                <ng-container *ngFor="let candidate of candidates; let i = index">
+                    <tr>
+                        <td>{{i+1}}</td>
+                        <td>{{candidate.candidateId}}</td>
+                        <td>{{candidate.candidateDeptNo}}</td>
+                        <td>{{candidate.candidateName}}</td>
+                        <td>{{candidate.voteCount}}</td>
+                    </tr>
+                </ng-container>
+            </table>
+        </div>
+    </div>
+</body>
+
 </html>

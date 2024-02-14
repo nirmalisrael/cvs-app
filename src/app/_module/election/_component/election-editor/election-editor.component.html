@@ -1,143 +1,139 @@
 <html>
-    <head>
-        <title class="scrolling-title">Loyola College | Admin Dashboard</title>
-    </head>
-    <body>
-        <div class="nav-bar">
-            <div class="left-navbar">
-                <a href="/admin-page/student-editor">Student Details</a>
-                <a href="/admin-page/auth-editor">Authentication Details</a>
-                <a href="/admin-page/election-editor">Election Details</a>
-                <a href="/admin-page/candidate-editor">Candidates Details</a>
-                <a href="/admin-page/election-result">Election Result Details</a>
-            </div>
-            <div class="top-navbar">
-                <a href="/admin-page"><h1>Admin Dashboard</h1></a>
-                <button onclick="">LOG OUT</button>
-            </div>
+
+<head>
+    <title class="scrolling-title">Loyola College | Admin Dashboard</title>
+</head>
+
+<body>
+    <div class="nav-bar">
+        <div class="left-navbar">
+            <a href="/admin-page/student-editor">Student Details</a>
+            <a href="/admin-page/auth-editor">Authentication Details</a>
+            <a href="/admin-page/election-editor">Election Details</a>
+            <a href="/admin-page/candidate-editor">Candidates Details</a>
+            <a href="/admin-page/election-result">Election Result Details</a>
         </div>
-        <div class="election-page-container">
-            <!-- <div class="table-nav" *ngIf="showElectionPage">
+        <div class="top-navbar">
+            <a href="/admin-page">
+                <h1>Admin Dashboard</h1>
+            </a>
+            <button onclick="">LOG OUT</button>
+        </div>
+    </div>
+    <div class="election-page-container">
+        <div class="table-nav" *ngIf="showElectionPage">
+            <div class="election-name">
+                <h1>Elections</h1>
+            </div>
+            <div class="btns-and-option">
                 <button class="add-election-btn" (click)="openAddElectionPage()">Add Election</button>
                 <select name="status-option" id="status-option">
                     <option [ngValue]="undefined" selected disabled>Select Status</option>
                     <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
-                </select>
-                <button class="search-btn"><img src="assets/student-editor/filter-icon.jpg" alt="filter-icon"></button>
-            </div> -->
-
-            <div class="table-nav" *ngIf="showElectionPage">
-                <div class="election-name">
-                    <h1>Elections</h1>
-                </div>
-                <div  class="btns-and-option">
-                    <button class="add-election-btn" (click)="openAddElectionPage()">Add Election</button>
-                    <select name="status-option" id="status-option">
-                        <option [ngValue]="undefined" selected disabled>Select Status</option>
-                        <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
-                    </select>  |
-                    <input type="text" name="electionName" id="electionName" placeholder="Election name.." required>
-                    <a href=""><img src="assets/candidate-editor/search-icon.png" alt="search-icon"></a>             
-                </div>
+                </select> |
+                <input type="text" name="electionName" id="electionName" placeholder="Election name.." required>
+                <a href=""><img src="assets/candidate-editor/search-icon.png" alt="search-icon"></a>
             </div>
+        </div>
 
-            <div class="election-table-container" *ngIf="showElectionPage">
-                <table>
-                    <thead>
+        <div class="election-table-container" *ngIf="showElectionPage">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 7%;">Serial Number</th>
+                        <th>Election Name</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Candidates</th>
+                        <th style="width: 5%;">Edit & Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let election of elections; let i = index">
                         <tr>
-                            <th style="width: 7%;">Serial Number</th>
-                            <th>Election Name</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                            <th>Candidates</th>
-                            <th style="width: 5%;">Edit & Delete</th>
+                            <td>{{i +1}}</td>
+                            <td>{{election.electionName}}</td>
+                            <td>{{election.electionDate | date:'dd-MM-yyyy'}}</td>
+                            <td>{{election.electionStatus}}</td>
+                            <td><button class="view-candidates-btn" (click)="onClickViewCandidates(election.electionName)">View Candidates</button></td>
+                            <td>
+                                <button class="modify-election-btn" (click)="openModifyElectionForm(election)">
+                                    <img src="assets/student-editor/modify.png" alt="delete">
+                                </button>
+                                <button class="remove-election-btn" (click)="openDeleteElection(election.electionName)">
+                                    <img src="assets/student-editor/delete.png" alt="modify">
+                                </button>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <ng-container *ngFor="let election of elections; let i = index">
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="add-election-container" *ngIf="showAddElectionPage">
+        <div class="add-election-form" [@formAnimation]="formAnimationState">
+            <form>
+                <h1>Create a Election</h1>
+
+                <label for="electionName">Election Name</label>
+                <input type="text" id="electionName" name="electionName" [(ngModel)]="newElection.electionName" placeholder="Election name..">
+
+                <label for="electionDate">Election Date</label>
+                <input type="date" id="electionDate" name="electionDate" placeholder="Election date.." [(ngModel)]="newElection.electionDate">
+
+                <label for="add-candidate">Add Candidates</label>
+                <div class="add-candidate-table" *ngIf="showAddedCandidates">
+                    <table>
+                        <tr>
+                            <th>Candidate ID</th>
+                            <th>Dept. No</th>
+                        </tr>
+                        <ng-container *ngFor="let candidate of candidates; let i = index">
                             <tr>
-                                <td>{{i +1}}</td>
-                                <td>{{election.electionName}}</td>
-                                <td>{{election.electionDate | date:'dd-MM-yyyy'}}</td>
-                                <td>{{election.electionStatus}}</td>
-                                <td><button class="view-candidates-btn">View Candidates</button></td>
-                                <td>
-                                    <button class="modify-election-btn" (click)="openModifyElectionForm(election)">
-                                        <img src="assets/student-editor/modify.png" alt="delete">
-                                    </button>
-                                    <!-- <br> -->
-                                    <button class="remove-election-btn" (click)="openDeleteElection(election.electionName)">
-                                        <img src="assets/student-editor/delete.png" alt="modify">
-                                    </button>
-                                </td>
+                                <td>{{candidate.candidateId}}</td>
+                                <td>{{candidate.candidateDeptNo}}</td>
+                                <td><button (click)="removeCandidate(i)"><img
+                                            src="assets/election-editor/remove-icon.png" alt="remove"></button></td>
                             </tr>
                         </ng-container>
-                    </tbody>
-                </table>
-            </div>
+                    </table>
+                </div>
+                <button class="add-candidate-btn" (click)="toggleAddCandidateForm()">Click to add candidate</button>
+                <button class="save-btn" (click)="saveElection(newElection ,candidates)">Save</button>
+            </form>
         </div>
-        <div class="add-election-container" *ngIf="showAddElectionPage">
-            <div class="add-election-form"  [@formAnimation]="formAnimationState">
-                <form>
-                    <h1>Create a Election</h1>
+        <div class="add-candidate-form" *ngIf="showAddCandidateForm">
+            <form>
+                <h1>Register a Candidate</h1>
+                <label for="candidate-id">Candidate ID</label>
+                <input type="text" name="candidate-id" id="candidate-id" placeholder="Candidate ID.." [(ngModel)]="newCandidate.candidateId">
 
-                    <label for="electionName">Election Name</label>
-                    <input type="text" id="electionName" name="electionName" [(ngModel)]="newElection.electionName" placeholder="Election name..">
-                
-                    <label for="electionDate">Election Date</label>
-                    <input type="date" id="electionDate" name="electionDate" placeholder="Election date.." [(ngModel)]="newElection.electionDate">
-                
-                    <label for="add-candidate">Add Candidates</label>
-                    <div class="add-candidate-table" *ngIf="showAddedCandidates">
-                            <table>
-                                <tr>
-                                    <th>Candidate ID</th>
-                                    <th>Dept. No</th>
-                                </tr>
-                                <ng-container *ngFor="let candidate of candidates; let i = index" >
-                                    <tr>
-                                        <td>{{candidate.candidateId}}</td>
-                                        <td>{{candidate.candidateDeptNo}}</td>
-                                        <td><button (click)="removeCandidate(i)"><img src="assets/election-editor/remove-icon.png" alt="remove"></button></td>
-                                    </tr>
-                                </ng-container>
-                            </table>
-                    </div>
-                    <button class="add-candidate-btn" (click)="toggleAddCandidateForm()">Click to add candidate</button>
-                    <button class="save-btn" (click)="saveElection(newElection ,candidates)">Save</button>
-                </form>
-            </div>
-            <div class="add-candidate-form" *ngIf="showAddCandidateForm" >
-                <form>
-                    <h1>Register a Candidate</h1>
-                    <label for="candidate-id">Candidate ID</label>
-                    <input type="text" name="candidate-id" id="candidate-id" placeholder="Candidate ID.." [(ngModel)]="newCandidate.candidateId">
+                <label for="candidate-deptNo">Candidate Department Number</label>
+                <input type="text" name="candidate-deptNo" id="candidate-deptNo" placeholder="Candidate dept. no. .." [(ngModel)]="newCandidate.candidateDeptNo">
 
-                    <label for="candidate-deptNo">Candidate Department Number</label>
-                    <input type="text" name="candidate-deptNo" id="candidate-deptNo" placeholder="Candidate dept. no. .." [(ngModel)]="newCandidate.candidateDeptNo">
+                <label for="electionName">Election Name</label>
+                <input type="text" name="electionName" id="electionName" readonly placeholder="Election name.." [(ngModel)]="newElection.electionName">
 
-                    <label for="electionName">Election Name</label>
-                    <input type="text" name="electionName" id="electionName" readonly placeholder="Election name.." [(ngModel)]="newElection.electionName">
-
-                    <button class="add-candidate" (click)="addCandidates(newCandidate)">Add Candidate</button>
-                </form>
-            </div>
-            <a (click)="closeAddElection()" class="close-icon"><img src="assets/student-editor/close-icon.png"  alt="close-icon"></a>
+                <button class="add-candidate" (click)="addCandidates(newCandidate)">Add Candidate</button>
+            </form>
         </div>
-        <div class="modify-election-container" *ngIf="showModifyElectionForm">
-            <div class="modify-election-form">
-                <form>
-                    <h1>Edit Election Details</h1>
-    
-                    <label for="electionName">Election Name</label>
-                    <input type="text" id="electionName" name="electionName" [(ngModel)]="modifyElection.electionName" placeholder="Election name.." readonly>
-                
-                    <label for="electionDate">Election Date</label>
-                    <input type="text" id="electionDate" name="electionDate" placeholder="Election date.." [(ngModel)]="modifyElection.electionDate">
-                    <input type="submit" value="Update">
-                </form>
-            </div>
-            <a (click)="closeAddElection()" class="close-icon"><img src="assets/student-editor/close-icon.png"  alt="close-icon"></a>
+        <a (click)="closeAddElection()" class="close-icon"><img src="assets/student-editor/close-icon.png" alt="close-icon"></a>
+    </div>
+    <div class="modify-election-container" *ngIf="showModifyElectionForm">
+        <div class="modify-election-form">
+            <form>
+                <h1>Edit Election Details</h1>
+
+                <label for="electionName">Election Name</label>
+                <input type="text" id="electionName" name="electionName" [(ngModel)]="modifyElection.electionName" placeholder="Election name.." readonly>
+
+                <label for="electionDate">Election Date</label>
+                <input type="text" id="electionDate" name="electionDate" placeholder="Election date.." [(ngModel)]="modifyElection.electionDate">
+                <input type="submit" value="Update">
+            </form>
         </div>
-    </body>
+        <a (click)="closeAddElection()" class="close-icon"><img src="assets/student-editor/close-icon.png" alt="close-icon"></a>
+    </div>
+</body>
+
 </html>

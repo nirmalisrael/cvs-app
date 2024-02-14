@@ -11,6 +11,7 @@ import { ElectionStatus } from 'src/app/_module/election/_dto/election-status';
 export class ElectionResultComponent {
 
   statusOptions = Object.values(ElectionStatus);
+  selectedElection?: string;
 
   showElectionPage = false;
   showCandidatePage = true;
@@ -44,5 +45,16 @@ export class ElectionResultComponent {
   filterElection(selectedValue: string): void {
     // Your filtering logic here based on the selected option
     console.log('Selected Option:', selectedValue);
+  }
+
+  getResultByElection(electionName: string) {
+    this.selectedElection = electionName;
+    this.showElectionPage = false;
+    this.showCandidatePage = true;
+  }
+
+  backToElectionResult() {
+    this.showCandidatePage = false;
+    this.showElectionPage = true; 
   }
 }

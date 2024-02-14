@@ -1,10 +1,12 @@
 <html>
-    <head>
-        <title>Loyola College | Admin Dashboard | Student Details</title>
-    </head>
 
-   <body>
-    <div class="nav-bar">
+<head>
+    <title>Loyola College | Admin Dashboard | Student Details</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
+</head>
+
+<body>
+    <div class="page-container">
         <div class="left-navbar">
             <a href="/admin-page/student-editor">Student Details</a>
             <a href="/admin-page/auth-editor">Authentication Details</a>
@@ -14,16 +16,18 @@
         </div>
         <div class="top-navbar">
             <div class="top-nav-heading">
-                <a href="/admin-page"><h1>Admin Dashboard</h1></a>
+                <a href="/admin-page">
+                    <h1>Admin Dashboard</h1>
+                </a>
             </div>
 
             <div class="top-nav-btns">
                 <a href="/home" class="home-btn">HOME</a>
-            <a href="/home" class="logout-btn">LOGOUT</a>
+                <a href="/home" class="logout-btn">LOGOUT</a>
             </div>
         </div>
 
-        <div class="students-page-cantainer">
+        <div class="students-page-cantainer" *ngIf="showAllStudents">
             <div class="students-nav">
                 <div class="heading">
                     <h1>Students</h1>
@@ -31,14 +35,16 @@
 
                 <div class="filter-and-btn">
                     <button class="add-student-btn">Add Student</button>
-                    
+
                     <select name="degreeType" id="degreeType">
                         <option [ngValue]="undefined" selected disabled>Degree Type</option>
-                        <option *ngFor="let degreeType of degreeTypeOptions" [value]="degreeType">{{degreeType}}</option>
+                        <option *ngFor="let degreeType of degreeTypeOptions" [value]="degreeType">{{degreeType}}
+                        </option>
                     </select>
                     <select name="department" id="department">
                         <option [ngValue]="undefined" selected disabled>Department</option>
-                        <option *ngFor="let department of departmentOptions" [value]="department">{{department}}</option>
+                        <option *ngFor="let department of departmentOptions" [value]="department">{{department}}
+                        </option>
                     </select>
                     <select name="admissionYear" id="admissionYear">
                         <option [ngValue]="undefined" selected disabled>Admission Year</option>
@@ -51,7 +57,7 @@
                 </div>
             </div>
             <div class="students-container">
-                <div class="students-grid-container" *ngIf="showAllStudents">
+                <div class="students-grid-container">
                     <ng-container *ngFor="let student of studentList">
                         <div class="student-grid" (click)="openStudent(student)">
                             <div class="sub-div student-profile">
@@ -60,30 +66,77 @@
                                 <p style="font-weight: bold;">{{student.deptNo}}</p>
                             </div>
                             <div class="sub-div student-info">
-                                <div class="info-container">
-                                    <div class="info-line">
-                                      <span class="label">Name</span>: 
-                                      <span class="value">{{student.studentName}}</span>
-                                    </div>
-                                    <div class="info-line">
-                                      <span class="label">Date of Birth</span>: 
-                                      <span class="value">{{student.dateOfBirth | date:'dd-MM-yyyy'}}</span>
-                                    </div>
-                                    <div class="info-line">
-                                      <span class="label">Admission Year</span>: 
-                                      <span class="value">{{student.admissionYear}}</span>
-                                    </div>
-                                    <div class="info-line" style="font-weight: bold;">
-                                      <span class="">{{student.degreeType}} - {{student.department}}</span>
-                                    </div>
-                                  </div>                  
-                            </div>                            
-                        </div>  
+                                <table>
+                                    <tr>
+                                        <th>Name</th>
+                                        <td>{{student.studentName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>DOB</th>
+                                        <td>{{student.dateOfBirth| date:'dd-MM-yyyy'}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Batch</th>
+                                        <td>{{student.admissionYear}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">{{student.degreeType}} - {{student.department}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                     </ng-container>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="student-profile-container" *ngIf="showStudentPage">
+            <div class="students-nav">
+                <div class="heading">
+                    <h1>Student Profile</h1>
+                </div>
+                <div class="filter-and-btn">
+                    <button class="back-btn">Back</button>
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                </div>
+            </div>
 
-   </body>
+            <div class="student-sec1-container">
+                <div class="student-sec-1">
+                    <div class="student-img-container">
+                      <div class="student-img">
+                          <img src="assets/student-editor/student-profile.jpg" alt="student profile">
+                      </div>
+                      <div class="id-table">
+                          <table>
+                              <tr>
+                                  <th colspan="2" id="student-name">Nirmal I</th>
+                              </tr>
+                              <tr>
+                                  <th>Dept. No</th>
+                                  <td>: 21UCS14</td>
+                              </tr>
+                              <tr>
+                                  <th>Degree Type</th>
+                                  <td>: UG</td>
+                              </tr>
+                              <tr>
+                                  <th>Department</th>
+                                  <td>: Computer Science</td>
+                              </tr>
+                              <tr></tr>
+                          </table>
+                      </div>
+                    </div>
+              </div>
+            </div>
+            <div class="student-sec2-container">
+                <div class="student-sec-2">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>

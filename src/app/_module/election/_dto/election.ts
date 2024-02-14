@@ -2,7 +2,7 @@ import { ElectionStatus } from "./election-status";
 
 export class Election {
 
-    electionName?: string;
+    electionName: string = '';
 
     electionDate?: Date;
 

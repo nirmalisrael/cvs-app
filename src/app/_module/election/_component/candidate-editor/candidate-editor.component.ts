@@ -1,13 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Candidate } from '../../_dto/candidate';
 import Swal from 'sweetalert2';
+import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
+import { ElectionService } from '../../_service/election.service';
 
 @Component({
   selector: 'app-candidate-editor',
   templateUrl: './candidate-editor.component.html',
   styleUrls: ['./candidate-editor.component.css']
 })
-export class CandidateEditorComponent {
+export class CandidateEditorComponent implements OnInit{
+
+  constructor(private electionService: ElectionService) {}
 
   showCandidatePage = true;
   showAddCandidateForm = false;
@@ -24,6 +28,13 @@ export class CandidateEditorComponent {
     {candidateId: 'LCVFA03', candidateDeptNo: '21UCS33', candidateName: 'Santhosh'},
     {candidateId: 'LCVFA04', candidateDeptNo: '21UCS45', candidateName: 'Maria Raj'},
   ];
+
+  ngOnInit(): void {
+    this.electionService.selectedElection$.subscribe(selectedElection => {
+      this.selectedElection = selectedElection;
+    });  
+    this.getCandidatesByElection(this.selectedElection);
+  }
 
   openModifyCandidateForm(candidate: Candidate) {
   }
@@ -65,4 +76,15 @@ export class CandidateEditorComponent {
     this.showCandidatePage = true;
   }
 
+  onSelectOption(event: Event): void {
+    const electionName = (event.target as HTMLSelectElement).value;
+    this.getCandidatesByElection(electionName);
+    
+    // Call your method here with the selected option
+    // this.filterElection(selectedValue);
+  }
+
+  getCandidatesByElection(electionName: string | undefined) {
+    console.log(electionName);
+  }
 }
