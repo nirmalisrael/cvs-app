@@ -250,6 +250,26 @@ td:last-child {
     cursor: pointer;
     box-shadow: 0 0 5px black;
 }
+
+.student-profile-container {
+    /* height: calc(100vh - 74px); */
+    padding-bottom: 15px;
+    width: calc(100% - 220px);
+    margin-left: 220px;
+    background-color: rgba(173, 216, 230, 0.726);
+    /* display: flex; */
+}
+.student-nav {
+    position: sticky;
+    top: 74px;
+    /* margin-left: 220px; */
+    background-color: lightsalmon;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 0 10px black;
+}
 .back-btn, .edit-btn, .delete-btn {
     width: 100px;
     cursor: pointer;
@@ -266,20 +286,16 @@ td:last-child {
 .delete-btn {
     background-color: rgb(255, 17, 0);
 }
-.student-sec1-container, .student-sec2-container {
-    width: calc(100% - 220px);
-    margin-left: 220px;
-    background-color: rgba(135, 206, 250, 0.829);
-    display: flex;
-    justify-content: center;
-}
-.student-sec-1{
+.student-sec-1, .student-sec-2{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     width: 60%;
-    /* margin: auto; */
+    height: fit-content;
     background-color: white;
     border-radius: 5px;
     margin: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 1%;
 }
 .student-img-container {
     width: 100%;
@@ -295,7 +311,6 @@ td:last-child {
 .student-img img {
     min-width: 100px;
     max-width: 90%;
-    /* margin:auto; */
     margin: 10px;
 }
 .id-table {
@@ -306,7 +321,6 @@ td:last-child {
 
 .id-table table {
     width: 50%;
-    /* margin-left: 5%; */
     text-wrap: nowrap;
 }
 .id-table th {
@@ -321,7 +335,15 @@ td:last-child {
     font-size: 20px;
 }
 
-.student-sec-2 {
-    width: 60%;
-    height: 80vh;
+.student-info-table table{
+    border-collapse: collapse;
+    border: 1px solid grey;
+    margin: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+.student-info-table tr, .student-info-table td, .student-info-table th{
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 10px;
 }
