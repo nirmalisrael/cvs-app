@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from './_module/auth/auth.module';
 import { ElectionModule } from './_module/election/election.module';
 import { ElectionResultModule } from './_module/election-result/election-result.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ElectionResultModule } from './_module/election-result/election-result.
     BrowserAnimationsModule,
     AuthModule,
     ElectionModule,
-    ElectionResultModule
+    ElectionResultModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

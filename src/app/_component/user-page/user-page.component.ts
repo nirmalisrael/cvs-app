@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class UserPageComponent {
 
+  elctionNames: string[] = ["Election 1", "Election 1", "Election 1"];
+
+  showSelectElection = false;
+
+  showVotingPage = true;
 }

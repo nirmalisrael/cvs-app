@@ -1,22 +1,22 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  display: flex;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
 }
 
 .top-navbar {
-  display: flex;
-  justify-content: space-between;
-  background-color: #ffffff;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  align-items: center;
-  box-shadow: 0px 0px 10px rgb(0, 0, 0);
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    align-items: center;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
 }
 
 .top-navbar h1 {
@@ -24,10 +24,13 @@ body {
     margin-left: 40px;
     padding: 5px;
 }
+
 .top-navbar h1:hover {
-    text-shadow: 0px 0px 3px rgb(97, 97, 97);;
+    text-shadow: 0px 0px 3px rgb(97, 97, 97);
+    ;
 }
-button {
+
+.logout-btn {
     color: white;
     background-color: red;
     border: none;
@@ -40,12 +43,13 @@ button {
     transition: box-shadow 0.3s;
 }
 
-button:hover {
+.logout-btn:hover {
     text-decoration: double;
     font-weight: bold;
     box-shadow: 0px 0px 10px black;
     cursor: pointer;
 }
+
 .student-profile {
     width: 100%;
     height: 100%;
@@ -53,43 +57,136 @@ button:hover {
     background: #67B26F;
     background: -webkit-linear-gradient(to right, tomato, rgb(22, 22, 141));
     background: linear-gradient(to right, tomato, rgb(5, 5, 70));
+}
 
-} 
-.container{
+.container {
     align-items: center;
     justify-content: center;
 }
+
 .student-profile .card {
-  border-radius: 10px;
+    border-radius: 10px;
 }
 
 .student-profile .card .card-header .profile_img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  margin: 10px auto;
-  border: 10px solid #ccc;
-  border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 10px auto;
+    border: 10px solid #ccc;
+    border-radius: 50%;
 }
 
 .student-profile .card h3 {
-  font-size: 20px;
-  font-weight: 700;
+    font-size: 20px;
+    font-weight: 700;
 }
 
 .student-profile .card p {
-  font-size: 16px;
-  color: #000;
+    font-size: 16px;
+    color: #000;
 }
 
 .student-profile .table th,
 .student-profile .table td {
-  font-size: 14px;
-  padding: 5px 10px;
-  color: #000;
+    font-size: 14px;
+    padding: 5px 10px;
+    color: #000;
 }
 
 .election-button {
-  color: crimson;
-  
+    color: crimson;
+}
+
+.select-election-container {
+    margin: 20px;
+}
+
+.select-election-container img {
+    height: fit-content;
+    width: fit-content;
+    mask-repeat: no-repeat;
+}
+
+.election-list {
+    /* border: 1px solid black; */
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    padding: 20px;
+    margin: auto;
+    flex-direction: column;
+    background: -webkit-linear-gradient(to right, tomato, rgb(22, 22, 141));
+    background: linear-gradient(to right, tomato, rgb(5, 5, 70));
+    box-shadow: 0 0 5px black;
+    border-radius: 10px;
+}
+
+.election-list h2,
+.continue-btn,
+.election-list select,
+.election-list option {
+    margin: 10px;
+}
+
+h2 {
+    color: white;
+    text-align: center;
+}
+
+.election-list select,
+option {
+    border: none;
+    outline: none;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.continue-btn {
+    background-color: #67B26F;
+    padding: 8px;
+    color: whitesmoke;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.continue-btn:hover {
+    box-shadow: 0 0 5px black;
+}
+
+.voting-page {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+}
+
+.heading {
+    margin: auto;
+}
+
+.heading h2 {
+    color: black;
+    padding: 20px;
+}
+
+.table-container {
+    margin: auto;
+}
+
+.table td img {
+    width: 80%;
+}
+
+#voting-table td,
+#voting-table th {
+    text-align: center;
+    vertical-align: middle;
 }

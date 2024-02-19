@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="filter-and-btn">
-                    <button class="add-student-btn">Add Student</button>
+                    <button class="add-student-btn" (click)="openStudent(newStudent)">Add Student</button>
 
                     <select name="degreeType" id="degreeType">
                         <option [ngValue]="undefined" selected disabled>Degree Type</option>
@@ -90,75 +90,136 @@
             </div>
         </div>
         <div class="student-profile-container" *ngIf="showStudentPage">
-            <div class="student-nav">
-                <div class="heading">
-                    <h1>Student Profile</h1>
-                </div>
-                <div class="filter-and-btn">
-                    <button class="back-btn">Back</button>
-                    <button class="edit-btn">Edit</button>
-                    <button class="delete-btn">Delete</button>
-                </div>
-            </div>
-
-            <div class="student-sec-1">
-                <div class="student-img-container">
-                    <div class="student-img">
-                        <img src="assets/student-editor/student-profile.jpg" alt="student profile">
+            <div class="bg">
+                <div class="student-nav">
+                    <div class="heading">
+                        <h1>{{studentPageHeading}}</h1>
                     </div>
-                    <div class="id-table">
-                        <table>
-                            <tr>
-                                <th colspan="2" id="student-name">Nirmal I</th>
-                            </tr>
-                            <tr>
-                                <th>Dept. No</th>
-                                <td>: 21UCS14</td>
-                            </tr>
-                            <tr>
-                                <th>Degree Type</th>
-                                <td>: UG</td>
-                            </tr>
-                            <tr>
-                                <th>Department</th>
-                                <td>: Computer Science</td>
-                            </tr>
-                            <tr></tr>
-                        </table>
+                    <div class="filter-and-btn">
+                        <button class="back-btn" (click)="onChangeStudentPageToBack()">Back</button>
+                        <button class="edit-btn" (click)="onChangeUpdateStudent()">Edit</button>
+                        <button class="delete-btn">Delete</button>
                     </div>
                 </div>
-            </div>
 
-            <div class="student-sec-2">
-                <table class="student-info-table">
-                    <tr>
-                        <th>Date Of Birth</th>
-                        <td>12-06-2004</td>
-                    </tr>
-                    <tr>
-                        <th>Addmission Year</th>
-                        <td>2021</td>
-                    </tr>
-                    <tr>
-                        <th>Gender</th>
-                        <td>MALE</td>
-                    </tr>
-                    <tr>
-                        <th>Email-Id</th>
-                        <td>nirmal.israel@gmail.com</td>
-                    </tr>
-                    <tr>
-                        <th>Phone Number</th>
-                        <td>8754271061</td>
-                    </tr>
-                    <tr>
-                        <th>Address</th>
-                        <td><address>220, Madha kovil street, Alliyandhal , Tiruvannamalai, Tamil Nadu - 606 705.</address></td>
-                    </tr>
-                </table>
-            </div>
+                <div class="student-sec-1">
+                    <div class="student-img-container">
+                        <div class="student-img">
+                            <img [src]="imageUrl" alt="student profile">
+                            <span *ngIf="showEditStudent"><input type="file" name="studentImg" id="studentImg" (change)="onFileSelect($event)"></span>
+                        </div>
+                        <div class="id-table">
+                            <table>
+                                <tr>
+                                    <th colspan="2" id="student-name">
+                                        <span *ngIf="!showEditStudent">{{selectedStudent.studentName}}</span>
+                                        <span *ngIf="showEditStudent"><input type="text" name="studentName" id="studentName" 
+                                            [(ngModel)]="selectedStudent.studentName" placeholder="Student Name.."></span>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>Dept. No</th>
+                                    <td>
+                                        <span *ngIf="!showEditStudent">: {{selectedStudent.deptNo}}</span>
+                                        <span *ngIf="showEditStudent"> : <input type="text" name="deptNo" id="deptNo" 
+                                            [(ngModel)]="selectedStudent.deptNo" placeholder="Student Dept. No.."></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Degree Type</th>
+                                    <td>
+                                        <span *ngIf="!showEditStudent">: {{selectedStudent.degreeType}}</span>
+                                        <span *ngIf="showEditStudent">: 
+                                            <select name="degreeType" [(ngModel)]="selectedStudent.degreeType" id="degreeType">
+                                            <option [ngValue]="undefined" selected disabled>Degree Type</option>
+                                            <option *ngFor="let degreeType of degreeTypeOptions" [value]="degreeType">{{degreeType}}
+                                            </option>
+                                        </select>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Department</th>
+                                    <td>
+                                        <span *ngIf="!showEditStudent">: {{selectedStudent.department}}</span>
+                                        <span *ngIf="showEditStudent">: 
+                                            <select name="department" [(ngModel)]="selectedStudent.department" id="department">
+                                                <option [ngValue]="undefined" selected disabled>Department</option>
+                                                <option *ngFor="let department of departmentOptions" [value]="department">{{department}}
+                                                </option>
+                                            </select>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="student-sec-2">
+                    <table class="student-info-table">
+                        <tr>
+                            <th>Date Of Birth</th>
+                            <td><span *ngIf="!showEditStudent">{{selectedStudent.dateOfBirth | date:'dd-MM-yyyy'}}</span>
+                                <span *ngIf="showEditStudent"><input type="text" name="dateOfBirth" id="dateOfBirth" 
+                                    [(ngModel)]="selectedStudent.dateOfBirth" placeholder=""></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Addmission Year</th>
+                            <td>
+                                <span *ngIf="!showEditStudent">{{selectedStudent.admissionYear}}</span>
+                                <span *ngIf="showEditStudent"><input type="number" name="admissionYear" id="admissionYear" 
+                                    [(ngModel)]="selectedStudent.admissionYear" placeholder="Addmission Year.."></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Gender</th>
+                            <td>
+                                <span *ngIf="!showEditStudent">{{selectedStudent.gender}}</span>
+                                <span *ngIf="showEditStudent">
+                                    <select name="gender" [(ngModel)]="selectedStudent.gender" id="gender">
+                                        <option [ngValue]="undefined" selected disabled>Gender</option>
+                                        <option *ngFor="let gender of genderOptions" [value]="gender">{{gender}}
+                                        </option>
+                                    </select>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Email-Id</th>
+                            <td>
+                                <span *ngIf="!showEditStudent">{{selectedStudent.emailId}}</span>
+                                <span *ngIf="showEditStudent"><input type="email" name="emailId" id="emailId" 
+                                    [(ngModel)]="selectedStudent.emailId" placeholder="Student Email-Id.."></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Phone Number</th>
+                            <td>
+                                <span *ngIf="!showEditStudent">{{selectedStudent.phoneNumber}}</span>
+                                <span *ngIf="showEditStudent"><input type="number" name="phoneNumber" id="phoneNumber" 
+                                    [(ngModel)]="selectedStudent.phoneNumber" placeholder="Student Mobile No.."></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td><address>
+                                <span *ngIf="!showEditStudent">{{selectedStudent.address}}</span>
+                                <span *ngIf="showEditStudent"><input type="text" name="address" id="address" 
+                                    [(ngModel)]="selectedStudent.address" placeholder="Student Address"></span>
+                            </address></td>
+                        </tr>
+                    </table>
+                    <div class="btns" *ngIf="showEditStudent">
+                        <button class="cancel-btn" (click)="onChangeUpdateStudent()">Cancel</button>
+                        <button class="save-btn">{{saveBtnName}}</button>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
 </body>
 
 </html>
