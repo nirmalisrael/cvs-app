@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Candidate } from 'src/app/_module/election/_dto/candidate';
 
 @Component({
   selector: 'app-user-page',
@@ -12,4 +13,8 @@ export class UserPageComponent {
   showSelectElection = false;
 
   showVotingPage = true;
+
+  candidate: Candidate = {
+    candidateId: "LCVSS01", candidateName: "Nirmal", candidateDeptNo: "21UCS14"
+  }
 }
