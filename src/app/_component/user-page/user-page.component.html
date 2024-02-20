@@ -103,8 +103,9 @@
                         </div>
 
                         <div class="voting-page" *ngIf="showVotingPage">
-                            <div class="heading col-lg-8">
+                            <div class="heading col-lg-12">
                                 <h2>Sports Secratery Candidates</h2>
+                                <button class="back-btn">Back</button>
                             </div>
                             <div class="table-container col-lg-10">
                                 <table class="table table-bordered" id="voting-table">
@@ -114,55 +115,20 @@
                                         <th>Candidate Name</th>
                                         <th>Vote</th>
                                     </tr>
-                                    <tr>
-                                        <td>LCVC01</td>
+                                    <tr *ngFor="let candidate of candidates">
+                                        <td>{{candidate.candidateId}}</td>
                                         <td>
                                             <img src="assets/student-editor/student-profile.jpg " alt=" " />
                                         </td>
-                                        <td>Nirmal</td>
+                                        <td>{{candidate.candidateName}}</td>
                                         <td>
                                             <label>
-                                                <input type="radio" class="option-input radio" name="vote" />
-                                            </label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>LCVC01</td>
-                                        <td>
-                                            <img src="assets/student-editor/student-profile.jpg " alt=" " />
-                                        </td>
-                                        <td>Nirmal</td>
-                                        <td>
-                                            <label>
-                                                <input type="radio" class="option-input radio" name="vote" />
-                                            </label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>LCVC01</td>
-                                        <td>
-                                            <img src="assets/student-editor/student-profile.jpg " alt=" " />
-                                        </td>
-                                        <td>Nirmal</td>
-                                        <td>
-                                            <label>
-                                                <input type="radio" class="option-input radio" name="vote" />
-                                            </label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>LCVC01</td>
-                                        <td>
-                                            <img src="assets/student-editor/student-profile.jpg " alt=" " />
-                                        </td>
-                                        <td>Nirmal</td>
-                                        <td>
-                                            <label>
-                                                <input type="radio" class="option-input radio" name="vote" />
+                                                <input type="radio" class="option-input radio" name="vote" [(ngModel)]="selectedCandidateId" [value]="candidate.candidateId" (change)="onSelectCandidateId(candidate.candidateId)"/>
                                             </label>
                                         </td>
                                     </tr>
                                 </table>
+                                <button class="vote-btn">Vote</button>
                             </div>
                         </div>
                     </div>

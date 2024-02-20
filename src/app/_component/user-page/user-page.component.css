@@ -89,7 +89,7 @@ body {
 
 .student-profile .table th,
 .student-profile .table td {
-    font-size: 14px;
+    font-size: 16px;
     padding: 5px 10px;
     color: #000;
 }
@@ -169,7 +169,10 @@ option {
 }
 
 .heading {
-    margin: auto;
+    /* width: 100%; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .heading h2 {
@@ -177,12 +180,28 @@ option {
     padding: 20px;
 }
 
+.back-btn {
+    width: 80px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    box-shadow: -2px 2px 0px black;
+}
+
 .table-container {
     margin: auto;
 }
 
 .table td img {
-    width: 60%;
+    width: 45%;
 }
 
 #voting-table td,
@@ -218,7 +237,7 @@ td label {
     margin-right: 0.5rem;
     outline: none;
     position: relative;
-    z-index: 1000;
+    /* z-index: 1000; */
 }
 
 .option-input:hover {
@@ -250,7 +269,7 @@ td label {
     content: '';
     display: block;
     position: relative;
-    z-index: 100;
+    /* z-index: 100; */
 }
 
 .option-input.radio {
@@ -275,4 +294,24 @@ td label {
         margin-top: -80px;
         opacity: 0;
     }
+}
+
+.vote-btn {
+    margin-top: 1%;
+    margin-bottom: 2%;
+    width: 100%;
+    padding: 10px;
+    font-size: 40px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #67B26F;
+    color: whitesmoke;
+    transition: 0.3s;
+}
+
+.vote-btn:hover {
+    box-shadow: 0 0 8px grey;
 }
