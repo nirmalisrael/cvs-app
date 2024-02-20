@@ -71,7 +71,9 @@
                                 <tr>
                                     <th width="30%">Address</th>
                                     <td width="2%">:</td>
-                                    <td><address></address></td>
+                                    <td>
+                                        <address></address>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
@@ -89,16 +91,13 @@
                             <form class="col-lg-6 election-list">
                                 <h2>Select Election & Vote</h2>
                                 <select name="election-names" id="election-names">
-                    <option [ngValue]="undefined" selected disabled>
-                      Select Election
-                    </option>
-                    <option
-                      *ngFor="let election of elctionNames"
-                      [value]="election"
-                    >
-                      {{ election }}
-                    </option>
-                  </select>
+                                    <option [ngValue]="undefined" selected disabled>
+                                        Select Election
+                                    </option>
+                                    <option *ngFor="let election of elctionNames" [value]="election">
+                                        {{ election }}
+                                    </option>
+                                </select>
                                 <button class="continue-btn">Continue</button>
                             </form>
                         </div>
@@ -122,8 +121,9 @@
                                         </td>
                                         <td>Nirmal</td>
                                         <td>
-                                            <input type="radio" name="vote" id="vote" [value]="candidate.candidateId" />
-                                            <img/>
+                                            <label>
+                                                <input type="radio" class="option-input radio" name="vote" />
+                                            </label>
                                         </td>
                                     </tr>
                                     <tr>
@@ -133,8 +133,9 @@
                                         </td>
                                         <td>Nirmal</td>
                                         <td>
-                                            <input type="radio" name="vote" id="vote" [value]="candidate.candidateId" />
-                                            <img/>
+                                            <label>
+                                                <input type="radio" class="option-input radio" name="vote" />
+                                            </label>
                                         </td>
                                     </tr>
                                     <tr>
@@ -144,8 +145,9 @@
                                         </td>
                                         <td>Nirmal</td>
                                         <td>
-                                            <input type="radio" name="vote" id="vote" [value]="candidate.candidateId" />
-                                            <img/>
+                                            <label>
+                                                <input type="radio" class="option-input radio" name="vote" />
+                                            </label>
                                         </td>
                                     </tr>
                                     <tr>
@@ -155,8 +157,9 @@
                                         </td>
                                         <td>Nirmal</td>
                                         <td>
-                                            <input type="radio" name="vote" id="vote" [value]="candidate.candidateId" />
-                                            <img/>
+                                            <label>
+                                                <input type="radio" class="option-input radio" name="vote" />
+                                            </label>
                                         </td>
                                     </tr>
                                 </table>
