@@ -122,28 +122,32 @@ body {
     border-radius: 10px;
 }
 
-.election-list h2,
+.election-list h1,
 .continue-btn,
 .election-list select,
 .election-list option {
     margin: 10px;
 }
 
-h2 {
+.election-list h1 {
     color: white;
     text-align: center;
+    margin-bottom: 5%;
 }
 
 .election-list select,
 option {
+    width: 40%;
     border: none;
     outline: none;
     font-size: 18px;
     padding: 10px;
     border-radius: 5px;
+    margin-bottom: 5%;
 }
 
 .continue-btn {
+    width: 30%;
     background-color: #67B26F;
     padding: 8px;
     color: whitesmoke;
@@ -301,7 +305,7 @@ td label {
     margin-bottom: 2%;
     width: 100%;
     padding: 10px;
-    font-size: 40px;
+    font-size: 35px;
     font-weight: bold;
     border: none;
     outline: none;
