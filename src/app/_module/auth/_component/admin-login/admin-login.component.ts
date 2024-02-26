@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../_service/jwt-service/auth.service';
 import { JwtRequest } from '../../_dto/jwt-request';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-login',
@@ -9,7 +10,7 @@ import { JwtRequest } from '../../_dto/jwt-request';
 })
 export class AdminLoginComponent {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   jwtRequest: JwtRequest = {
     username : '',
@@ -19,12 +20,16 @@ export class AdminLoginComponent {
   login() {
     this.authService.lgoin(this.jwtRequest).subscribe(
       (response) => {
-        console.log(response);
+        console.log(response)
+        const role: string[] = this.authService.getRole(response);
+        console.log(role);
         
+        if(role.some(role => role == 'admin')) {
+          this.router.navigate(['/admin-page'])
+        }
       },
-      (error) => {
-        console.log(error);
-        
+      error => {
+       alert("Invalid Username or Password!");
       }
     )
     // console.log(this.jwtRequest);

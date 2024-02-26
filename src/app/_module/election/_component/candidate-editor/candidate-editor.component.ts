@@ -3,6 +3,7 @@ import { Candidate } from '../../_dto/candidate';
 import Swal from 'sweetalert2';
 import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 import { ElectionService } from '../../_service/election.service';
+import { AuthService } from 'src/app/_module/auth/_service/jwt-service/auth.service';
 
 @Component({
   selector: 'app-candidate-editor',
@@ -11,7 +12,7 @@ import { ElectionService } from '../../_service/election.service';
 })
 export class CandidateEditorComponent implements OnInit{
 
-  constructor(private electionService: ElectionService) {}
+  constructor(private electionService: ElectionService, public authService: AuthService) {}
 
   showCandidatePage = true;
   showAddCandidateForm = false;

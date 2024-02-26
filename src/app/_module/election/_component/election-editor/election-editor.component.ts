@@ -4,9 +4,9 @@ import { ElectionStatus } from '../../_dto/election-status';
 import { Candidate } from '../../_dto/candidate';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import Swal from 'sweetalert2';
-import { CandidateEditorComponent } from '../candidate-editor/candidate-editor.component';
 import { Router } from '@angular/router';
 import { ElectionService } from '../../_service/election.service';
+import { AuthService } from 'src/app/_module/auth/_service/jwt-service/auth.service';
 
 @Component({
   selector: 'app-election-editor',
@@ -24,7 +24,7 @@ import { ElectionService } from '../../_service/election.service';
 })
 export class ElectionEditorComponent {
 
-  constructor(private router: Router, private electionService: ElectionService) { }
+  constructor(private router: Router, private electionService: ElectionService, public authService: AuthService) { }
 
   showElectionPage = true;
   showAddedCandidates = false;

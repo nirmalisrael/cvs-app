@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Role } from 'src/app/_module/auth/_dto/role';
 import { User } from 'src/app/_module/auth/_dto/user';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../_service/jwt-service/auth.service';
 
 @Component({
   selector: 'app-auth-editor',
@@ -10,6 +11,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./auth-editor.component.css']
 })
 export class AuthEditorComponent {
+
+  constructor(public authService: AuthService) {}
 
   userRequest: User = new User;
   activeTab: string = 'users';

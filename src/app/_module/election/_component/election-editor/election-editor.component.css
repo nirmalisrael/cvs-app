@@ -8,58 +8,80 @@ body {
     height: 100%;
 }
 
-
-.nav-bar {
-    display: flex;
-    position: relative;
-}
-
 .top-navbar {
+    position: sticky;
+    top: 0;
+    background-color: #ffffff;
+    padding: 10px;
+    font-size: 15px;
     display: flex;
     justify-content: space-between;
-    background-color: #ffffff;
-    padding-top: 15px;
-    padding-bottom: 15px;
     align-items: center;
+    padding: 20px;
     box-shadow: 0px 0px 10px rgb(0, 0, 0);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 40px;
-    z-index: 2;
+    z-index: 1000;
 }
 
-.top-navbar a {
+a {
+    font-family: Arial, Helvetica, sans-serif;
     text-decoration: none;
-}
-.top-navbar h1 {
     color: rgb(5, 5, 70);
-    margin-left: 40px;
-    padding: 5px;
-}
-.top-navbar h1:hover {
-    text-shadow: 0px 0px 3px rgb(97, 97, 97);;
 }
 
-.top-navbar button {
-    color: white;
-    background-color: red;
-    border: none;
-    font-weight: bold;
-    font-size: 15px;
+.top-nav-btns a {
+    position: relative;
+    width: fit-content;
+    color: black;
     text-decoration: none;
-    margin-right: 2%;
-    padding: 8px 15px;
-    border-radius: 5px;
-    transition: box-shadow 0.3s;
+    padding-bottom: 5px;
+    font-size: large;
+    transition: all 0.3s ease;
+    /* Adding a smooth transition effect */
 }
 
-.top-navbar button:hover {
-    text-decoration: double;
-    font-weight: bold;
-    box-shadow: 0px 0px 10px black;
-    cursor: pointer;
+.top-nav-btns a:hover {
+    color: darkblue;
+    /* font-weight: bold; */
 }
+
+.top-nav-btns a::after,
+.top-nav-heading a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: darkblue;
+    bottom: 0;
+    left: 0;
+    transition: all 0.3s ease;
+    /* Adding a smooth transition effect */
+}
+
+.top-nav-btns a:hover::after,
+.top-nav-heading a:hover::after {
+    width: 100%;
+}
+
+.top-navbar .top-nav-heading a h1 {
+    margin-left: 20px;
+}
+
+#logout::after {
+    background-color: red;
+}
+
+#logout:hover {
+    color: red;
+}
+
+.top-nav-btns {
+    width: 15%;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+/* .top-nav-btns  */
 
 .left-navbar {
     width: 220px;
@@ -89,12 +111,14 @@ body {
 .left-navbar a:first-child {
     margin-top: 98px;
 }
+
 .left-navbar a:hover {
     background-color: #ffffff;
     box-shadow: 0px 0px 10px rgb(0, 0, 0);
     color: rgb(5, 5, 70);
     font-weight: bold;
 }
+
 .left-navbar a[href="/admin-page/election-editor"] {
     background-color: #ffffff;
     box-shadow: 0px 0px 10px rgb(0, 0, 0);
@@ -104,8 +128,8 @@ body {
 
 .election-page-container {
     background-color: rgba(252, 96, 68, 0.397);
-
 }
+
 .table-nav {
     position: sticky;
     top: 70px;
@@ -125,7 +149,6 @@ body {
     align-items: center;
 }
 
-
 .btns-and-option {
     display: flex;
     justify-content: space-between;
@@ -140,9 +163,10 @@ body {
 .election-name h1 {
     font-size: 28px;
     letter-spacing: 0.02em;
-    
 }
-.add-election-btn, select {
+
+.add-election-btn,
+select {
     font-size: 15px;
     padding: 8px;
     border-radius: 5px;
@@ -163,11 +187,13 @@ body {
     border-radius: 5px;
     border: 1px solid grey;
 }
+
 .btns-and-option input:focus {
     box-shadow: 0 0 3px black;
     border: 1px solid white;
 }
-.btns-and-option a img{
+
+.btns-and-option a img {
     width: 25px;
 }
 
@@ -186,7 +212,7 @@ body {
 }
 
 .election-table-container table {
-    font-family:  'Roboto', 'Lato', 'Open Sans';
+    font-family: 'Roboto', 'Lato', 'Open Sans';
     width: 90%;
     height: fit-content;
     table-layout: fixed;
@@ -221,17 +247,21 @@ body {
 .election-table-container table th:first-child {
     border-left: 2px solid;
 }
+
 .election-table-container table td:first-child {
-  border-left: 2px solid;
+    border-left: 2px solid;
 }
-.election-table-container table tbody tr:last-child td{
+
+.election-table-container table tbody tr:last-child td {
     border-bottom: 2px solid;
 }
+
 .election-table-container table tbody td:last-child {
     border-right: 2px solid;
     padding: 0;
     margin: 0;
 }
+
 .election-table-container table td button {
     border-radius: 5px;
     border: 1px solid grey;
@@ -249,7 +279,8 @@ body {
 .election-table-container table td .view-candidates-btn:hover {
     box-shadow: 0px 0px 3px blue;
 }
-.election-table-container table td .modify-election-btn , 
+
+.election-table-container table td .modify-election-btn,
 .election-table-container table td .remove-election-btn {
     border: none;
     outline: none;
@@ -257,17 +288,17 @@ body {
     margin: 0;
     background: transparent;
     border-radius: 50%;
-    display:inline-flex;
+    display: inline-flex;
     justify-content: space-between;
     /* align-items: center; */
 }
 
-.election-table-container table td .modify-election-btn img, 
+.election-table-container table td .modify-election-btn img,
 .election-table-container table td .remove-election-btn img {
     width: 40px;
 }
 
-.election-table-container table td .modify-election-btn:hover , 
+.election-table-container table td .modify-election-btn:hover,
 .election-table-container table td .remove-election-btn:hover {
     box-shadow: 0 0 4px black;
 }
@@ -276,7 +307,8 @@ body {
     margin-right: 5px;
 }
 
-.add-election-container, .modify-election-container {
+.add-election-container,
+.modify-election-container {
     position: relative;
     margin-top: 70px;
     left: 220px;
@@ -291,7 +323,8 @@ body {
 
 .add-election-form form input[type=text],
 .add-election-form form input[type=date],
-.add-election-form form select, textarea,
+.add-election-form form select,
+textarea,
 .add-candidate-btn {
     width: 100%;
     padding: 12px;
@@ -306,8 +339,11 @@ body {
 .add-candidate-btn:hover {
     background-color: white;
     cursor: pointer;
-}  
-input[type=submit], .add-candidate, .save-btn {
+}
+
+input[type=submit],
+.add-candidate,
+.save-btn {
     background-color: #04AA6D;
     color: white;
     padding: 12px 20px;
@@ -315,18 +351,19 @@ input[type=submit], .add-candidate, .save-btn {
     border-radius: 4px;
     cursor: pointer;
 }
-  
+
 input[type=submit]:hover {
     background-color: #45a049;
 }
-  
+
 .add-election-form {
     position: absolute;
     width: 40%;
     display: flex;
     transition: transform 500ms ease-out;
 }
-.add-election-form form{
+
+.add-election-form form {
     width: 100%;
     min-height: fit-content;
     max-height: 75vh;
@@ -345,6 +382,7 @@ input[type=submit]:hover {
     background-color: #ccc;
     border-radius: 4px;
 }
+
 ::-webkit-scrollbar-track {
     background-color: white;
     border-radius: 4px;
@@ -372,26 +410,24 @@ input[type=submit]:hover {
 .add-candidate-table table th {
     padding: 5px;
     border: 1px solid;
-
 }
-
 
 .add-candidate-table table td {
     /* color: white; */
     text-align: center;
     padding: 5px;
     border: 1px solid;
-
 }
 
 .add-candidate-table table td button {
     border-radius: 60%;
     display: flex;
     align-items: center;
-    justify-content: center;    
+    justify-content: center;
     border: none;
     box-sizing: border-box;
 }
+
 .add-candidate-table table td img {
     width: 19px;
     padding: 0px !important;
@@ -405,16 +441,19 @@ input[type=submit]:hover {
     padding-left: 5px;
     margin: 0;
 }
+
 .add-candidate-table table td button:hover {
     box-shadow: 0 0 4px black;
 }
 
 .add-candidate-form form input[type=text],
 .add-candidate-form form input[type=date],
-.add-candidate-form form select, textarea,
+.add-candidate-form form select,
+textarea,
 .modify-election-form form input[type=text],
 .modify-election-form form input[type=date],
-.modify-election-form form select, textarea {
+.modify-election-form form select,
+textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -424,20 +463,23 @@ input[type=submit]:hover {
     margin-bottom: 16px;
     resize: vertical;
 }
-  
-.add-candidate-form{
+
+.add-candidate-form {
     position: absolute;
     width: 40%;
     right: 5%;
-    display: flex;  
+    display: flex;
     transition: transform 300ms ease-out;
 }
+
 .modify-election-form {
     width: 40%;
-    display: flex;  
+    display: flex;
     transition: transform 300ms ease-out;
 }
-.add-candidate-form form, .modify-election-form form{
+
+.add-candidate-form form,
+.modify-election-form form {
     width: 100%;
     min-height: fit-content;
     max-height: 75vh;
@@ -447,7 +489,9 @@ input[type=submit]:hover {
     padding: 20px;
 }
 
-.add-election-container .add-election-form h1, .add-candidate-form h1,.modify-election-form h1 {
+.add-election-container .add-election-form h1,
+.add-candidate-form h1,
+.modify-election-form h1 {
     padding: 10px;
     padding-bottom: 20px;
     text-align: center;
@@ -467,6 +511,6 @@ input[type=submit]:hover {
 }
 
 .close-icon img:hover {
-    box-shadow:0 0 6px darkred;
+    box-shadow: 0 0 6px darkred;
     background-color: rgb(248, 154, 154);
 }

@@ -8,11 +8,10 @@
 <body>
     <div class="page-container">
         <div class="left-navbar">
-            <a href="/admin-page/student-editor">Student Details</a>
-            <a href="/admin-page/auth-editor">Authentication Details</a>
-            <a href="/admin-page/election-editor">Election Details</a>
-            <a href="/admin-page/candidate-editor">Candidates Details</a>
-            <a href="/admin-page/election-result">Election Result Details</a>
+            <a (click)="authService.navigate('/admin-page/student-editor')">Student Details</a>
+            <a (click)="authService.navigate('/admin-page/auth-editor')">Authentication Details</a>
+            <a (click)="authService.navigate('/admin-page/election-editor')">Election Details</a>
+            <a (click)="authService.navigate('/admin-page/student-result')">Election Result Details</a>
         </div>
         <div class="top-navbar">
             <div class="top-nav-heading">
@@ -22,8 +21,8 @@
             </div>
 
             <div class="top-nav-btns">
-                <a href="/home" class="home-btn">HOME</a>
-                <a href="/home" class="logout-btn">LOGOUT</a>
+                <a href="/home" class="home-btn">Home</a>
+                <a href="/home" id="logout" class="logout-btn">Logout</a>
             </div>
         </div>
 

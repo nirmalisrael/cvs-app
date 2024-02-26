@@ -1,5 +1,5 @@
 export interface JwtResponse {
     username: string;
-    roles: { role: string; roleDescription: string }[];
+    roles: { roleName: string; roleDescription: string }[];
     jwtToken: string; 
 }

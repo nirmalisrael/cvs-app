@@ -16,13 +16,13 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent},
   { path: 'admin-login', component: AdminLoginComponent},
   { path: 'student-login', component: UserLoginComponent},
-  { path: 'admin-page', component: AdminPageComponent, canActivate: [AuthGuard]},
+  { path: 'admin-page', component: AdminPageComponent},
   { path: 'student-page', component: UserPageComponent, canActivate: [AuthGuard]},
   { path: 'admin-page/student-editor', component: StudentEditorComponent},
-  { path: 'admin-page/auth-editor', component: AuthEditorComponent, canActivate: [AuthGuard]},
-  { path: 'admin-page/election-editor', component: ElectionEditorComponent, canActivate: [AuthGuard]},
-  { path: 'admin-page/candidate-editor', component: CandidateEditorComponent, canActivate: [AuthGuard]},
-  { path: 'admin-page/election-result', component: ElectionResultComponent, canActivate: [AuthGuard]},
+  { path: 'admin-page/auth-editor', component: AuthEditorComponent},
+  { path: 'admin-page/election-editor', component: ElectionEditorComponent},
+  { path: 'admin-page/candidate-editor', component: CandidateEditorComponent},
+  { path: 'admin-page/election-result', component: ElectionResultComponent},
   { path: '**', redirectTo: '/home', pathMatch: 'full'}
 ];
 

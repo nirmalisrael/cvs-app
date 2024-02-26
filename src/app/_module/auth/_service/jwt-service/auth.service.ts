@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { JwtRequest } from '../../_dto/jwt-request';
 import { JwtResponse } from '../../_dto/jwt-response';
 import { Observable, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 const HOST_PORT = 'http://localhost:8080';
-const LOGIN_URL = 'http://localhost:8080/cvs/login';
+const LOGIN_URL = HOST_PORT + '/cvs/login';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -20,23 +21,16 @@ export class AuthService {
 
   private token: string | null = null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   lgoin(credentials: JwtRequest): Observable<JwtResponse> {
-    console.log(LOGIN_URL);
-    console.log(credentials);
     return this.http.post<JwtResponse>(LOGIN_URL, credentials, httpOptions)
     .pipe(
       tap((response: JwtResponse) => {
         this.token = response.jwtToken;
-        console.log("get the response");
-        
-        console.log(this.token);
-        
         this.storeToken(this.token);
       })
     );
-    console.log(LOGIN_URL);
   }
 
   logout(): void {
@@ -61,7 +55,7 @@ export class AuthService {
   }
 
   getRole(response: JwtResponse): string[] {
-    return response.roles.map(role => role.role);
+    return response.roles.map(role => role.roleName);
   }
 
   isAdmin(): boolean {
@@ -94,5 +88,9 @@ export class AuthService {
       console.error('Error decoding token:', error);
       return null;
     }
+  }
+
+  navigate(url: string) {
+    this.router.navigate([url]);
   }
 }

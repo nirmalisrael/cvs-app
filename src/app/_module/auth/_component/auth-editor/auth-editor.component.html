@@ -1,178 +1,185 @@
 <html>
-    <body>
-        <div class="nav-bar">
-            <div class="left-navbar">
-                <a href="/admin-page/student-editor">Student Details</a>
-                <a href="/admin-page/auth-editor">Authentication Details</a>
-                <a href="/admin-page/election-editor">Election Details</a>
-                <a href="/admin-page/election-result">Election Result Details</a>
-            </div>
-            <div class="top-navbar">
-                <a href="/admin-page"><h1>Admin Dashboard</h1></a>
-                <button onclick="">LOG OUT</button>
-            </div>
+
+<body>
+    <div class="left-navbar">
+        <a (click)="authService.navigate('/admin-page/student-editor')">Student Details</a>
+        <a (click)="authService.navigate('/admin-page/auth-editor')">Authentication Details</a>
+        <a (click)="authService.navigate('/admin-page/election-editor')">Election Details</a>
+        <a (click)="authService.navigate('/admin-page/student-result')">Election Result Details</a>
+    </div>
+    <div class="top-navbar">
+        <div class="top-nav-heading">
+            <a href="/admin-page">
+                <h1>Admin Dashboard</h1>
+            </a>
         </div>
 
-        <div class="user-role-nav">
-            <div class="users" (click)="setActiveTab('users')" [class.clicked]="activeTab === 'users'">
-                <button>Users</button>
-            </div>
-            <div class="roles" (click)="setActiveTab('roles')" [class.clicked]="activeTab === 'roles'">
-                <button>Roles</button>
-            </div>
+        <div class="top-nav-btns">
+            <a href="/home" class="home-btn">Home</a>
+            <a href="/home" id="logout" class="logout-btn">Logout</a>
         </div>
-        <div *ngIf="showUserSide" class="users-find-btn">
-            <button class="view-users" (click)="openAllUsers()">View Users</button>
+    </div>
+    <div class="user-role-nav">
+        <div class="users" (click)="setActiveTab('users')" [class.clicked]="activeTab === 'users'">
+            <button>Users</button>
+        </div>
+        <div class="roles" (click)="setActiveTab('roles')" [class.clicked]="activeTab === 'roles'">
+            <button>Roles</button>
+        </div>
+    </div>
+    <div *ngIf="showUserSide" class="users-find-btn">
+        <button class="view-users" (click)="openAllUsers()">View Users</button>
 
-            <div class="remove-user">
-                <input type="text" name="username" id="username" placeholder="Username" [(ngModel)]="username" required>
-                <button (click)="openDeleteConfirmation(username, 'user')">Remove</button>
-            </div>
+        <div class="remove-user">
+            <input type="text" name="username" id="username" placeholder="Username" [(ngModel)]="username" required>
+            <button (click)="openDeleteConfirmation(username, 'user')">Remove</button>
         </div>
-        <div class="user-side" *ngIf="showUserSide">
-           
-            <div class="add-user-form-container">
-                <form (ngSubmit)="saveUser(userRequest)" class="add-user-form" id="grid-item">
-                    <h2>CREATE USER</h2>
-                    <input type="text" name="username" placeholder="Username" id="username" [(ngModel)]="userRequest.username" required>
-                    <input type="text" name="password" id="password" placeholder="Password" [(ngModel)]="userRequest.password" required>
-                    <select class="roles-option" id="roles-option" name="roles-option" [(ngModel)]="role.roleName" required>
+    </div>
+    <div class="user-side" *ngIf="showUserSide">
+
+        <div class="add-user-form-container">
+            <form (ngSubmit)="saveUser(userRequest)" class="add-user-form" id="grid-item">
+                <h2>CREATE USER</h2>
+                <input type="text" name="username" placeholder="Username" id="username" [(ngModel)]="userRequest.username" required>
+                <input type="text" name="password" id="password" placeholder="Password" [(ngModel)]="userRequest.password" required>
+                <select class="roles-option" id="roles-option" name="roles-option" [(ngModel)]="role.roleName" required>
                         <option [ngValue]="undefined"  disabled selected>Select Role</option>
                         <option>ADMIN</option>
                         <option>STUDENT</option>
                     </select>
-                    <button class="save-btn" type="submit">Save</button>
-                </form>
-            </div>
-            <div class="update-user-form-container">
-                <form (ngSubmit)="updatePassword(updateUsername.value, newPassword.value, confirmPassword.value)" class="update-user-form"id="grid-item">
-                    <h2>CHANGE PASSWORD</h2>
-                    <input type="text" #updateUsername name="username" placeholder="Username" id="username" required>
-                    <input type="text" name="password" id="password" #newPassword placeholder="New Password" required>
-                    <input type="text" name="password" id="password" #confirmPassword placeholder="Confirm Password" required>
-                    <button class="save-btn" type="submit">Update</button>
-                </form>
-            </div>
-            <div class="find-user-form-container">
-                <form class="find-user-form" (ngSubmit)="findUser(findUsername.value)" id="grid-item">
-                    <h2>FIND USER</h2>
-                    <input type="text" name="username" placeholder="Username" #findUsername id="find-username"  required>
-                    <button class="find-btn" type="submit">Find</button>
-                    <div class="find-user-para">
-                        <p><b>Username : </b>admin<br>
+                <button class="save-btn" type="submit">Save</button>
+            </form>
+        </div>
+        <div class="update-user-form-container">
+            <form (ngSubmit)="updatePassword(updateUsername.value, newPassword.value, confirmPassword.value)" class="update-user-form" id="grid-item">
+                <h2>CHANGE PASSWORD</h2>
+                <input type="text" #updateUsername name="username" placeholder="Username" id="username" required>
+                <input type="text" name="password" id="password" #newPassword placeholder="New Password" required>
+                <input type="text" name="password" id="password" #confirmPassword placeholder="Confirm Password" required>
+                <button class="save-btn" type="submit">Update</button>
+            </form>
+        </div>
+        <div class="find-user-form-container">
+            <form class="find-user-form" (ngSubmit)="findUser(findUsername.value)" id="grid-item">
+                <h2>FIND USER</h2>
+                <input type="text" name="username" placeholder="Username" #findUsername id="find-username" required>
+                <button class="find-btn" type="submit">Find</button>
+                <div class="find-user-para">
+                    <p><b>Username : </b>admin<br>
                         <b>Role : </b>ADMIN <br>
                         <b>Role Description : </b>For administrative</p>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
+        </div>
 
-            <div class="view-all-users" *ngIf="showAllUsers">
-                <h1>Users</h1>
-                <div class="filter-container">
-                    <select name="role" id="role">
+        <div class="view-all-users" *ngIf="showAllUsers">
+            <h1>Users</h1>
+            <div class="filter-container">
+                <select name="role" id="role">
                         <option value="">ADMIN</option>
                         <option value="">STUDENT</option>
                     </select>
-                    <a href=""><img src="\assets\auth-editor\search-icon.png" alt="serach-icon"></a>
-                </div>
-                <div class="users-table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Username</th>
-                                <th>Role</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>admin</td>
-                                <td>ADMIN</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>ADMIN</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>ADMIN</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>ADMIN</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>ADMIN</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>ADMIN</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>ADMIN</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>ADMIN</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>ADMIN</td>
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-                    
-                </div>
-                <a (click)="closeAllUsers()"><img class="close-icon" src="assets/student-editor/close-icon.png" alt="close-icon"></a>
+                <a href=""><img src="\assets\auth-editor\search-icon.png" alt="serach-icon"></a>
             </div>
-        </div>
-        <div class="role-side" *ngIf="showRoleSide">
-            <div class="add-role-container">
-                <form (ngSubmit)="createRole(roleName, roleDescription.value)" class="add-role-form">
-                    <h2>Create Role</h2>
+            <div class="users-table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>admin</td>
+                            <td>ADMIN</td>
+                        </tr>
+                        <tr>
+                            <td>admin</td>
+                            <td>ADMIN</td>
+                        </tr>
+                        <tr>
+                            <td>admin</td>
+                            <td>ADMIN</td>
+                        </tr>
+                        <tr>
+                            <td>admin</td>
+                            <td>ADMIN</td>
+                        </tr>
+                        <tr>
+                            <td>admin</td>
+                            <td>ADMIN</td>
+                        </tr>
+                        <tr>
+                            <td>admin</td>
+                            <td>ADMIN</td>
+                        </tr>
+                        <tr>
+                            <td>admin</td>
+                            <td>ADMIN</td>
+                        </tr>
+                        <tr>
+                            <td>admin</td>
+                            <td>ADMIN</td>
+                        </tr>
+                        <tr>
+                            <td>admin</td>
+                            <td>ADMIN</td>
+                        </tr>
 
-                    <input type="text" name="roleName" id="roleName" (input)="convertToUppercase($event)" placeholder="Role Name" [(ngModel)]="roleName" required>
-                    <input type="text" name="roleDescription" #roleDescription id="roleDescription" placeholder="Role Description " required>
-                    <button class="save-btn">Save</button>
-                </form>
+                    </tbody>
+                </table>
+
             </div>
-            <div class="remove-role-container">
-                <form (ngSubmit)="openDeleteConfirmation(roleName, 'role ')" class="remove-role-form">
-                    <h2>Remove Role</h2>
-                    <input type="text" name="roleName" id="removeRoleName" (input)="convertToUppercase($event)" placeholder="Role Name" [(ngModel)]="roleName" required>
-                    <button type="submit" mat-raised-button  class="remove-btn" >Remove</button>
-                </form>
-            </div>
-            <div class="all-roles-container">
-                <h2>Active Roles</h2>
-                <div class="roles-table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Role Name</th>
-                                <th>Role Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>admin</td>
-                                <td>for administrative</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>for administrative</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>for administrative</td>
-                            </tr>
-                        
-                        </tbody>
-                    </table>
-                </div>
+            <a (click)="closeAllUsers()"><img class="close-icon" src="assets/student-editor/close-icon.png" alt="close-icon"></a>
+        </div>
+    </div>
+    <div class="role-side" *ngIf="showRoleSide">
+        <div class="add-role-container">
+            <form (ngSubmit)="createRole(roleName, roleDescription.value)" class="add-role-form">
+                <h2>Create Role</h2>
+
+                <input type="text" name="roleName" id="roleName" (input)="convertToUppercase($event)" placeholder="Role Name" [(ngModel)]="roleName" required>
+                <input type="text" name="roleDescription" #roleDescription id="roleDescription" placeholder="Role Description " required>
+                <button class="save-btn">Save</button>
+            </form>
+        </div>
+        <div class="remove-role-container">
+            <form (ngSubmit)="openDeleteConfirmation(roleName, 'role ')" class="remove-role-form">
+                <h2>Remove Role</h2>
+                <input type="text" name="roleName" id="removeRoleName" (input)="convertToUppercase($event)" placeholder="Role Name" [(ngModel)]="roleName" required>
+                <button type="submit" mat-raised-button class="remove-btn">Remove</button>
+            </form>
+        </div>
+        <div class="all-roles-container">
+            <h2>Active Roles</h2>
+            <div class="roles-table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Role Name</th>
+                            <th>Role Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>admin</td>
+                            <td>for administrative</td>
+                        </tr>
+                        <tr>
+                            <td>admin</td>
+                            <td>for administrative</td>
+                        </tr>
+                        <tr>
+                            <td>admin</td>
+                            <td>for administrative</td>
+                        </tr>
+
+                    </tbody>
+                </table>
             </div>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>

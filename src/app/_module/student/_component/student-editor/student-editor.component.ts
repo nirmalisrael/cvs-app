@@ -4,6 +4,7 @@ import { Department } from '../../_dto/department';
 import { StudentResponse } from '../../_dto/student-response';
 import { Gender } from '../../_dto/gender';
 import { StudentRequest } from '../../_dto/student-request';
+import { AuthService } from 'src/app/_module/auth/_service/jwt-service/auth.service';
 
 @Component({
   selector: 'app-student-editor',
@@ -12,6 +13,7 @@ import { StudentRequest } from '../../_dto/student-request';
 })
 export class StudentEditorComponent {
 
+  constructor(public authService: AuthService) {}
   showStudentPage = true;
 
   showAllStudents = false;

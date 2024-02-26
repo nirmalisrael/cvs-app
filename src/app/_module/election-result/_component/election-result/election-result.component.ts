@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/_module/auth/_service/jwt-service/auth.service';
 import { Candidate } from 'src/app/_module/election/_dto/candidate';
 import { Election } from 'src/app/_module/election/_dto/election';
 import { ElectionStatus } from 'src/app/_module/election/_dto/election-status';
@@ -10,6 +11,8 @@ import { ElectionStatus } from 'src/app/_module/election/_dto/election-status';
 })
 export class ElectionResultComponent {
 
+  constructor(public authService: AuthService) {}
+  
   statusOptions = Object.values(ElectionStatus);
   selectedElection?: string;
 
