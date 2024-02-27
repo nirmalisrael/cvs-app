@@ -15,3 +15,7 @@ export enum Department {
 
     PHYSICAL_EDUCATION = 'Physical Education'
 }
+
+export function getEnumKeyByValue(enumType: any, value?: string): string | undefined {
+    return Object.keys(enumType).find(key => enumType[key] === value);
+}

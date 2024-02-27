@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="filter-and-btn">
-                    <button class="add-student-btn" (click)="openStudent(newStudent)">Add Student</button>
+                    <button class="add-student-btn" (click)="openNewStudent()">Add Student</button>
 
                     <select name="degreeType" id="degreeType">
                         <option [ngValue]="undefined" selected disabled>Degree Type</option>
@@ -116,7 +116,7 @@
                                             [(ngModel)]="selectedStudent.studentName" placeholder="Student Name.."></span>
                                     </th>
                                 </tr>
-                                <tr>
+                                <tr *ngIf="showDeptNo">
                                     <th>Dept. No</th>
                                     <td>
                                         <span *ngIf="!showEditStudent">: {{selectedStudent.deptNo}}</span>
@@ -161,7 +161,7 @@
                         <tr>
                             <th>Date Of Birth</th>
                             <td><span *ngIf="!showEditStudent">{{selectedStudent.dateOfBirth | date:'dd-MM-yyyy'}}</span>
-                                <span *ngIf="showEditStudent"><input type="text" name="dateOfBirth" id="dateOfBirth" 
+                                <span *ngIf="showEditStudent"><input type="date" name="dateOfBirth" id="dateOfBirth" 
                                     [(ngModel)]="selectedStudent.dateOfBirth" placeholder=""></span>
                             </td>
                         </tr>
@@ -213,7 +213,8 @@
                     </table>
                     <div class="btns" *ngIf="showEditStudent">
                         <button class="cancel-btn" (click)="onChangeUpdateStudent()">Cancel</button>
-                        <button class="save-btn">{{saveBtnName}}</button>
+                        <button class="save-btn" *ngIf="showSaveButton" (click)="createStudent()">{{saveBtnName}}</button>
+                        <button class="save-btn" *ngIf="showUpdateButton" (click)="updateStudent(selectedStudent)">Update</button>
                     </div>
                 </div>
             </div>

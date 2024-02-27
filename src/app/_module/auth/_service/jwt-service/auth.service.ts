@@ -38,7 +38,7 @@ export class AuthService {
   }
   
   getToken(): string | null {
-    return this.token;
+    return localStorage.getItem('jwtToken');
   }
 
   private storeToken(jwtToken: string): void {

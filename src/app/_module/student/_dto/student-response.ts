@@ -23,4 +23,5 @@ export class StudentResponse {
     phoneNumber?: number;
 
     address?: string;
+
 }

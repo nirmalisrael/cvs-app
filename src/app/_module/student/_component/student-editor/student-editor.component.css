@@ -167,6 +167,16 @@ a {
     margin-right: 10px;
 }
 
+.add-student-btn {
+    padding: 10px;
+    background-color: whitesmoke;
+    margin-right: 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: 1px solid grey;
+    cursor: pointer;
+}
+
 .filter-and-btn input {
     width: 130px;
     font-size: 15px;
@@ -212,7 +222,7 @@ a {
     width: 25%;
     height: 20vh;
     align-items: center;
-    background-color: lightgray;
+    background-color: whitesmoke;
     padding: 20px;
     margin-bottom: 20px;
     transition: 0.3s;
