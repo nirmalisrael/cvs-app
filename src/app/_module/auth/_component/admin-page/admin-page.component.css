@@ -10,49 +10,84 @@ body {
 }
 
 .top-navbar {
-    display: flex;
-    justify-content: space-between;
-    background-color: #ffffff;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    align-items: center;
-    box-shadow: 0px 0px 10px rgb(0, 0, 0);
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1;
-}
-
-.top-navbar a {
-    text-decoration: none;
-}
-.top-navbar h1 {
-    color: rgb(5, 5, 70);
-    margin-left: 40px;
-    padding: 5px;
-}
-.top-navbar h1:hover {
-    text-shadow: 0px 0px 3px rgb(97, 97, 97);;
-}
-
-button {
-    color: white;
-    background-color: red;
-    border: none;
-    font-weight: bold;
+    background-color: #ffffff;
+    padding: 10px;
     font-size: 15px;
-    text-decoration: none;
-    margin-right: 40px;
-    padding: 8px 15px;
-    border-radius: 5px;
-    transition: box-shadow 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    z-index: 1000;
 }
 
-button:hover {
-    text-decoration: double;
-    font-weight: bold;
-    box-shadow: 0px 0px 10px black;
-    cursor: pointer;
+a {
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    color: rgb(5, 5, 70);
+}
+
+.top-nav-btns {
+    margin-right: 20px;
+}
+
+.top-nav-btns a {
+    position: relative;
+    width: fit-content;
+    color: black;
+    text-decoration: none;
+    padding-bottom: 5px;
+    /* font-size: large; */
+    transition: all 0.3s ease;
+    margin-right: 20px;
+    /* Adding a smooth transition effect */
+}
+
+.top-nav-btns a::after,
+.top-nav-heading a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: darkblue;
+    bottom: 0;
+    left: 0;
+    transition: all 0.3s ease;
+    /* Adding a smooth transition effect */
+}
+
+.top-nav-btns a:hover::after,
+.top-nav-heading a:hover::after {
+    width: 100%;
+}
+
+.top-nav-btns a:hover::after {
+    width: 100%;
+}
+
+.top-nav-btns a:hover {
+    color: darkblue;
+}
+
+.top-navbar .top-nav-heading a h1 {
+    margin-left: 20px;
+}
+
+#logout::after {
+    background-color: red;
+}
+
+#logout:hover {
+    color: red;
+}
+
+.top-nav-btns {
+    width: 15%;
+    display: flex;
+    justify-content: space-around;
 }
 
 .left-navbar {
@@ -61,26 +96,26 @@ button:hover {
     background-color: #333;
     color: white;
     box-shadow: 0px 0px 10px rgb(0, 0, 0);
-
 }
 
 .left-navbar a {
     color: white;
-      text-decoration: none;
-      display: block;
-      padding: 15px;
-      margin-left: 0;
-      text-align: center;
-      line-height: 1.5;
-      box-sizing: border-box;
-      margin-bottom: 30px;
-      border-radius: 2px;
-      transition: box-shadow 0.3s;
-
+    text-decoration: none;
+    display: block;
+    padding: 15px;
+    margin-left: 0;
+    text-align: center;
+    line-height: 1.5;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    border-radius: 2px;
+    transition: box-shadow 0.3s;
 }
+
 .left-navbar a:first-child {
     margin-top: 98px;
 }
+
 .left-navbar a:hover {
     background-color: #ffffff;
     box-shadow: 0px 0px 10px rgb(0, 0, 0);
@@ -94,20 +129,21 @@ main {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-  }
+}
 
-  .grid-container {
+.grid-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 70px;
     max-width: 1000px;
-    max-height: 500px; /* Set your preferred max-width */
+    max-height: 500px;
+    /* Set your preferred max-width */
     width: 100%;
     height: 100%;
-  }
+}
 
-  .grid-item {
+.grid-item {
     width: 45%;
     box-sizing: border-box;
     padding: 10px;
@@ -120,16 +156,16 @@ main {
     align-items: flex-start;
     text-align: left;
     transition: box-shadow 0.3s;
-  }
+}
 
-  .grid-item a {
+.grid-item a {
     text-decoration: none;
     color: white;
     display: block;
     width: 100%;
     height: 100%;
     position: absolute;
-  }
+}
 
 .grid-item:hover {
     box-shadow: 0px 0px 20px rgb(0, 0, 0);
@@ -139,16 +175,18 @@ main {
 .grid-item p {
     line-height: 2;
 }
+
 #student {
     background-color: rgb(0, 132, 255);
-    
 }
+
 #student h1 {
     position: absolute;
     top: 0;
     left: 0;
     padding: 30px;
 }
+
 #student img {
     position: absolute;
     top: 0;
@@ -157,6 +195,7 @@ main {
     padding-right: 20px;
     max-width: 60px;
 }
+
 #student p {
     /* font-weight: bold; */
     /* color: #ffffff; */
@@ -168,12 +207,14 @@ main {
 #election {
     background-color: tomato;
 }
+
 #election h1 {
     position: absolute;
     top: 0;
     left: 0;
     padding: 30px;
 }
+
 #election img {
     position: absolute;
     top: 0;
@@ -182,8 +223,8 @@ main {
     padding-right: 15px;
     max-width: 60px;
 }
-#election p {
 
+#election p {
     letter-spacing: 1px;
     margin: 0;
     padding-left: 20px;
@@ -192,12 +233,14 @@ main {
 #auth {
     background-color: rgb(46, 235, 46);
 }
+
 #auth h1 {
     position: absolute;
     top: 0;
     left: 0;
     padding: 30px;
 }
+
 #auth img {
     position: absolute;
     top: 0;
@@ -206,23 +249,24 @@ main {
     padding-right: 12px;
     max-width: 70px;
 }
-#auth p {
 
+#auth p {
     letter-spacing: 1.5px;
     margin: 0;
     padding-left: 20px;
 }
 
-
 #result {
-    background-color:slateblue
+    background-color: slateblue
 }
+
 #result h1 {
     position: absolute;
     top: 0;
     left: 0;
     padding: 30px;
 }
+
 #result img {
     position: absolute;
     top: 0;
@@ -231,6 +275,7 @@ main {
     padding-right: 15px;
     max-width: 60px;
 }
+
 #result p {
     letter-spacing: 1px;
     margin: 0;

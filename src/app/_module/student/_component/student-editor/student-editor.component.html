@@ -8,10 +8,10 @@
 <body>
     <div class="page-container">
         <div class="left-navbar">
-            <a (click)="authService.navigate('/admin-page/student-editor')">Student Details</a>
+            <a (click)="authService.navigate('/admin-page/student-editor')" id="selected-btn">Student Details</a>
             <a (click)="authService.navigate('/admin-page/auth-editor')">Authentication Details</a>
             <a (click)="authService.navigate('/admin-page/election-editor')">Election Details</a>
-            <a (click)="authService.navigate('/admin-page/student-result')">Election Result Details</a>
+            <a (click)="authService.navigate('/admin-page/election-result')">Election Result Details</a>
         </div>
         <div class="top-navbar">
             <div class="top-nav-heading">

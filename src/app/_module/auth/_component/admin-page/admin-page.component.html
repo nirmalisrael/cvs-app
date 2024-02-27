@@ -12,10 +12,16 @@
         <a (click)="authService.navigate('/admin-page/student-result')">Election Result Details</a>
     </div>
     <div class="top-navbar">
-        <a href="/admin-page">
-            <h1>Admin Dashboard</h1>
-        </a>
-        <button onclick="">LOG OUT</button>
+        <div class="top-nav-heading">
+            <a href="/admin-page">
+                <h1>Admin Dashboard</h1>
+            </a>
+        </div>
+
+        <div class="top-nav-btns">
+            <a href="/home" class="home-btn">HOME</a>
+            <a href="/home" id="logout" class="logout-btn">LOGOUT</a>
+        </div>
     </div>
     <main>
         <div class="grid-container">

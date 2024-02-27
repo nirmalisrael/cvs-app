@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'admin-login', component: AdminLoginComponent},
   { path: 'student-login', component: UserLoginComponent},
   { path: 'admin-page', component: AdminPageComponent},
-  { path: 'student-page', component: UserPageComponent, canActivate: [AuthGuard]},
+  { path: 'student-page', component: UserPageComponent},
   { path: 'admin-page/student-editor', component: StudentEditorComponent},
   { path: 'admin-page/auth-editor', component: AuthEditorComponent},
   { path: 'admin-page/election-editor', component: ElectionEditorComponent},
