@@ -13,18 +13,7 @@ export class StudentService {
 
   constructor(private http: HttpClient) { }
 
-  createStudent(studentRequest1: StudentRequest): Observable<StudentResponse> {
-    const studentRequest = {
-      studentName: "Nirmal I",
-      dateOfBirth: "2004-06-12",
-      gender: "MALE",
-      admissionYear: 2021,
-      degreeType: "UG",
-      department: "COMPUTER_SCIENCE",
-      emailId: "nirmalmeenu111@gmail.com",
-      phoneNumber: 8754271061,
-      address: "220, madha kovil street"
-    };
+  createStudent(studentRequest: StudentRequest): Observable<StudentResponse> {
     return this.http.post<StudentResponse>(Url.getHostNameAndPort() + '/createStudent', studentRequest);
   }
   getAllStudents(): Observable<StudentResponse[]> {

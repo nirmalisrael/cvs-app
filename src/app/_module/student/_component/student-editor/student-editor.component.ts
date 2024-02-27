@@ -5,7 +5,7 @@ import { Gender } from '../../_dto/gender';
 import { StudentRequest } from '../../_dto/student-request';
 import { AuthService } from 'src/app/_module/auth/_service/jwt-service/auth.service';
 import { StudentService } from '../../_service/student.service';
-import { Department } from '../../_dto/department';
+import { Department, getKeyByValue } from '../../_dto/department';
 
 @Component({
   selector: 'app-student-editor',
@@ -39,7 +39,7 @@ export class StudentEditorComponent implements OnInit{
 
   studentResponse: StudentResponse = new StudentResponse();
   
-  department?: Department;
+  selectedDepartment?: Department;
 
   studentList: StudentResponse[] = [
     // {deptNo: '21UCS01', studentName: 'Durai', dateOfBirth: new Date('2000-09-21'), admissionYear: 2021, gender: Gender.MALE, degreeType: DegreeType.UG, department: Department.COMPUTER_SCIENCE, emailId: 'nirmalmeenu111@gmail.com',phoneNumber: 8754271092, address: '220, madha kovil street, alliyanthal, tiruvannaamali.'},
@@ -133,6 +133,7 @@ export class StudentEditorComponent implements OnInit{
   openNewStudent() {
     this.openStudent(new StudentRequest());
   }
+
   toggleEdit(index: number): void {
     this.isEditing = !this.isEditing;
   }
@@ -171,9 +172,35 @@ export class StudentEditorComponent implements OnInit{
     return new Date();
   }
 
+  setDepartment(student: StudentResponse): Department | undefined{
+    const keyFromStudent = student.department;
+
+    if (keyFromStudent) {
+      if (Object.keys(Department).includes(keyFromStudent)) {
+        const value = Department[keyFromStudent as unknown as keyof typeof Department];
+        this.selectedDepartment = value;
+        return value;
+      }
+    }
+    return undefined;
+  }
+
+  setGender(student: StudentResponse): Gender | undefined {
+    const gender = student.gender;
+    if (gender) {
+      if(Object.keys(Gender).includes(gender)) {
+        const value = Gender[gender as unknown as keyof typeof Gender];
+        return value;
+      }
+    }
+    return undefined;
+  }
+
   createStudent() {
     this.newStudent = this.selectedStudent;
     console.log(this.newStudent);
+    this.newStudent.department = getKeyByValue(Department, this.newStudent.department);
+    this.newStudent.gender = getKeyByValue(Gender, this.newStudent.gender);
     this.studentService.createStudent(this.newStudent).subscribe(
       (createdStudent) => {
         this.selectedStudent = createdStudent;

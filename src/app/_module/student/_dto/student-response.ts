@@ -3,7 +3,6 @@ import { Department } from "./department";
 import { Gender } from "./gender";
 
 export class StudentResponse {
-
     deptNo?: string;
     
     studentName?: string;

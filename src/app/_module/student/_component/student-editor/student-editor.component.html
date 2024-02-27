@@ -79,7 +79,7 @@
                                         <td>{{student.admissionYear}}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2">{{student.degreeType}} - {{student.department}}</td>
+                                        <td colspan="2">{{student.degreeType}} - {{setDepartment(student)}}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -140,9 +140,9 @@
                                 <tr>
                                     <th>Department</th>
                                     <td>
-                                        <span *ngIf="!showEditStudent">: {{selectedStudent.department}}</span>
+                                        <span *ngIf="!showEditStudent">: {{setDepartment(selectedStudent)}}</span>
                                         <span *ngIf="showEditStudent">: 
-                                            <select name="department" [(ngModel)]="selectedStudent.department" id="department">
+                                            <select name="department" [(ngModel)]="selectedDepartment" id="department">
                                                 <option [ngValue]="undefined" selected disabled>Department</option>
                                                 <option *ngFor="let department of departmentOptions" [value]="department">{{department}}
                                                 </option>
@@ -176,7 +176,7 @@
                         <tr>
                             <th>Gender</th>
                             <td>
-                                <span *ngIf="!showEditStudent">{{selectedStudent.gender}}</span>
+                                <span *ngIf="!showEditStudent">{{setGender(selectedStudent)}}</span>
                                 <span *ngIf="showEditStudent">
                                     <select name="gender" [(ngModel)]="selectedStudent.gender" id="gender">
                                         <option [ngValue]="undefined" selected disabled>Gender</option>

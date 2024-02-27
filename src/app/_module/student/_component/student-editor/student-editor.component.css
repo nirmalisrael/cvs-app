@@ -208,7 +208,7 @@ a {
 .students-grid-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    /* justify-content: start; */
     margin-left: 220px;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -224,7 +224,7 @@ a {
     align-items: center;
     background-color: whitesmoke;
     padding: 20px;
-    margin-bottom: 20px;
+    margin: 20px;
     transition: 0.3s;
     border-radius: 4px;
 }
