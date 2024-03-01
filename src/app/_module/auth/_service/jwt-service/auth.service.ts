@@ -4,6 +4,8 @@ import { JwtRequest } from '../../_dto/jwt-request';
 import { JwtResponse } from '../../_dto/jwt-response';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { User } from '../../_dto/user';
+import { Url } from 'src/app/_dto/url';
 
 const HOST_PORT = 'http://localhost:8080';
 const LOGIN_URL = HOST_PORT + '/cvs/login';
@@ -31,6 +33,10 @@ export class AuthService {
         this.storeToken(this.token);
       })
     );
+  }
+
+  createUser(user: User): Observable<User> {
+    return this.http.post<User>(Url.getHostNameAndPort() + '/createUser', user);
   }
 
   logout(): void {

@@ -209,17 +209,22 @@ export class StudentEditorComponent implements OnInit{
 
   removeStudent(deptNo?: string) {
     if (deptNo !== undefined) {
-      this.studentService.removeStudent(deptNo).subscribe(
-        (response) => {
-          console.log(response);
-          if (response.message === this.selectedStudent.deptNo) {
-            this.onChangeStudentPageToBack();
-            alert(response.message + " Student removed Successfully!");
-          } else {
-            alert(deptNo + " Student Not found!");
+       const isConfirmed = confirm("Are you sure to remove student " + deptNo);
+       if (isConfirmed) {  
+        this.studentService.removeStudent(deptNo).subscribe(
+          (response) => {
+            console.log(response);
+            if (response.message === this.selectedStudent.deptNo) {
+              this.onChangeStudentPageToBack();
+              alert(response.message + " Student removed Successfully!");
+            } else {
+              alert(deptNo + " Student Not found!");
+            }
           }
-        }
-      )
+        )
+      } else {
+        alert(deptNo + " student is safe!");
+      }
     }
   }
 
