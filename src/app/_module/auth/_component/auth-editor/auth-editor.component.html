@@ -65,9 +65,9 @@
                 <input type="text" name="username" placeholder="Username" #findUsername id="find-username" required>
                 <button class="find-btn" type="submit">Find</button>
                 <div class="find-user-para">
-                    <p><b>Username : </b>admin<br>
-                        <b>Role : </b>ADMIN <br>
-                        <b>Role Description : </b>For administrative</p>
+                    <p><b>Username : </b>{{userResponse.username}}<br>
+                        <b>Role : </b>{{userResponse.roles}} <br>
+                        <b>Role Description : </b>{{userResponse.password}}</p>
                 </div>
             </form>
         </div>

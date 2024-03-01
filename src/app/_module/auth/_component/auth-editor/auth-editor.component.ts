@@ -18,9 +18,13 @@ export class AuthEditorComponent {
   activeTab: string = 'users';
   username: string = '';
   roleName: string = '';
+
+  userResponse: User = new User();
   
   role: Role = new Role;
-      
+
+  userRole: Role = new Role();
+  
   showUserSide = true;
   showRoleSide = false;
   showAllUsers = false;
@@ -98,6 +102,18 @@ export class AuthEditorComponent {
   }
 
   findUser(username: string) {
+    if(username != undefined) {
+      this.authService.getUser(username).subscribe(
+        (response) => {
+          this.userResponse = response;
+          const roles = this.userResponse.roles;
+          // const roleNames: string[] = roles?.map((userRole => userRole?.role?.roleName));
+          // console.log(roleNames);
+          
+          console.log(this.userResponse);
+        }
+      )
+    }
   }
 
   createRole(roleName: string, roleDescription: string) {

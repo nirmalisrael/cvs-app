@@ -38,6 +38,10 @@ export class AuthService {
   createUser(user: User): Observable<User> {
     return this.http.post<User>(Url.getHostNameAndPort() + '/createUser', user);
   }
+  
+  getUser(username: string): Observable<User> {
+    return this.http.get<User>(`${Url.getHostNameAndPort()}/getUserByUsername?username=${username}`);
+  }
 
   logout(): void {
     this.clearToken();
@@ -62,6 +66,14 @@ export class AuthService {
 
   getRole(response: JwtResponse): string[] {
     return response.roles.map(role => role.roleName);
+  }
+
+  getRoleByUser(user: User): any {
+    return user.roles?.map((userRole) => userRole.role.roleName);
+  }
+
+  getRoleDescriptionByUser(user: User): any {
+    return user.roles?.map((role) => role.role.roleDescription);
   }
 
   isAdmin(): boolean {
