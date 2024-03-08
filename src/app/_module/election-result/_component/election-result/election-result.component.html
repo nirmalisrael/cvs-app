@@ -9,7 +9,6 @@
         <a (click)="authService.navigate('/admin-page/student-editor')">Student Details</a>
         <a (click)="authService.navigate('/admin-page/auth-editor')">Authentication Details</a>
         <a (click)="authService.navigate('/admin-page/election-editor')">Election Details</a>
-        <a (click)="authService.navigate('/admin-page/candidate-editor')">Candidate Details</a>
         <a (click)="authService.navigate('/admin-page/election-result')" id="selected-btn">Election Result Details</a>
     </div>
     <div class="top-navbar">
@@ -32,12 +31,12 @@
             </div>
 
             <div class="filter-and-btn">
-                <select name="status-option" id="status-option">
+                <select name="status-option" id="status-option" (click)="onSelectElectionStatus($event)">
                     <option [ngValue]="undefined" selected disabled>Select Status</option>
                     <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
                 </select>
-                <input type="text" name="electionName" id="electionName" placeholder="Election name.." required>
-                <a href=""><img src="assets/candidate-editor/search-icon.png" alt="search-icon"></a>
+                <input type="text" name="electionName" #electionName id="electionName" placeholder="Election name.." required>
+                <a (click)="findElectionByName(electionName.value)"><img src="assets/candidate-editor/search-icon.png" alt="search-icon"></a>
             </div>
         </div>
 
@@ -58,7 +57,7 @@
                         <tr>
                             <td>{{i +1}}</td>
                             <td>{{election.electionName}}</td>
-                            <td>{{election.startTime | date:'dd-MM-yyyy'}}</td>
+                            <td>{{election.startTime | date:'dd-MM-yyyy'}}<br><br>{{getTimeFromDate(election.startTime)}} - {{getTimeFromDate(election.endTime)}}</td>
                             <td>{{election.electionStatus}}</td>
                             <td>{{getWinnerByElectionName(election.electionName)}}</td>
                             <td><button class="view-candidates-btn" (click)="getResultByElection(election.electionName)">View Result</button></td>

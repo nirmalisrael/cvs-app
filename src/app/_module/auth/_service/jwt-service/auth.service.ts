@@ -25,12 +25,15 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
+  username?: string;
+
   lgoin(credentials: JwtRequest): Observable<JwtResponse> {
-    return this.http.post<JwtResponse>(LOGIN_URL, credentials, httpOptions)
+    return this.http.post<JwtResponse>(Url.getHostNameAndPort() + '/login', credentials, httpOptions)
     .pipe(
       tap((response: JwtResponse) => {
         this.token = response.jwtToken;
         this.storeToken(this.token);
+        localStorage.setItem('username', response.username);
       })
     );
   }

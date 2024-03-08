@@ -116,57 +116,54 @@ export class StudentEditorComponent implements OnInit{
   }
 
   setDepartment(student: StudentResponse): Department | undefined{
-    const keyFromStudent = student.department;
-
-    if (keyFromStudent) {
-      if (Object.keys(Department).includes(keyFromStudent)) {
-        const value = Department[keyFromStudent as unknown as keyof typeof Department];
-        this.selectedDepartment = value;
-        return value;
-      }
+    if (student) {
+      return this.studentService.setDepartment(student);
     }
-    return undefined;
+    return undefined
   }
 
   setGender(student: StudentResponse): Gender | undefined {
-    const gender = student.gender;
-    if (gender) {
-      if(Object.keys(Gender).includes(gender)) {
-        const value = Gender[gender as unknown as keyof typeof Gender];
-        this.selectedGender = value;
-        return value;
-      }
+    if (student) {
+      return this.studentService.setGender(student);
     }
     return undefined;
   }
 
   createStudent() {
-    this.newStudent = this.selectedStudent;
-    this.newStudent.department = getKeyByValue(Department, this.selectedDepartment);
-    this.newStudent.gender = getKeyByValueForGender(Gender, this.selectedGender);
-    console.log(this.newStudent);
+    let dummy: StudentResponse = new StudentResponse();
+    const department = getKeyByValue(Department, Department.BUSINESS_ADMINISTRATION);
+    console.log(department);
     
-    this.studentService.createStudent(this.newStudent).subscribe(
-      (createdStudent) => {
-        this.selectedStudent = createdStudent;
-        console.log(createdStudent);
+    if (department) {
+      this.studentService.getStudentsByFiler(DegreeType.UG, department, 0);
+
+    }
+    // this.newStudent = this.selectedStudent;
+    // this.newStudent.department = getKeyByValue(Department, this.selectedDepartment);
+    // this.newStudent.gender = getKeyByValueForGender(Gender, this.selectedGender);
+    // console.log(this.newStudent);
+    
+    // this.studentService.createStudent(this.newStudent).subscribe(
+    //   (createdStudent) => {
+    //     this.selectedStudent = createdStudent;
+    //     console.log(createdStudent);
         
-        if(createdStudent) {
-          console.log(createdStudent);
-          this.showNewStudent = false;
-          this.showEditStudent = false;
-          this.showDeptNo = true;
-          this.showStudentPage = true;
-          alert("Student saved successfully! Department No. " + this.selectedStudent.deptNo);
-        }else {
-          alert("An unexpected error occurred while saving the student.");
-        }
-      },
-      (error) => {
-        console.error("Error creating student:", error);
-        alert("Please enter all details correctly!");
-      }
-    )
+    //     if(createdStudent) {
+    //       console.log(createdStudent);
+    //       this.showNewStudent = false;
+    //       this.showEditStudent = false;
+    //       this.showDeptNo = true;
+    //       this.showStudentPage = true;
+    //       alert("Student saved successfully! Department No. " + this.selectedStudent.deptNo);
+    //     }else {
+    //       alert("An unexpected error occurred while saving the student.");
+    //     }
+    //   },
+    //   (error) => {
+    //     console.error("Error creating student:", error);
+    //     alert("Please enter all details correctly!");
+    //   }
+    // )
     
   }
 

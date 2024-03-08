@@ -120,15 +120,15 @@
             <form>
                 <h1>Register a Candidate</h1>
                 <label for="candidate-id">Candidate ID</label>
-                <input type="text" name="candidate-id" id="candidate-id" placeholder="Candidate ID.." [(ngModel)]="newCandidate.candidateId">
+                <input type="text" name="candidate-id" id="candidate-id" placeholder="Candidate ID.." #candidateId>
 
                 <label for="candidate-deptNo">Candidate Department Number</label>
-                <input type="text" name="candidate-deptNo" id="candidate-deptNo" placeholder="Candidate dept. no. .." [(ngModel)]="newCandidate.deptNo">
+                <input type="text" name="candidate-deptNo" id="candidate-deptNo" placeholder="Candidate dept. no. .." #deptNo>
 
                 <label for="electionName">Election Name</label>
-                <input type="text" name="electionName" id="electionName" readonly placeholder="Election name.." [(ngModel)]="newElection.electionName">
+                <input type="text" name="electionName" id="electionName" readonly placeholder="Election name.." #electionName [(ngModel)]="newElection.electionName">
 
-                <button class="add-candidate" (click)="addCandidates(newCandidate)">Add Candidate</button>
+                <button class="add-candidate" (click)="addCandidates(candidateId.value, deptNo.value, electionName.value)">Add Candidate</button>
             </form>
         </div>
         <a (click)="closeAddElection()" class="close-icon"><img src="assets/student-editor/close-icon.png" alt="close-icon"></a>

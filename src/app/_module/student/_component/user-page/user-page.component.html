@@ -8,8 +8,14 @@
 
 <body>
     <div class="top-navbar">
-        <h1>Student Profile</h1>
-        <button onclick="" class="logout-btn">LOG OUT</button>
+        <div class="top-nav-heading">
+            <h1>Student Profile</h1>
+        </div>
+
+        <div class="top-nav-btns">
+            <a href="/home" class="home-btn">HOME</a>
+            <a href="/home" id="logout" class="logout-btn">LOGOUT</a>
+        </div>
     </div>
     <!-- student-profile.component.html -->
     <div class="student-profile py-4">
@@ -23,13 +29,13 @@
                         </div>
                         <div class="card-body">
                             <p class="mb-0">
-                                <strong class="pr-1">Department Number : </strong>21UCS14
+                                <strong class="pr-1">Department Number : </strong>{{studentResponse.deptNo}}
                             </p>
                             <p class="mb-0">
-                                <strong class="pr-1">Degree Type : </strong>UG
+                                <strong class="pr-1">Degree Type : </strong>{{studentResponse.degreeType}}
                             </p>
                             <p class="mb-0">
-                                <strong class="pr-1">Department : </strong>Computer Science
+                                <strong class="pr-1">Department : </strong>{{studentService.setDepartment(studentResponse)}}
                             </p>
                         </div>
                     </div>
@@ -46,33 +52,33 @@
                                 <tr>
                                     <th width="30%">Date Of Birth</th>
                                     <td width="2%">:</td>
-                                    <td></td>
+                                    <td>{{studentResponse.dateOfBirth}}</td>
                                 </tr>
                                 <tr>
                                     <th width="30%">Admission Year</th>
                                     <td width="2%">:</td>
-                                    <td></td>
+                                    <td>{{studentResponse.admissionYear}}</td>
                                 </tr>
                                 <tr>
                                     <th width="30%">Gender</th>
                                     <td width="2%">:</td>
-                                    <td></td>
+                                    <td>{{studentService.setGender(studentResponse)}}</td>
                                 </tr>
                                 <tr>
                                     <th width="30%">Email-Id</th>
                                     <td width="2%">:</td>
-                                    <td></td>
+                                    <td>{{studentResponse.emailId}}</td>
                                 </tr>
                                 <tr>
                                     <th width="30%">Phone Number</th>
                                     <td width="2%">:</td>
-                                    <td></td>
+                                    <td>{{studentResponse.phoneNumber}}</td>
                                 </tr>
                                 <tr>
                                     <th width="30%">Address</th>
                                     <td width="2%">:</td>
                                     <td>
-                                        <address></address>
+                                        <address>{{studentResponse.address}}</address>
                                     </td>
                                 </tr>
                             </table>

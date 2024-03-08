@@ -33,6 +33,5 @@ export class AdminLoginComponent {
       }
     )
     // console.log(this.jwtRequest);
-    
   }
 }

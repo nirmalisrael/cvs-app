@@ -65,15 +65,20 @@ export class CandidateEditorComponent implements OnInit{
   }
 
   saveCandidate(newCandidate: Candidate) {
-    this.candidateService.createCandidate(newCandidate).subscribe(
-      (response) => {
-        newCandidate = response;
-        console.log(response);
-        
-        this.candidates.push(newCandidate);
-        this.closeAddCandidateForm();
-      }
-    )
+    
+    if (newCandidate && this.selectedElection) {
+      newCandidate.electionName = this.selectedElection;
+      this.candidateService.createCandidate(newCandidate).subscribe(
+        (response) => {
+          newCandidate = response;
+          console.log(response);
+          
+          this.candidates.push(newCandidate);
+          this.closeAddCandidateForm();
+          Swal.fire("Added", newCandidate.candidateId + " Candidate Added Successfully in "+newCandidate.electionName, 'success');
+        }
+      )
+    }
   }
 
   closeAddCandidateForm () {

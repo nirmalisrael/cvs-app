@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Election } from '../_dto/election';
 import { Url } from 'src/app/_dto/url';
+import { ElectionStatus } from '../_dto/election-status';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,10 @@ export class ElectionService {
 
   getElectionByName(electionName: string): Observable<Election> {
     return this.http.get<Election>(`${Url.getHostNameAndPort()}/getElectionById?electionName=${electionName}`);
+  }
+
+  getElectionsByElectionStatus(electionStatus: ElectionStatus): Observable<Election[]> {
+    return this.http.get<Election[]>(`${Url.getHostNameAndPort()}/getElectionsByElectionStatus?electionStatus=${electionStatus}`);
   }
 
   getAllElections(): Observable<Election[]> {

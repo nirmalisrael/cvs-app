@@ -1,39 +1,42 @@
-import { Component } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/_module/auth/_service/jwt-service/auth.service';
 import { Candidate } from 'src/app/_module/election/_dto/candidate';
 import { Election } from 'src/app/_module/election/_dto/election';
 import { ElectionStatus } from 'src/app/_module/election/_dto/election-status';
+import { CandidateService } from 'src/app/_module/election/_service/candidate.service';
+import { ElectionService } from 'src/app/_module/election/_service/election.service';
+import { VoteService } from 'src/app/_module/vote/_service/vote.service';
 
 @Component({
   selector: 'app-election-result',
   templateUrl: './election-result.component.html',
   styleUrls: ['./election-result.component.css']
 })
-export class ElectionResultComponent {
+export class ElectionResultComponent implements OnInit{
 
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService,
+    private electionService: ElectionService,
+    private voteService: VoteService,
+    private candidateService: CandidateService) {}
   
   statusOptions = Object.values(ElectionStatus);
   selectedElection?: string;
 
-  showElectionPage = false;
-  showCandidatePage = true;
+  showElectionPage = true;
+  showCandidatePage = false;
 
-  electionNames: string[] = ['Fine Arts Secretary','Sports Secretary','Media Secretary'];
+  electionNames: string[] = [];
 
   elections: Election[] = [
-    // {electionName: 'Fine Arts Secretary', electionDate: new Date('2024-01-20'), electionStatus: ElectionStatus.LIVE},
-    // {electionName: 'Sports Secretary', electionDate: new Date('2024-01-20'), electionStatus: ElectionStatus.COMPLETED},
-    // {electionName: 'Chair Man', electionDate: new Date('2024-01-20'), electionStatus: ElectionStatus.UPCOMMING},
-    // {electionName: 'Media Secretary', electionDate: new Date('2024-01-20'), electionStatus: ElectionStatus.LIVE}
   ];
     
   candidates: Candidate[] = [
-    {candidateId: 'LCVFA01', deptNo: '21UCS20', candidateName: 'Vetri Piriyan', voteCount: 0},
-    {candidateId: 'LCVFA02', deptNo: '21UCS21', candidateName: 'Nirmal', voteCount: 0},
-    {candidateId: 'LCVFA03', deptNo: '21UCS33', candidateName: 'Santhosh', voteCount: 0},
-    {candidateId: 'LCVFA04', deptNo: '21UCS45', candidateName: 'Maria Raj', voteCount: 0},
   ];
+
+  ngOnInit(): void {
+    this.getAllElections();
+  }
 
   getWinnerByElectionName(electionName: string | undefined): string {
     return 'LCVCM01';
@@ -41,8 +44,11 @@ export class ElectionResultComponent {
 
   onSelectOption(event: Event): void {
     const selectedValue = (event.target as HTMLSelectElement).value;
-    // Call your method here with the selected option
-    this.filterElection(selectedValue);
+    this.getResultByElection(selectedValue);
+  }
+  onSelectElectionStatus(event: Event) {
+    const selectedElectionStatus = (event.target as HTMLSelectElement).value;
+    this.getElectionsByElectionStatus(selectedElectionStatus);
   }
 
   filterElection(selectedValue: string): void {
@@ -52,12 +58,66 @@ export class ElectionResultComponent {
 
   getResultByElection(electionName: string) {
     this.selectedElection = electionName;
-    this.showElectionPage = false;
-    this.showCandidatePage = true;
+    if (electionName) {
+      this.candidateService.getCandidatesByElectionName(electionName).subscribe(
+        (response) => {
+          this.candidates = response;
+          this.showElectionPage = false;
+          this.showCandidatePage = true;
+        }
+      )
+    }
+  }
+
+  isValidElectionStatus(status: string): status is keyof typeof ElectionStatus {
+    return Object.keys(ElectionStatus).includes(status);
+  }
+
+  getElectionsByElectionStatus(status: string) {
+    if (this.isValidElectionStatus(status)) {
+      const electionStatus: ElectionStatus = ElectionStatus[status as keyof typeof ElectionStatus];
+      if (electionStatus == ElectionStatus.ALL) {
+        this.getAllElections();
+      } else {
+        this.electionService.getElectionsByElectionStatus(electionStatus).subscribe(
+          (response) => {
+            this.elections = response;
+          }
+        )
+      }
+      
+    }
+  }
+
+  findElectionByName(electionName: string) {
+    if (electionName !== '' && electionName !== undefined) {
+      this.electionService.getElectionByName(electionName).subscribe(
+        (response) => {
+          if(response) {
+            this.elections = [];
+            this.elections.push(response);
+          }
+        }
+      )
+    }    
+  }
+
+  getAllElections() {
+    this.electionService.getAllElections().subscribe(
+      (response) => {
+        this.elections = response;
+        this.electionNames = this.elections.map(electon => electon.electionName);
+      }
+    )
   }
 
   backToElectionResult() {
     this.showCandidatePage = false;
     this.showElectionPage = true; 
+  }
+
+  getTimeFromDate(date?: Date): string | null{
+    const datePipe = new DatePipe('en-US');
+    return datePipe.transform(date, 'HH:mm');
   }
 }

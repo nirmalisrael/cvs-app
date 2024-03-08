@@ -17,6 +17,10 @@ export class CandidateService {
     return this.http.post<Candidate>(Url.getHostNameAndPort()+'/createCandidate', candidateDTO);
   }
 
+  createCandidates(candidateDTOs: Candidate[]): Observable<Candidate[]> {
+    return this.http.post<Candidate[]>(Url.getHostNameAndPort()+'/createCandidates', candidateDTOs);
+  }
+
   removeCandidate(candidateId: string): Observable<any> {
     return this.http.delete<any>(`${Url.getHostNameAndPort()}/removeCandidate?candidateId=${candidateId}`);
   }

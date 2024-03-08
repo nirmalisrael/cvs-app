@@ -1,6 +1,7 @@
 export enum ElectionStatus {
 
-    UPCOMMING = ('UPCOMMING'),
+    ALL = ('ALL'),
+    UPCOMING = ('UPCOMING'),
     LIVE = ('LIVE'),
     COMPLETED = ('COMPLETED')
 }

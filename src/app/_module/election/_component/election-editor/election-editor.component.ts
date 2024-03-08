@@ -105,7 +105,7 @@ export class ElectionEditorComponent implements OnInit{
 
   openDeleteElection(electionName: string) {
     Swal.fire({
-      html: 'Are you sure you want to delete ' + electionName + ' Election',
+      html: 'Are you sure you want to delete ' + electionName,
       icon: 'question',
       showCancelButton: true,
       confirmButtonText: 'Yes',
@@ -128,12 +128,16 @@ export class ElectionEditorComponent implements OnInit{
           }
         )
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire('Cancelled', electionName + ' Election details are safe!', 'error');
+        Swal.fire('Cancelled', electionName + ' details are safe!', 'error');
       }
     });
   }
 
-  addCandidates(candidate: Candidate) {
+  addCandidates(candidateId: string, deptNo: string, electionName: string) {
+    const candidate = new Candidate();
+    candidate.candidateId = candidateId;
+    candidate.deptNo = deptNo;
+    candidate.electionName = electionName;
     this.candidates.push(candidate);
     if (this.candidates.length !== 0) {
       this.showAddedCandidates = true;
@@ -147,7 +151,16 @@ export class ElectionEditorComponent implements OnInit{
         (response) => {
           election = response;
           if (response) {
-            Swal.fire('Created', election.electionName + ' Created successfully!', 'success');
+            if (election.electionName) {
+              this.candidateService.createCandidates(this.candidates).subscribe(
+                (response) => {
+                  if (response) {
+                    Swal.fire('Created', election.electionName + ' Created successfully! & ' + response.length + ' Candidates Added!', 'success');
+
+                  }
+                }
+              )
+            }
             this.closeAddElection();
           }
         }
@@ -201,7 +214,9 @@ export class ElectionEditorComponent implements OnInit{
       (response) => {
         this.elections = response;
         this.electionNames = this.elections.map(election => election.electionName);    
-        this.candidateService.setElectionNames(this.electionNames);    
+        this.candidateService.setElectionNames(this.electionNames);
+        console.log(response);
+            
       },
       (error) => {
         console.log(error);
