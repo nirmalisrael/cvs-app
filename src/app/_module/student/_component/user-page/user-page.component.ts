@@ -15,24 +15,24 @@ export class UserPageComponent {
 
   showVotingPage = false;
 
-  selectedCandidateId?: "LCVFA01";
+  selectedCandidateId?: string;
 
   selectedElection?: string;
 
   hasVoted: boolean = false;
 
   candidate: Candidate = {
-    candidateId: "LCVSS01", candidateName: "Nirmal", candidateDeptNo: "21UCS14"
+    candidateId: "LCVSS01", candidateName: "Nirmal", deptNo: "21UCS14"
   }
 
   candidates: Candidate[] = [
-    {candidateId: 'LCVFA01', candidateDeptNo: '21UCS20', candidateName: 'Vetri Piriyan'},
-    {candidateId: 'LCVFA02', candidateDeptNo: '21UCS21', candidateName: 'Nirmal'},
-    {candidateId: 'LCVFA03', candidateDeptNo: '21UCS37', candidateName: 'julius'},
-    {candidateId: 'LCVFA04', candidateDeptNo: '21UCS45', candidateName: 'Maria Raj'},
+    {candidateId: 'LCVFA01', deptNo: '21UCS20', candidateName: 'Vetri Piriyan'},
+    {candidateId: 'LCVFA02', deptNo: '21UCS21', candidateName: 'Nirmal'},
+    {candidateId: 'LCVFA03', deptNo: '21UCS37', candidateName: 'julius'},
+    {candidateId: 'LCVFA04', deptNo: '21UCS45', candidateName: 'Maria Raj'},
   ];
 
-  onSelectCandidateId(candidateId: string | undefined) {
+  onSelectCandidateId() {
     console.log(this.selectedCandidateId);
   }
 
@@ -61,6 +61,7 @@ export class UserPageComponent {
       }).then((result) => {
         if (result.value) {
           //call delete method in service
+          this.hasVoted = true;
           Swal.fire(
             'Voted',
             'Voted successfully for '+ this.selectedCandidateId,

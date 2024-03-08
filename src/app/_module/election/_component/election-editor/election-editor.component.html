@@ -9,7 +9,7 @@
         <a (click)="authService.navigate('/admin-page/student-editor')">Student Details</a>
         <a (click)="authService.navigate('/admin-page/auth-editor')">Authentication Details</a>
         <a (click)="authService.navigate('/admin-page/election-editor')" id="selected-btn">Election Details</a>
-        <a (click)="authService.navigate('/admin-page/candidate-editor')">Candidate Details</a>
+        <!-- <a (click)="authService.navigate('/admin-page/candidate-editor')">Candidate Details</a> -->
         <a (click)="authService.navigate('/admin-page/election-result')">Election Result Details</a>
     </div>
     <div class="top-navbar">
@@ -35,8 +35,8 @@
                     <option [ngValue]="undefined" selected disabled>Select Status</option>
                     <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
                 </select> |
-                <input type="text" name="electionName" id="electionName" placeholder="Election name.." required>
-                <a href=""><img src="assets/candidate-editor/search-icon.png" alt="search-icon"></a>
+                <input type="text" name="electionName" #electionName id="electionName" placeholder="Election name.." required>
+                <a (click)="findElectionByName(electionName.value)"><img src="assets/candidate-editor/search-icon.png" alt="search-icon"></a>
             </div>
         </div>
 
@@ -57,7 +57,7 @@
                         <tr>
                             <td>{{i +1}}</td>
                             <td>{{election.electionName}}</td>
-                            <td>{{election.electionDate | date:'dd-MM-yyyy'}}</td>
+                            <td>{{election.startTime | date:'dd-MM-yyyy'}}<br><br>{{getTimeFromDate(election.startTime)}} - {{getTimeFromDate(election.endTime)}}</td>
                             <td>{{election.electionStatus}}</td>
                             <td><button class="view-candidates-btn" (click)="onClickViewCandidates(election.electionName)">View Candidates</button></td>
                             <td>
@@ -82,8 +82,18 @@
                 <label for="electionName">Election Name</label>
                 <input type="text" id="electionName" name="electionName" [(ngModel)]="newElection.electionName" placeholder="Election name..">
 
-                <label for="electionDate">Election Date</label>
-                <input type="date" id="electionDate" name="electionDate" placeholder="Election date.." [(ngModel)]="newElection.electionDate">
+                <!-- <label for="electionDate">Election Date</label>
+                <input type="date" id="electionDate" name="electionDate" placeholder="Election date.." [(ngModel)]="newElection.startTime"> -->
+
+                <label for="electionDateTime">Election Date, Time & Duration Hours</label>
+                <div class="datetime-picker">
+                    <input type="date" class="form-control date-input" placeholder="dd-MM-YY" [(ngModel)]="selectedDate" name="electionDate" />
+                    <span>&nbsp;</span>
+                    <!-- Add a space between date and time inputs -->
+                    <input type="time" class="form-control time-input" placeholder="HH:mm AM/PM" [(ngModel)]="selectedTime" name="electionTime" />
+                    <span>&nbsp;</span>
+                    <input type="number" name="durationHours" id="durationHours" [(ngModel)]="newElection.durationHours" placeholder="5 Hours">
+                </div>
 
                 <label for="add-candidate">Add Candidates</label>
                 <div class="add-candidate-table" *ngIf="showAddedCandidates">
@@ -95,7 +105,7 @@
                         <ng-container *ngFor="let candidate of candidates; let i = index">
                             <tr>
                                 <td>{{candidate.candidateId}}</td>
-                                <td>{{candidate.candidateDeptNo}}</td>
+                                <td>{{candidate.deptNo}}</td>
                                 <td><button (click)="removeCandidate(i)"><img
                                             src="assets/election-editor/remove-icon.png" alt="remove"></button></td>
                             </tr>
@@ -113,7 +123,7 @@
                 <input type="text" name="candidate-id" id="candidate-id" placeholder="Candidate ID.." [(ngModel)]="newCandidate.candidateId">
 
                 <label for="candidate-deptNo">Candidate Department Number</label>
-                <input type="text" name="candidate-deptNo" id="candidate-deptNo" placeholder="Candidate dept. no. .." [(ngModel)]="newCandidate.candidateDeptNo">
+                <input type="text" name="candidate-deptNo" id="candidate-deptNo" placeholder="Candidate dept. no. .." [(ngModel)]="newCandidate.deptNo">
 
                 <label for="electionName">Election Name</label>
                 <input type="text" name="electionName" id="electionName" readonly placeholder="Election name.." [(ngModel)]="newElection.electionName">
@@ -129,11 +139,17 @@
                 <h1>Edit Election Details</h1>
 
                 <label for="electionName">Election Name</label>
-                <input type="text" id="electionName" name="electionName" [(ngModel)]="modifyElection.electionName" placeholder="Election name.." readonly>
+                <input type="text" id="electionName" name="electionName" [(ngModel)]="modifyElection.electionName" placeholder="Election name..">
 
-                <label for="electionDate">Election Date</label>
-                <input type="text" id="electionDate" name="electionDate" placeholder="Election date.." [(ngModel)]="modifyElection.electionDate">
-                <input type="submit" value="Update">
+                <label for="electionDateTime">Election Date, Time & Duration Hours</label>
+                <div class="datetime-picker">
+                    <input type="date" class="form-control date-input" [(ngModel)]="selectedDate" name="electionDate" />
+                    <span>&nbsp;</span>
+                    <input type="time" class="form-control time-input" placeholder="HH:mm AM/PM" [(ngModel)]="selectedTime" name="electionTime" />
+                    <span>&nbsp;</span>
+                    <input type="number" name="durationHours" id="durationHours" [(ngModel)]="modifyElection.durationHours" placeholder="5 Hours">
+                </div>
+                <input type="submit" (click)="saveModifiedElection()" value="Update">
             </form>
         </div>
         <a (click)="closeAddElection()" class="close-icon"><img src="assets/student-editor/close-icon.png" alt="close-icon"></a>

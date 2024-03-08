@@ -4,7 +4,11 @@ export class Election {
 
     electionName: string = '';
 
-    electionDate?: Date;
+    startTime?: Date;
 
+    endTime?: Date;
+
+    durationHours?: number;
+    
     electionStatus?: ElectionStatus;
 }

@@ -4,6 +4,8 @@ import { Role } from 'src/app/_module/auth/_dto/role';
 import { User } from 'src/app/_module/auth/_dto/user';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../_service/jwt-service/auth.service';
+import { UserService } from '../../_service/user-service/user.service';
+import { RoleService } from '../../_service/role-service/role.service';
 
 @Component({
   selector: 'app-auth-editor',
@@ -12,7 +14,10 @@ import { AuthService } from '../../_service/jwt-service/auth.service';
 })
 export class AuthEditorComponent {
 
-  constructor(public authService: AuthService) {}
+  constructor(
+    public authService: AuthService, 
+    private userService: UserService,
+    private roleService: RoleService) {}
 
   userRequest: User = new User;
   activeTab: string = 'users';
@@ -21,7 +26,7 @@ export class AuthEditorComponent {
 
   userResponse: User = new User();
   
-  role: Role = new Role;
+  selectedRole: Role = new Role();
 
   userRole: Role = new Role();
   
@@ -78,11 +83,18 @@ export class AuthEditorComponent {
   }
   saveUser(user: User) {
     
-    if(this.role.roleName !=null && user.username != null && user.password != null){
-      user.roles?.push({role: this.role});
-      console.log(user);
-      Swal.fire('Saved', user.username + ' user saved successfully!', 'success');
-      this.role = new Role();
+    if(this.selectedRole.roleName !=null && user.username != null && user.password != null){
+      user.roles?.push({roleName: this.selectedRole.roleName, roleDescription: this.selectedRole.roleDescription});
+      this.userService.createUser(user).subscribe(
+        (response) => {
+          user = response;
+          console.log(user);
+          if (user) {
+            Swal.fire('Saved', user.username + ' user saved successfully!', 'success');
+          }
+        }
+      )
+      this.selectedRole = new Role();
     } else {
       Swal.fire('', 'Enter the user credantials!','warning');
     }
@@ -103,14 +115,9 @@ export class AuthEditorComponent {
 
   findUser(username: string) {
     if(username != undefined) {
-      this.authService.getUser(username).subscribe(
+      this.userService.getUser(username).subscribe(
         (response) => {
           this.userResponse = response;
-          const roles = this.userResponse.roles;
-          // const roleNames: string[] = roles?.map((userRole => userRole?.role?.roleName));
-          // console.log(roleNames);
-          
-          console.log(this.userResponse);
         }
       )
     }
@@ -118,7 +125,20 @@ export class AuthEditorComponent {
 
   createRole(roleName: string, roleDescription: string) {
     if(roleName != '' && roleDescription != ''){
-      Swal.fire('Saved', roleName +' role create successfully!','success');
+      let role: Role = new Role();
+      role.roleName = roleName;
+      role.roleDescription = roleDescription;
+      this.roleService.createRole(role).subscribe(
+        (response) => {
+          role = response;
+          console.log(role);
+          if (response) {
+            Swal.fire('Saved', roleName +' role create successfully!','success');
+          } else {
+            Swal.fire('', 'Fill the role name and description!','warning');
+          }
+        }
+      )
     } else {
       Swal.fire('', 'Fill the role name and description!','warning');
     }

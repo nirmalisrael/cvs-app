@@ -22,17 +22,17 @@ export class ElectionResultComponent {
   electionNames: string[] = ['Fine Arts Secretary','Sports Secretary','Media Secretary'];
 
   elections: Election[] = [
-    {electionName: 'Fine Arts Secretary', electionDate: new Date('2024-01-20'), electionStatus: ElectionStatus.LIVE},
-    {electionName: 'Sports Secretary', electionDate: new Date('2024-01-20'), electionStatus: ElectionStatus.COMPLETED},
-    {electionName: 'Chair Man', electionDate: new Date('2024-01-20'), electionStatus: ElectionStatus.UPCOMMING},
-    {electionName: 'Media Secretary', electionDate: new Date('2024-01-20'), electionStatus: ElectionStatus.LIVE}
+    // {electionName: 'Fine Arts Secretary', electionDate: new Date('2024-01-20'), electionStatus: ElectionStatus.LIVE},
+    // {electionName: 'Sports Secretary', electionDate: new Date('2024-01-20'), electionStatus: ElectionStatus.COMPLETED},
+    // {electionName: 'Chair Man', electionDate: new Date('2024-01-20'), electionStatus: ElectionStatus.UPCOMMING},
+    // {electionName: 'Media Secretary', electionDate: new Date('2024-01-20'), electionStatus: ElectionStatus.LIVE}
   ];
     
   candidates: Candidate[] = [
-    {candidateId: 'LCVFA01', candidateDeptNo: '21UCS20', candidateName: 'Vetri Piriyan', voteCount: 0},
-    {candidateId: 'LCVFA02', candidateDeptNo: '21UCS21', candidateName: 'Nirmal', voteCount: 0},
-    {candidateId: 'LCVFA03', candidateDeptNo: '21UCS33', candidateName: 'Santhosh', voteCount: 0},
-    {candidateId: 'LCVFA04', candidateDeptNo: '21UCS45', candidateName: 'Maria Raj', voteCount: 0},
+    {candidateId: 'LCVFA01', deptNo: '21UCS20', candidateName: 'Vetri Piriyan', voteCount: 0},
+    {candidateId: 'LCVFA02', deptNo: '21UCS21', candidateName: 'Nirmal', voteCount: 0},
+    {candidateId: 'LCVFA03', deptNo: '21UCS33', candidateName: 'Santhosh', voteCount: 0},
+    {candidateId: 'LCVFA04', deptNo: '21UCS45', candidateName: 'Maria Raj', voteCount: 0},
   ];
 
   getWinnerByElectionName(electionName: string | undefined): string {

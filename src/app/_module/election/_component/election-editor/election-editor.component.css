@@ -90,7 +90,7 @@ a {
     position: fixed;
     color: white;
     box-shadow: 0px 0px 10px rgb(0, 0, 0);
-    z-index: 1;
+    z-index: 3;
 }
 
 .left-navbar a {
@@ -141,6 +141,7 @@ a {
     align-items: center;
     padding: 20px;
     box-shadow: 0 0 10px black;
+    z-index: 2;
 }
 
 .btns-and-option {
@@ -174,6 +175,14 @@ select {
     outline: none;
     font-weight: bold;
     margin-right: 10px;
+    cursor: pointer;
+    background-color: white;
+    transition: 0.3s;
+}
+
+.add-election-btn:hover,
+select:hover {
+    box-shadow: 0 0 3px black;
 }
 
 .btns-and-option input {
@@ -186,6 +195,7 @@ select {
     margin-left: 10px;
     border-radius: 5px;
     border: 1px solid grey;
+    transition: 0.3s;
 }
 
 .btns-and-option input:focus {
@@ -203,20 +213,19 @@ select {
 
 .election-table-container {
     width: calc(100% - 220px);
-    height: 100vh;
-    margin-top: 100px;
+    min-height: 100vh;
+    margin-top: 40px;
     margin-left: 220px;
     display: flex;
     justify-content: center;
-    padding-top: 0px;
 }
 
 .election-table-container table {
     font-family: 'Roboto', 'Lato', 'Open Sans';
-    width: 90%;
+    width: 80%;
+    margin-top: 0px;
     height: fit-content;
     table-layout: fixed;
-    /* border: 1px solid black; */
     border-collapse: separate;
     background-color: rgba(245, 222, 179, 0.733);
     border-spacing: 0;
@@ -310,7 +319,7 @@ select {
 .add-election-container,
 .modify-election-container {
     position: relative;
-    margin-top: 70px;
+    /* margin-top: 70px; */
     left: 220px;
     width: calc(100% - 220px);
     height: calc(100vh - 70px);
@@ -323,7 +332,11 @@ select {
 
 .add-election-form form input[type=text],
 .add-election-form form input[type=date],
+.add-election-form form input[type=time],
+.add-election-form form input,
 .add-election-form form select,
+.modify-election-form form input,
+.modify-election-form form select,
 textarea,
 .add-candidate-btn {
     width: 100%;
@@ -350,10 +363,12 @@ input[type=submit],
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    width: 100%;
 }
 
 input[type=submit]:hover {
     background-color: #45a049;
+    cursor: pointer;
 }
 
 .add-election-form {
@@ -513,4 +528,17 @@ textarea {
 .close-icon img:hover {
     box-shadow: 0 0 6px darkred;
     background-color: rgb(248, 154, 154);
+}
+
+.datetime-picker {
+    display: flex;
+    align-items: center;
+}
+
+.date-input,
+.time-input {
+    width: 100px;
+    /* Adjust the width as needed */
+    margin-right: 5px;
+    /* Adjust the spacing between date and time inputs */
 }

@@ -58,7 +58,7 @@
                         <tr>
                             <td>{{i +1}}</td>
                             <td>{{election.electionName}}</td>
-                            <td>{{election.electionDate | date:'dd-MM-yyyy'}}</td>
+                            <td>{{election.startTime | date:'dd-MM-yyyy'}}</td>
                             <td>{{election.electionStatus}}</td>
                             <td>{{getWinnerByElectionName(election.electionName)}}</td>
                             <td><button class="view-candidates-btn" (click)="getResultByElection(election.electionName)">View Result</button></td>
@@ -98,7 +98,7 @@
                     <tr>
                         <td>{{i+1}}</td>
                         <td>{{candidate.candidateId}}</td>
-                        <td>{{candidate.candidateDeptNo}}</td>
+                        <td>{{candidate.deptNo}}</td>
                         <td>{{candidate.candidateName}}</td>
                         <td>{{candidate.voteCount}}</td>
                     </tr>

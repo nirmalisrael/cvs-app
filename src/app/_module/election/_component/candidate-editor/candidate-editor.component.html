@@ -31,12 +31,12 @@
             </div>
             <div class="btns-and-option">
                 <button (click)="openAddCandidateForm()" class="add-candidate-btn">Add Candidate</button>
-                <select name="electionNames" id="electionNames" [(ngModel)]="selectedElection" (change)="onSelectOption($event)">
+                <select name="electionNames" id="electionNames" [(ngModel)]="selectedElection" (click)="onSelectOption($event)">
                     <option [ngValue]="undefined" selected disabled>Select Election</option>
                     <option *ngFor="let electionName of electionNames" [value]="electionName">{{electionName}}</option>
                 </select>|
-                <input type="text" name="candidateId" id="candidateId" placeholder="Candidate ID.." required>
-                <a href=""><img src="assets/candidate-editor/search-icon.png" alt="search-icon"></a>
+                <input type="text" name="candidateId" #candidateId id="candidateId" placeholder="Candidate ID.." required>
+                <a (click)="getCandidateById(candidateId.value)"><img src="assets/candidate-editor/search-icon.png" alt="search-icon"></a>
             </div>
         </div>
 
@@ -53,7 +53,7 @@
                     <tr>
                         <td>{{i+1}}</td>
                         <td>{{candidate.candidateId}}</td>
-                        <td>{{candidate.candidateDeptNo}}</td>
+                        <td>{{candidate.deptNo}}</td>
                         <td>{{candidate.candidateName}}</td>
                         <td>
                             <button class="remove-election-btn" (click)="openDeleteCandidate(candidate.candidateId)">
@@ -72,10 +72,10 @@
                     <input type="text" name="candidate-id" id="candidate-id" placeholder="Candidate ID.." [(ngModel)]="newCandidate.candidateId">
 
                     <label for="candidate-deptNo">Candidate Department Number</label>
-                    <input type="text" name="candidate-deptNo" id="candidate-deptNo" placeholder="Candidate dept. no. .." [(ngModel)]="newCandidate.candidateDeptNo">
+                    <input type="text" name="candidate-deptNo" id="candidate-deptNo" placeholder="Candidate dept. no. .." [(ngModel)]="newCandidate.deptNo">
 
                     <label for="electionName">Election Name</label>
-                    <select name="electionNames" id="electionNames" [(ngModel)]="selectedElection">
+                    <select name="electionNames" id="electionNames" [(ngModel)]="newCandidate.electionName">
                         <option [ngValue]="undefined" disabled selected>Select Election</option>
                         <option *ngFor="let electionName of electionNames" [value]="electionName">{{electionName}}
                         </option>

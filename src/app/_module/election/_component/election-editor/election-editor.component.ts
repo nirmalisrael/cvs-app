@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Election } from '../../_dto/election';
 import { ElectionStatus } from '../../_dto/election-status';
 import { Candidate } from '../../_dto/candidate';
@@ -7,6 +7,8 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { ElectionService } from '../../_service/election.service';
 import { AuthService } from 'src/app/_module/auth/_service/jwt-service/auth.service';
+import { DatePipe } from '@angular/common';
+import { CandidateService } from '../../_service/candidate.service';
 
 @Component({
   selector: 'app-election-editor',
@@ -22,9 +24,10 @@ import { AuthService } from 'src/app/_module/auth/_service/jwt-service/auth.serv
     transition('movedRight => initial', animate('500ms ease-in'))
   ])]
 })
-export class ElectionEditorComponent {
+export class ElectionEditorComponent implements OnInit{
 
-  constructor(private router: Router, private electionService: ElectionService, public authService: AuthService) { }
+  constructor(private router: Router, private electionService: ElectionService, 
+    public authService: AuthService, private candidateService: CandidateService) { }
 
   showElectionPage = true;
   showAddedCandidates = false;
@@ -33,6 +36,10 @@ export class ElectionEditorComponent {
   showAddCandidateForm = false;
 
   formAnimationState = 'initial';
+  selectedDate: string | null = '';
+  selectedTime: string | null = '';
+
+  electionNames?: string[];
 
   // electionName: string = '';
 
@@ -40,26 +47,15 @@ export class ElectionEditorComponent {
   newCandidate: Candidate = new Candidate();
   newElection: Election = new Election();
 
-  elections: Election[] = [
-    { electionName: 'Fine Arts Secretary', electionDate: new Date('2024-01-20'), electionStatus: ElectionStatus.LIVE },
-    { electionName: 'Sports Secretary', electionDate: new Date('2024-01-20'), electionStatus: ElectionStatus.COMPLETED },
-    { electionName: 'Chair Man', electionDate: new Date('2024-01-20'), electionStatus: ElectionStatus.UPCOMMING },
-    { electionName: 'Media Secretary', electionDate: new Date('2024-01-20'), electionStatus: ElectionStatus.LIVE }
-  ];
+  elections: Election[] = [];
 
-  candidates: Candidate[] = [
-    {candidateId: 'LCVPM01', candidateDeptNo: '21UCS01', electionName: 'Chair Man'},
-    {candidateId: 'LCVPM02', candidateDeptNo: '21UCS02', electionName: 'Chair Man'},
-    {candidateId: 'LCVPM03', candidateDeptNo: '21UCS03', electionName: 'Chair Man'},
-    {candidateId: 'LCVPM04', candidateDeptNo: '21UCS04', electionName: 'Chair Man'},
-  ];
+  candidates: Candidate[] = [];
 
   statusOptions: string[] = [];
 
-  // candidateComponent: CandidateEditorComponent = new CandidateEditorComponent;
-
   ngOnInit() {
     this.populateStatusOptions();
+    this.getAllElections();
   }
 
   private populateStatusOptions() {
@@ -95,22 +91,22 @@ export class ElectionEditorComponent {
     this.showAddElectionPage = false;
     this.showModifyElectionForm = false;
     this.showElectionPage = true;
+    this.getAllElections();
   }
 
+  getTimeFromDate(date?: Date): string | null{
+    const datePipe = new DatePipe('en-US');
+    return datePipe.transform(date, 'HH:mm'); 
+  }
   openAddElectionPage() {
     this.showElectionPage = false;
     this.showAddElectionPage = true;
   }
 
-  openModifyElectionForm(election: Election) {
-    this.showElectionPage = false;
-    this.showModifyElectionForm = true;
-    this.modifyElection = election;
-  }
-  openDeleteElection(electionName: string | undefined) {
+  openDeleteElection(electionName: string) {
     Swal.fire({
       html: 'Are you sure you want to delete ' + electionName + ' Election',
-      icon: 'warning',
+      icon: 'question',
       showCancelButton: true,
       confirmButtonText: 'Yes',
       confirmButtonColor: 'red',
@@ -118,11 +114,19 @@ export class ElectionEditorComponent {
     }).then((result) => {
       if (result.value) {
         //call delete method in service
-        Swal.fire(
-          'Deleted',
-          electionName + ' Election Deleted Successfully!',
-          'success'
-        );
+        this.electionService.removeElection(electionName).subscribe(
+          (response) => {
+            const deleteResponse = response.message;
+            if (deleteResponse) {
+              Swal.fire(
+                'Deleted',
+                deleteResponse + ' Deleted Successfully!',
+                'success'
+              );
+              this.getAllElections();
+            }
+          }
+        )
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire('Cancelled', electionName + ' Election details are safe!', 'error');
       }
@@ -137,13 +141,76 @@ export class ElectionEditorComponent {
   }
 
   saveElection(election: Election, newCandidates: Candidate[]) {
-    Swal.fire('Saved', election.electionName + ' Election created successfully!', 'success');
+    if (election.electionName !== undefined && this.selectedDate !== '' && this.selectedTime !== '' && election.durationHours !== undefined) {
+      const electionDateTime = this.selectedDate + ' ' +this.selectedTime;
+      this.electionService.createElection(election.electionName, electionDateTime, election.durationHours).subscribe(
+        (response) => {
+          election = response;
+          if (response) {
+            Swal.fire('Created', election.electionName + ' Created successfully!', 'success');
+            this.closeAddElection();
+          }
+        }
+      )
+    }
+  }
+
+  openModifyElectionForm(election: Election) {
+    this.modifyElection = election;
+    this.showElectionPage = false;
+    this.showModifyElectionForm = true;
+    console.log(this.modifyElection.startTime);
+    const datePipe = new DatePipe('en-US');
+    this.selectedDate = datePipe.transform(this.modifyElection.startTime, 'yyyy-MM-dd');
+    this.selectedTime = datePipe.transform(this.modifyElection.startTime, 'HH:mm');    
+  }
+
+  saveModifiedElection() {
+      
+    if (this.modifyElection .electionName !== undefined && this.selectedDate !== '' && this.selectedTime !== '' && this.modifyElection.durationHours !== undefined) {
+      const electionDateTime = this.selectedDate + ' ' +this.selectedTime;
+      console.log(electionDateTime);
+      
+      this.electionService.modifyElection(this.modifyElection.electionName, electionDateTime, this.modifyElection.durationHours).subscribe(
+        (response) => {
+          this.modifyElection = response;
+          if (response) {
+            Swal.fire('Updated', this.modifyElection.electionName + ' Updated successfully!', 'success');
+            this.closeAddElection();
+          }
+        }
+      )
+    }
+  }
+
+  findElectionByName(electionName: string) {
+    if (electionName !== '' && electionName !== undefined) {
+      this.electionService.getElectionByName(electionName).subscribe(
+        (response) => {
+          if(response) {
+            this.elections = [];
+            this.elections.push(response);
+          }
+        }
+      )
+    }    
+  }
+
+  getAllElections() {
+    this.electionService.getAllElections().subscribe(
+      (response) => {
+        this.elections = response;
+        this.electionNames = this.elections.map(election => election.electionName);    
+        this.candidateService.setElectionNames(this.electionNames);    
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
   }
 
   onClickViewCandidates(electionName: string) {
     this.electionService.setSelectedElection(electionName);
     this.router.navigate(['/admin-page/candidate-editor']);
-    // console.log(electionName);
-    
   }
 }

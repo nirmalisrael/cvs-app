@@ -42,10 +42,11 @@
                 <h2>CREATE USER</h2>
                 <input type="text" name="username" placeholder="Username" id="username" [(ngModel)]="userRequest.username" required>
                 <input type="text" name="password" id="password" placeholder="Password" [(ngModel)]="userRequest.password" required>
-                <select class="roles-option" id="roles-option" name="roles-option" [(ngModel)]="role.roleName" required>
+                <select class="roles-option" id="roles-option" name="roles-option" [(ngModel)]="selectedRole.roleName" required>
                         <option [ngValue]="undefined"  disabled selected>Select Role</option>
-                        <option>ADMIN</option>
-                        <option>STUDENT</option>
+                        <option>admin</option>
+                        <option>student</option>
+                        <option>HOD</option>
                     </select>
                 <button class="save-btn" type="submit">Save</button>
             </form>
@@ -66,8 +67,8 @@
                 <button class="find-btn" type="submit">Find</button>
                 <div class="find-user-para">
                     <p><b>Username : </b>{{userResponse.username}}<br>
-                        <b>Role : </b>{{userResponse.roles}} <br>
-                        <b>Role Description : </b>{{userResponse.password}}</p>
+                        <b>Role : </b>{{userResponse.roles?.at(0)?.roleName}} <br>
+                        <b>Role Description : </b>{{userResponse.roles?.at(0)?.roleDescription}}</p>
                 </div>
             </form>
         </div>

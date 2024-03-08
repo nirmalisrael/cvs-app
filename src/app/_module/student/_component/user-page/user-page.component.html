@@ -128,13 +128,15 @@
                                                 name="vote" 
                                                 [(ngModel)]="selectedCandidateId" 
                                                 [value]="candidate.candidateId" 
-                                                (change)="onSelectCandidateId(candidate.candidateId)"
+                                                (change)="onSelectCandidateId()"
                                                 [disabled]="hasVoted"/>
                                             </label>
                                         </td>
                                     </tr>
                                 </table>
-                                <button class="vote-btn" (click)="onClickVote()">Vote</button>
+                                <button *ngIf="!hasVoted" class="vote-btn" (click)="onClickVote()">Vote</button>
+                                <button *ngIf="hasVoted" class="vote-btn">You're Voted</button>
+
                             </div>
                         </div>
                     </div>

@@ -302,7 +302,7 @@ select {
 
 .add-and-modify-candidate-container {
     position: relative;
-    margin-top: 70px;
+    /* margin-top: 70px; */
     left: 220px;
     width: calc(100% - 220px);
     height: calc(100vh - 70px);

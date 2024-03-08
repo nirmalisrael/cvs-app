@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 import { ElectionService } from '../../_service/election.service';
 import { AuthService } from 'src/app/_module/auth/_service/jwt-service/auth.service';
+import { CandidateService } from '../../_service/candidate.service';
 
 @Component({
   selector: 'app-candidate-editor',
@@ -12,28 +13,25 @@ import { AuthService } from 'src/app/_module/auth/_service/jwt-service/auth.serv
 })
 export class CandidateEditorComponent implements OnInit{
 
-  constructor(private electionService: ElectionService, public authService: AuthService) {}
+  constructor(private electionService: ElectionService, public authService: AuthService, private candidateService: CandidateService) {}
 
   showCandidatePage = true;
   showAddCandidateForm = false;
   showModifyCandidateForm = false;
 
-  electionNames: string[] = ['Fine Arts Secretary','Sports Secretary','Media Secretary'];
+  electionNames?: string[];
   selectedElection?: string;
 
   newCandidate: Candidate = new Candidate();
   
-  candidates: Candidate[] = [
-    {candidateId: 'LCVFA01', candidateDeptNo: '21UCS20', candidateName: 'Vetri Piriyan'},
-    {candidateId: 'LCVFA02', candidateDeptNo: '21UCS21', candidateName: 'Nirmal'},
-    {candidateId: 'LCVFA03', candidateDeptNo: '21UCS33', candidateName: 'Santhosh'},
-    {candidateId: 'LCVFA04', candidateDeptNo: '21UCS45', candidateName: 'Maria Raj'},
-  ];
+  candidates: Candidate[] = [];
 
   ngOnInit(): void {
     this.electionService.selectedElection$.subscribe(selectedElection => {
       this.selectedElection = selectedElection;
     });  
+    this.getCandidatesByElection(this.selectedElection);
+    this.electionNames = this.candidateService.getElectionNames();
     this.getCandidatesByElection(this.selectedElection);
   }
 
@@ -50,7 +48,6 @@ export class CandidateEditorComponent implements OnInit{
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
-        //call delete method in service
         Swal.fire(
           'Deleted',
           candidateId + ' Candidate removed Successfully!',
@@ -68,24 +65,53 @@ export class CandidateEditorComponent implements OnInit{
   }
 
   saveCandidate(newCandidate: Candidate) {
-    Swal.fire('Saved', newCandidate.candidateId + ' Candidate added successfully!', 'success');
+    this.candidateService.createCandidate(newCandidate).subscribe(
+      (response) => {
+        newCandidate = response;
+        console.log(response);
+        
+        this.candidates.push(newCandidate);
+        this.closeAddCandidateForm();
+      }
+    )
   }
 
   closeAddCandidateForm () {
     this.showAddCandidateForm = false;
     this.showModifyCandidateForm = false;
     this.showCandidatePage = true;
+    this.getCandidatesByElection(this.selectedElection);
+  }
+
+  getCandidateById(candidateId: string) {
+    if (candidateId) {
+      this.candidateService.getCandidateById(candidateId).subscribe(
+        (response) => {
+          if (response) {
+            this.candidates = [];
+            this.candidates.push(response);
+          }
+        }
+      )
+    }
   }
 
   onSelectOption(event: Event): void {
     const electionName = (event.target as HTMLSelectElement).value;
     this.getCandidatesByElection(electionName);
-    
-    // Call your method here with the selected option
-    // this.filterElection(selectedValue);
   }
 
   getCandidatesByElection(electionName: string | undefined) {
     console.log(electionName);
+    
+    if (electionName) {
+      this.candidateService.getCandidatesByElectionName(electionName).subscribe(
+        (response) => {
+          this.candidates = response;
+          console.log(this.candidates);
+          
+        }
+      )
+    }
   }
 }
