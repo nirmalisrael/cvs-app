@@ -35,18 +35,21 @@
                 <div class="filter-and-btn">
                     <button class="add-student-btn" (click)="openNewStudent()">Add Student</button>
 
-                    <select name="degreeType" id="degreeType">
+                    <select name="degreeType" id="degreeType" (change)="onSelectDegreeType($event)">
                         <option [ngValue]="undefined" selected disabled>Degree Type</option>
+                        <option value="All">All</option>
                         <option *ngFor="let degreeType of degreeTypeOptions" [value]="degreeType">{{degreeType}}
                         </option>
                     </select>
-                    <select name="department" id="department">
+                    <select name="department" id="department" (change)="onSelectDepartment($event)">
                         <option [ngValue]="undefined" selected disabled>Department</option>
+                        <option value="All">All</option>
                         <option *ngFor="let department of departmentOptions" [value]="department">{{department}}
                         </option>
                     </select>
-                    <select name="admissionYear" id="admissionYear">
+                    <select name="admissionYear" id="admissionYear" (change)="onSelectAdmissionYear($event)">
                         <option [ngValue]="undefined" selected disabled>Admission Year</option>
+                        <option value="All">All</option>
                         <option value="2021">2021</option>
                         <option value="2022">2022</option>
                         <option value="2023">2023</option>

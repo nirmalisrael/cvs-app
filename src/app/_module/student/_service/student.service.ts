@@ -6,8 +6,6 @@ import { Url } from 'src/app/_dto/url';
 import { Gender } from '../_dto/gender';
 import { StudentRequest } from '../_dto/student-request';
 import { Department } from '../_dto/department';
-import { Vote } from '../../vote/_dto/vote';
-import { DegreeType } from '../_dto/degree-type';
 
 @Injectable({
   providedIn: 'root'
@@ -32,14 +30,8 @@ export class StudentService {
     return this.http.get<StudentResponse>(`${Url.getHostNameAndPort()}/getStudentById?deptNo=${deptNo}`);
   }
 
-  getStudentsByFiler(degreeType: string | null, department: string | null, admissionYear: any) {
-    this.http.get<StudentResponse[]>(`${Url.getHostNameAndPort()}/getStudentsByFiler?degreeType=${degreeType}&department=${department}&admissionYear=${admissionYear}`)
-    .subscribe(
-      (response) => {
-        console.log(response);
-        
-      }
-    )
+  getStudentsByFiler(degreeType: string | null, department: string | null, admissionYear: number): Observable<StudentResponse[]> {
+    return this.http.get<StudentResponse[]>(`${Url.getHostNameAndPort()}/getStudentsByFiler?degreeType=${degreeType}&department=${department}&admissionYear=${admissionYear}`);
   }
 
   getAllStudents(): Observable<StudentResponse[]> {
@@ -55,7 +47,7 @@ export class StudentService {
     formData.append('file', file, file.name);
 
     const headers = new HttpHeaders();
-    return this.http.post(`${Url.getHostNameAndPort()}/uploadStudentImage?deptNo=${deptNo}`, formData, { headers});
+    return this.http.post(`${Url.getHostNameAndPort()}/uploadStudentImage?deptNo=${deptNo}`, formData, {headers});
   }
 
   setDepartment(student: StudentResponse): Department | undefined{

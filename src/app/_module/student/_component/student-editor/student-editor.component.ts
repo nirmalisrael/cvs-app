@@ -30,6 +30,12 @@ export class StudentEditorComponent implements OnInit{
 
   studentPageHeading?: string;
 
+  selectedDegreeType: string = 'null';
+
+  selectedDepartmentOption: string = 'null';
+
+  selectedAdmissionYear: number = 0;
+
   saveBtnName: string = 'Save';
 
   degreeTypeOptions = Object.values(DegreeType);
@@ -103,6 +109,45 @@ export class StudentEditorComponent implements OnInit{
     this.getAllStudents();
   }
 
+  onSelectDegreeType(event: Event): void {
+    const degreeType: string = (event.target as HTMLSelectElement).value;
+    if (degreeType === 'All') {
+      this.selectedDegreeType = 'null';
+      this.getStudentsByFilter(this.selectedDegreeType, this.selectedDepartmentOption, this.selectedAdmissionYear);
+    } else {
+      this.selectedDegreeType = degreeType;
+      this.getStudentsByFilter(this.selectedDegreeType, this.selectedDepartmentOption, this.selectedAdmissionYear);
+    }
+  }
+
+  onSelectDepartment(event: Event): void {
+    let department = (event.target as HTMLSelectElement).value;
+    console.log(department);
+    if (department === 'All') {
+      this.selectedDepartmentOption = 'null';
+      this.getStudentsByFilter(this.selectedDegreeType, this.selectedDepartmentOption, this.selectedAdmissionYear);
+    } else {
+      department = getKeyByValue(Department, department);
+      this.selectedDepartmentOption = department;
+      this.getStudentsByFilter(this.selectedDegreeType, this.selectedDepartmentOption, this.selectedAdmissionYear);
+    }
+    
+  }
+
+  onSelectAdmissionYear(event: Event): void {
+    const admissionYear: string =(event.target as HTMLSelectElement).value;
+    console.log(admissionYear);
+    
+    if (admissionYear === 'All') {
+      this.selectedAdmissionYear = 0;
+      this.getStudentsByFilter(this.selectedDegreeType, this.selectedDepartmentOption, this.selectedAdmissionYear);
+    } else {
+      const admissionYearNumber = parseInt(admissionYear);
+      this.selectedAdmissionYear = admissionYearNumber;
+      this.getStudentsByFilter(this.selectedDegreeType, this.selectedDepartmentOption, this.selectedAdmissionYear);
+    }
+  }
+
   onClickEditButton() {
     this.showEditStudent = !this.showEditStudent;
   }
@@ -135,7 +180,12 @@ export class StudentEditorComponent implements OnInit{
     console.log(department);
     
     if (department) {
-      this.studentService.getStudentsByFiler(DegreeType.UG, department, 0);
+      this.studentService.getStudentsByFiler(DegreeType.UG, 'null', 0).subscribe(
+        (res) => {
+          console.log(res);
+          
+        }
+      );
 
     }
     // this.newStudent = this.selectedStudent;
@@ -202,6 +252,7 @@ export class StudentEditorComponent implements OnInit{
         }
       )
     }
+    this.toggleEmptyStudentMsg();
   }
 
   removeStudent(deptNo?: string) {
@@ -223,6 +274,7 @@ export class StudentEditorComponent implements OnInit{
         alert(deptNo + " student is safe!");
       }
     }
+    this.toggleEmptyStudentMsg();
   }
 
   getStudentById() {
@@ -240,6 +292,20 @@ export class StudentEditorComponent implements OnInit{
         }
       )
     }
+    this.toggleEmptyStudentMsg();
+  }
+
+  getStudentsByFilter(degreeType: string | null, department: string | null, admissionYear: number | 0) {
+    console.log(degreeType, department, admissionYear);
+    
+    this.studentService.getStudentsByFiler(degreeType, department, admissionYear).subscribe(
+      (response) => {
+        this.studentList = response;
+        console.log(response);
+        
+      }
+    )
+    this.toggleEmptyStudentMsg();
   }
   
   getAllStudents(): StudentResponse[] {
@@ -251,6 +317,15 @@ export class StudentEditorComponent implements OnInit{
         }
       })
     )
+    this.toggleEmptyStudentMsg();
     return this.studentList;
+  }
+
+  toggleEmptyStudentMsg() {
+    if (this.studentList.length > 0) {
+      this.showsEmptyStudentMsg = false;
+    } else {
+      this.showsEmptyStudentMsg = true;
+    }
   }
 }
