@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../_service/jwt-service/auth.service';
 import { JwtRequest } from '../../_dto/jwt-request';
 import { Router } from '@angular/router';
@@ -8,9 +8,16 @@ import { Router } from '@angular/router';
   templateUrl: './admin-login.component.html',
   styleUrls: ['./admin-login.component.css']
 })
-export class AdminLoginComponent {
+export class AdminLoginComponent implements OnInit{
 
   constructor(private authService: AuthService, private router: Router) { }
+  
+  
+  ngOnInit(): void {
+    if (this.authService._isAdminLoggedIn()) {
+      this.router.navigate(['/admin-page']);
+    }  
+  }
 
   jwtRequest: JwtRequest = {
     username : '',

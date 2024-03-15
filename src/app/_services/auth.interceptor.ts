@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
+import { Observable, catchError, throwError } from 'rxjs';
 import { AuthService } from '../_module/auth/_service/jwt-service/auth.service';
 
 @Injectable()
@@ -17,7 +17,16 @@ export class AuthInterceptor implements HttpInterceptor {
                 }
             });
 
-            return next.handle(authReq);
+            return next.handle(authReq).pipe(
+                catchError((error: HttpErrorResponse) => {
+                  if (error.status === 401) {
+                    // Token expired or invalid, log user out
+                    
+                    this.authService.logout(token);
+                  }
+                  return throwError(error);
+                })
+              );
         }
         return next.handle(req);
     }

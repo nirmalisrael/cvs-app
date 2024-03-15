@@ -228,4 +228,29 @@ export class ElectionEditorComponent implements OnInit{
     this.electionService.setSelectedElection(electionName);
     this.router.navigate(['/admin-page/candidate-editor']);
   }
+
+  isValidElectionStatus(status: string): status is keyof typeof ElectionStatus {
+    return Object.keys(ElectionStatus).includes(status);
+  }
+
+  onSelectElectionStatus(event: Event) {
+    const selectedElectionStatus = (event.target as HTMLSelectElement).value;
+    this.getElectionsByElectionStatus(selectedElectionStatus);
+  }
+  
+  getElectionsByElectionStatus(status: string) {
+    if (this.isValidElectionStatus(status)) {
+      const electionStatus: ElectionStatus = ElectionStatus[status as keyof typeof ElectionStatus];
+      if (electionStatus == ElectionStatus.ALL) {
+        this.getAllElections();
+      } else {
+        this.electionService.getElectionsByElectionStatus(electionStatus).subscribe(
+          (response) => {
+            this.elections = response;
+          }
+        )
+      }
+      
+    }
+  }
 }

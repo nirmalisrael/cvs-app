@@ -15,11 +15,11 @@ import { AuthService } from "../_module/auth/_service/jwt-service/auth.service";
         } else if(this.authService.isUser()){
           return true; // Prevent access to the admin route for non-admin users
         } else {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/home']);
             return false;
         }
       } else {
-        this.router.navigate(['/login']); // Redirect to the login page for unauthenticated users
+        this.router.navigate(['/home']); // Redirect to the login page for unauthenticated users
         return false; // Prevent access to the route for unauthenticated users
       }
     }

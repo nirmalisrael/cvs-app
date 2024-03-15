@@ -60,9 +60,9 @@
             </div>
             <div class="students-container">
                 <div class="students-grid-container">
-                    <div class="empty-student-msg" *ngIf="showsEmptyStudentMsg">
+                    <!-- <div class="empty-student-msg" *ngIf="showsEmptyStudentMsg">
                         <p>Student Not found!</p>
-                    </div>
+                    </div> -->
                     <ng-container *ngFor="let student of studentList">
                         <div class="student-grid" (click)="openUpdateStudent(student)">
                             <div class="sub-div student-profile">

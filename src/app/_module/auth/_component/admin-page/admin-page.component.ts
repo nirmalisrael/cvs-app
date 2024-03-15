@@ -11,4 +11,8 @@ export class AdminPageComponent {
 
   constructor(private router: Router, public authService: AuthService) {}
 
+  onClickLogout() {
+    this.authService.logout('admin');
+  }
+  
 }

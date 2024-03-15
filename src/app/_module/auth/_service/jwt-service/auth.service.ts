@@ -23,7 +23,13 @@ export class AuthService {
 
   private token: string | null = null;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  private isAdminLoggedIn = false;
+
+  private isStudentLoggedIn = false;
+
+  constructor(private http: HttpClient, private router: Router) { 
+    this.isAdminLoggedIn = !!localStorage.getItem('isAdminLoggedIn');
+  }
 
   username?: string;
 
@@ -33,25 +39,79 @@ export class AuthService {
       tap((response: JwtResponse) => {
         this.token = response.jwtToken;
         this.storeToken(this.token);
-        localStorage.setItem('username', response.username);
+        if (this.getRole(response).some(role => role == 'admin')) {
+          localStorage.setItem('adminToken', this.token);
+          this.isAdminLoggedIn = true;
+          localStorage.setItem('isAdminLoggedIn', 'true');
+        } else {
+          this.isStudentLoggedIn = true;
+          localStorage.setItem('isStudentLoggedIn', 'true');
+          localStorage.setItem('userToken', this.token);
+          localStorage.setItem('username', response.username);
+        }
+        
       })
     );
   }
 
-  logout(): void {
-    this.clearToken();
+  logout(who: string): void {
+    if (who == 'admin') {
+      this.clearToken('adminToken');
+      this.isAdminLoggedIn = false;
+      localStorage.removeItem('isAdminLoggedIn');
+    } else if(who == 'user') {
+      this.clearToken('userToken');
+      this.isStudentLoggedIn = false;
+      localStorage.removeItem('isStudentLoggedIn');
+    } else {
+      if (who) {
+        const decodedToken = this.decodeToken(who);
+        const roles = decodedToken?.roles || [];
+
+        if(roles.includes('admin')) {
+          this.clearToken('adminToken');
+        } else if(roles.includes('user')) {
+          this.clearToken('user');          
+        }
+      }
+    }
+    this.router.navigate(['/home']);
   }
   
+  _isAdminLoggedIn(): boolean {
+    return this.isAdminLoggedIn;
+  }
+
+  _isStudentLoggedIn(): boolean {
+    return this.isStudentLoggedIn;
+  }
+  
+  getAdminToken(): string | null {
+    return localStorage.getItem('adminToken');
+  }
+
   getToken(): string | null {
     return localStorage.getItem('jwtToken');
+  }
+
+  getUserToken(): string | null {
+    return localStorage.getItem('userToken');
   }
 
   private storeToken(jwtToken: string): void {
     localStorage.setItem('jwtToken', jwtToken);
   }
 
-  private clearToken(): void {
-    localStorage.removeItem('jwtToken');
+  private clearToken(who: string): void {
+    if (who == 'admin') {
+      localStorage.removeItem('adminToken');
+      localStorage.removeItem('isAdminLoggedIn');
+      this.isAdminLoggedIn = false;
+    } else if (who == 'user') {
+      localStorage.removeItem('userToken');
+      localStorage.removeItem('isStudentLoggedIn');
+      this.isStudentLoggedIn = false;
+    }
   }
 
   isAuthenticated(): boolean {
