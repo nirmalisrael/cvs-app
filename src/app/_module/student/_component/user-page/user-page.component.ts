@@ -66,7 +66,10 @@ export class UserPageComponent implements OnInit{
           (reponse) => {
             console.log(reponse);
             
-            this.hasVoted = JSON.parse(reponse.candidateId);
+            this.hasVoted = JSON.parse(reponse.hasVoted);
+            
+            console.log(this.hasVoted);
+            
             this.selectedCandidateId = reponse.candidateId;
           }
         )
