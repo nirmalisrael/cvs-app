@@ -1,0 +1,92 @@
+<html>
+
+<head>
+    <title class="scrolling-title">Loyola College | Admin Dashboard | Candidate Details</title>
+</head>
+
+<body>
+    <div class="left-navbar">
+        <a (click)="authService.navigate('/admin-page/student-editor')">Student Details</a>
+        <a (click)="authService.navigate('/admin-page/auth-editor')">Authentication Details</a>
+        <a (click)="authService.navigate('/admin-page/election-editor')">Election Details</a>
+        <a (click)="authService.navigate('/admin-page/candidate-editor')" id="selected-btn">Candidate Details</a>
+        <a (click)="authService.navigate('/admin-page/election-result')">Election Result Details</a>
+    </div>
+    <div class="top-navbar">
+        <div class="top-nav-heading">
+            <a href="/admin-page">
+                <h1>Admin Dashboard</h1>
+            </a>
+        </div>
+
+        <div class="top-nav-btns">
+            <a href="/home" class="home-btn">Home</a>
+            <a href="/home" id="logout" class="logout-btn">Logout</a>
+        </div>
+    </div>
+    <div class="candidates-page-container">
+        <div class="candidates-nav" *ngIf="showCandidatePage">
+            <div class="election-name">
+                <h2>{{selectedElection}} Candidates</h2>
+            </div>
+            <div class="btns-and-option">
+                <button (click)="openAddCandidateForm()" class="add-candidate-btn">Add Candidate</button>
+                <select name="electionNames" id="electionNames" [(ngModel)]="selectedElection" (click)="onSelectOption($event)">
+                    <option [ngValue]="undefined" selected disabled>Select Election</option>
+                    <option *ngFor="let electionName of electionNames" [value]="electionName">{{electionName}}</option>
+                </select>|
+                <input type="text" name="candidateId" #candidateId id="candidateId" placeholder="Candidate ID.." required>
+                <a (click)="getCandidateById(candidateId.value)"><img src="assets/candidate-editor/search-icon.png" alt="search-icon"></a>
+            </div>
+        </div>
+
+        <div class="candidates-table-container" *ngIf="showCandidatePage">
+            <table class="candidates-table">
+                <tr>
+                    <th style="width: 7%;">Serial No.</th>
+                    <th>Candidate ID</th>
+                    <th>Candidate Dept. No.</th>
+                    <th>Canidate Name</th>
+                    <th style="width: 6%;">Remove</th>
+                </tr>
+                <ng-container *ngFor="let candidate of candidates; let i = index">
+                    <tr>
+                        <td>{{i+1}}</td>
+                        <td>{{candidate.candidateId}}</td>
+                        <td>{{candidate.deptNo}}</td>
+                        <td>{{candidate.candidateName}}</td>
+                        <td>
+                            <button class="remove-election-btn" (click)="openDeleteCandidate(candidate.candidateId)">
+                                <img src="assets/student-editor/delete.png" alt="modify">
+                            </button>
+                        </td>
+                    </tr>
+                </ng-container>
+            </table>
+        </div>
+        <div class="add-and-modify-candidate-container" *ngIf="!showCandidatePage">
+            <div class="add-candidate-form" *ngIf="showAddCandidateForm">
+                <form>
+                    <h1>Register a Candidate</h1>
+                    <label for="candidate-id">Candidate ID</label>
+                    <input type="text" name="candidate-id" id="candidate-id" placeholder="Candidate ID.." [(ngModel)]="newCandidate.candidateId">
+
+                    <label for="candidate-deptNo">Candidate Department Number</label>
+                    <input type="text" name="candidate-deptNo" id="candidate-deptNo" placeholder="Candidate dept. no. .." [(ngModel)]="newCandidate.deptNo">
+
+                    <label for="electionName">Election Name</label>
+                    <select name="electionNames" id="electionNames" [(ngModel)]="selectedElection">
+                        <option [ngValue]="undefined" disabled selected>Select Election</option>
+                        <option *ngFor="let electionName of electionNames" [value]="electionName">{{electionName}}
+                        </option>
+                    </select>
+
+                    <button class="save-btn" (click)="saveCandidate(newCandidate)">Add Candidate</button>
+                </form>
+            </div>
+            <a (click)="closeAddCandidateForm()" class="close-icon"><img src="assets/student-editor/close-icon.png" alt="close-icon"></a>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,544 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('/assets/election-editor/election-bg.jpeg');
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+}
+
+.top-navbar {
+    position: sticky;
+    top: 0;
+    background-color: #ffffff;
+    padding: 10px;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    z-index: 1000;
+}
+
+a {
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    color: rgb(5, 5, 70);
+}
+
+.top-nav-btns a {
+    position: relative;
+    width: fit-content;
+    color: black;
+    text-decoration: none;
+    padding-bottom: 5px;
+    font-size: large;
+    transition: all 0.3s ease;
+    /* Adding a smooth transition effect */
+}
+
+.top-nav-btns a:hover {
+    color: darkblue;
+    /* font-weight: bold; */
+}
+
+.top-nav-btns a::after,
+.top-nav-heading a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: darkblue;
+    bottom: 0;
+    left: 0;
+    transition: all 0.3s ease;
+    /* Adding a smooth transition effect */
+}
+
+.top-nav-btns a:hover::after,
+.top-nav-heading a:hover::after {
+    width: 100%;
+}
+
+.top-navbar .top-nav-heading a h1 {
+    margin-left: 20px;
+}
+
+#logout::after {
+    background-color: red;
+}
+
+#logout:hover {
+    color: red;
+}
+
+.top-nav-btns {
+    width: 15%;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+/* .top-nav-btns  */
+
+.left-navbar {
+    width: 220px;
+    height: 100vh;
+    background-color: #333;
+    position: fixed;
+    color: white;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    z-index: 3;
+}
+
+.left-navbar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    width: 90%;
+    margin-left: 10px;
+    text-align: center;
+    line-height: 1.5;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    border-radius: 2px;
+    transition: box-shadow 0.3s;
+}
+
+.left-navbar a:first-child {
+    margin-top: 98px;
+}
+
+.left-navbar a:hover {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    color: rgb(5, 5, 70);
+    font-weight: bold;
+}
+
+.left-navbar #selected-btn {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    color: rgb(5, 5, 70);
+    font-weight: bold;
+}
+
+.election-page-container {
+    background-color: rgba(252, 96, 68, 0.397);
+}
+
+.table-nav {
+    position: sticky;
+    top: 70px;
+    width: calc(100% - 220px);
+    left: 220px;
+    background-color: lightsalmon;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 0 10px black;
+    z-index: 2;
+}
+
+.btns-and-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btns-and-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.election-name {
+    margin-left: 10%;
+    margin-right: 5%;
+}
+
+.election-name h1 {
+    font-size: 28px;
+    letter-spacing: 0.02em;
+}
+
+.add-election-btn,
+select {
+    font-size: 15px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    outline: none;
+    font-weight: bold;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: white;
+    transition: 0.3s;
+}
+
+.add-election-btn:hover,
+select:hover {
+    box-shadow: 0 0 3px black;
+}
+
+.btns-and-option input {
+    width: 130px;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 8px;
+    outline: none;
+    margin-right: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    transition: 0.3s;
+}
+
+.btns-and-option input:focus {
+    box-shadow: 0 0 3px black;
+    border: 1px solid white;
+}
+
+.btns-and-option a img {
+    width: 25px;
+}
+
+.btns-and-option a img:hover {
+    filter: brightness(0) contrast(1);
+}
+
+.election-table-container {
+    width: calc(100% - 220px);
+    min-height: 100vh;
+    margin-top: 40px;
+    margin-left: 220px;
+    display: flex;
+    justify-content: center;
+}
+
+.election-table-container table {
+    font-family: 'Roboto', 'Lato', 'Open Sans';
+    width: 80%;
+    margin-top: 0px;
+    height: fit-content;
+    table-layout: fixed;
+    border-collapse: separate;
+    background-color: rgba(245, 222, 179, 0.733);
+    border-spacing: 0;
+}
+
+.election-table-container table th {
+    padding: 20px;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+}
+
+.election-table-container table th {
+    position: sticky;
+    top: 147px;
+    background-color: lightgrey;
+}
+
+.election-table-container table td {
+    /* color: white; */
+    text-align: center;
+    padding: 40px;
+    /* border-top: 1px solid; */
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+}
+
+.election-table-container table th:first-child {
+    border-left: 2px solid;
+}
+
+.election-table-container table td:first-child {
+    border-left: 2px solid;
+}
+
+.election-table-container table tbody tr:last-child td {
+    border-bottom: 2px solid;
+}
+
+.election-table-container table tbody td:last-child {
+    border-right: 2px solid;
+    padding: 0;
+    margin: 0;
+}
+
+.election-table-container table td button {
+    border-radius: 5px;
+    border: 1px solid grey;
+    outline: none;
+    white-space: nowrap;
+    background-color: rgb(35, 133, 245);
+    /* font-size: 16px; */
+    padding: 10px;
+    /* letter-spacing: 1px; */
+    cursor: pointer;
+    font-weight: bold;
+    transition: 300ms;
+}
+
+.election-table-container table td .view-candidates-btn:hover {
+    box-shadow: 0px 0px 3px blue;
+}
+
+.election-table-container table td .modify-election-btn,
+.election-table-container table td .remove-election-btn {
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: space-between;
+    /* align-items: center; */
+}
+
+.election-table-container table td .modify-election-btn img,
+.election-table-container table td .remove-election-btn img {
+    width: 40px;
+}
+
+.election-table-container table td .modify-election-btn:hover,
+.election-table-container table td .remove-election-btn:hover {
+    box-shadow: 0 0 4px black;
+}
+
+.modify-election-btn {
+    margin-right: 5px;
+}
+
+.add-election-container,
+.modify-election-container {
+    position: relative;
+    /* margin-top: 70px; */
+    left: 220px;
+    width: calc(100% - 220px);
+    height: calc(100vh - 70px);
+    /* background-image: url('/assets/election-editor/election-bg.jpeg'); */
+    background-color: rgba(161, 159, 155, 0.733);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-election-form form input[type=text],
+.add-election-form form input[type=date],
+.add-election-form form input[type=time],
+.add-election-form form input,
+.add-election-form form select,
+.modify-election-form form input,
+.modify-election-form form select,
+textarea,
+.add-candidate-btn {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+.add-candidate-btn:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
+input[type=submit],
+.add-candidate,
+.save-btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+    cursor: pointer;
+}
+
+.add-election-form {
+    position: absolute;
+    width: 40%;
+    display: flex;
+    transition: transform 500ms ease-out;
+}
+
+.add-election-form form {
+    width: 100%;
+    min-height: fit-content;
+    max-height: 75vh;
+    overflow: auto;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: white;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #8a8888;
+}
+
+.add-candidate-table {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+}
+
+.add-candidate-table table {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    border-collapse: collapse;
+    margin: 10px;
+}
+
+.add-candidate-table table th {
+    padding: 5px;
+    border: 1px solid;
+}
+
+.add-candidate-table table td {
+    /* color: white; */
+    text-align: center;
+    padding: 5px;
+    border: 1px solid;
+}
+
+.add-candidate-table table td button {
+    border-radius: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    box-sizing: border-box;
+}
+
+.add-candidate-table table td img {
+    width: 19px;
+    padding: 0px !important;
+    margin: 0;
+    cursor: pointer;
+}
+
+.add-candidate-table table tr td:last-child {
+    border: none;
+    /* border-radius: 100%; */
+    padding-left: 5px;
+    margin: 0;
+}
+
+.add-candidate-table table td button:hover {
+    box-shadow: 0 0 4px black;
+}
+
+.add-candidate-form form input[type=text],
+.add-candidate-form form input[type=date],
+.add-candidate-form form select,
+textarea,
+.modify-election-form form input[type=text],
+.modify-election-form form input[type=date],
+.modify-election-form form select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+.add-candidate-form {
+    position: absolute;
+    width: 40%;
+    right: 5%;
+    display: flex;
+    transition: transform 300ms ease-out;
+}
+
+.modify-election-form {
+    width: 40%;
+    display: flex;
+    transition: transform 300ms ease-out;
+}
+
+.add-candidate-form form,
+.modify-election-form form {
+    width: 100%;
+    min-height: fit-content;
+    max-height: 75vh;
+    overflow: auto;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.add-election-container .add-election-form h1,
+.add-candidate-form h1,
+.modify-election-form h1 {
+    padding: 10px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.close-icon img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 50%;
+    background-color: rgba(161, 159, 155, 0.733);
+    transition: 300ms;
+    cursor: pointer;
+}
+
+.close-icon img:hover {
+    box-shadow: 0 0 6px darkred;
+    background-color: rgb(248, 154, 154);
+}
+
+.datetime-picker {
+    display: flex;
+    align-items: center;
+}
+
+.date-input,
+.time-input {
+    width: 100px;
+    /* Adjust the width as needed */
+    margin-right: 5px;
+    /* Adjust the spacing between date and time inputs */
+}

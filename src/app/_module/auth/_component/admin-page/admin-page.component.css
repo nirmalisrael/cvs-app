@@ -1,0 +1,283 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+}
+
+.container {
+    display: flex;
+}
+
+.top-navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 10px;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    z-index: 1000;
+}
+
+a {
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    color: rgb(5, 5, 70);
+}
+
+.top-nav-btns {
+    margin-right: 20px;
+}
+
+.top-nav-btns a {
+    position: relative;
+    width: fit-content;
+    color: black;
+    text-decoration: none;
+    padding-bottom: 5px;
+    /* font-size: large; */
+    transition: all 0.3s ease;
+    margin-right: 20px;
+    /* Adding a smooth transition effect */
+}
+
+.top-nav-btns a::after,
+.top-nav-heading a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: darkblue;
+    bottom: 0;
+    left: 0;
+    transition: all 0.3s ease;
+    /* Adding a smooth transition effect */
+}
+
+.top-nav-btns a:hover::after,
+.top-nav-heading a:hover::after {
+    width: 100%;
+}
+
+.top-nav-btns a:hover::after {
+    width: 100%;
+}
+
+.top-nav-btns a:hover {
+    color: darkblue;
+}
+
+.top-navbar .top-nav-heading a h1 {
+    margin-left: 20px;
+}
+
+#logout::after {
+    background-color: red;
+}
+
+#logout:hover {
+    color: red;
+}
+
+.top-nav-btns {
+    width: 15%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.left-navbar {
+    width: 250px;
+    height: 100vh;
+    background-color: #333;
+    color: white;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+}
+
+.left-navbar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 15px;
+    margin-left: 0;
+    text-align: center;
+    line-height: 1.5;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    border-radius: 2px;
+    transition: box-shadow 0.3s;
+}
+
+.left-navbar a:first-child {
+    margin-top: 98px;
+}
+
+.left-navbar a:hover {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    color: rgb(5, 5, 70);
+    font-weight: bold;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 70px;
+    max-width: 1000px;
+    max-height: 500px;
+    /* Set your preferred max-width */
+    width: 100%;
+    height: 100%;
+}
+
+.grid-item {
+    width: 45%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 15px;
+    border-radius: 4px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    transition: box-shadow 0.3s;
+}
+
+.grid-item a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.grid-item:hover {
+    box-shadow: 0px 0px 20px rgb(0, 0, 0);
+    /* cursor: pointer; */
+}
+
+.grid-item p {
+    line-height: 2;
+}
+
+#student {
+    background-color: rgb(0, 132, 255);
+}
+
+#student h1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 30px;
+}
+
+#student img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-top: 10px;
+    padding-right: 20px;
+    max-width: 60px;
+}
+
+#student p {
+    /* font-weight: bold; */
+    /* color: #ffffff; */
+    letter-spacing: 1px;
+    margin: 0;
+    padding-left: 20px;
+}
+
+#election {
+    background-color: tomato;
+}
+
+#election h1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 30px;
+}
+
+#election img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-top: 10px;
+    padding-right: 15px;
+    max-width: 60px;
+}
+
+#election p {
+    letter-spacing: 1px;
+    margin: 0;
+    padding-left: 20px;
+}
+
+#auth {
+    background-color: rgb(46, 235, 46);
+}
+
+#auth h1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 30px;
+}
+
+#auth img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-top: 7px;
+    padding-right: 12px;
+    max-width: 70px;
+}
+
+#auth p {
+    letter-spacing: 1.5px;
+    margin: 0;
+    padding-left: 20px;
+}
+
+#result {
+    background-color: slateblue
+}
+
+#result h1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 30px;
+}
+
+#result img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-top: 10px;
+    padding-right: 15px;
+    max-width: 60px;
+}
+
+#result p {
+    letter-spacing: 1px;
+    margin: 0;
+    padding-left: 20px;
+}

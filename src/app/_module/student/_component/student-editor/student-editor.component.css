@@ -1,0 +1,508 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('/assets/student-editor/students-bg.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+}
+
+.page-container {
+    /* display: flex; */
+    position: relative;
+}
+
+.top-navbar {
+    position: sticky;
+    top: 0;
+    background-color: #ffffff;
+    padding: 10px;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    z-index: 1000;
+}
+
+a {
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    color: rgb(5, 5, 70);
+}
+
+.top-nav-btns a {
+    position: relative;
+    width: fit-content;
+    color: black;
+    text-decoration: none;
+    padding-bottom: 5px;
+    font-size: large;
+    transition: all 0.3s ease;
+    /* Adding a smooth transition effect */
+}
+
+.top-nav-btns a::after,
+.top-nav-heading a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: darkblue;
+    bottom: 0;
+    left: 0;
+    transition: all 0.3s ease;
+    /* Adding a smooth transition effect */
+}
+
+.top-nav-btns a:hover::after,
+.top-nav-heading a:hover::after {
+    width: 100%;
+}
+
+.top-nav-btns a:hover::after {
+    width: 100%;
+}
+
+.top-navbar .top-nav-heading a h1 {
+    margin-left: 20px;
+}
+
+#logout::after {
+    background-color: red;
+}
+
+#logout:hover {
+    color: red;
+}
+
+.top-nav-btns {
+    width: 15%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.top-nav-btns a:hover {
+    color: darkblue;
+    /* font-weight: bold; */
+}
+
+.left-navbar {
+    width: 220px;
+    height: 100vh;
+    background-color: #333;
+    position: fixed;
+    color: white;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    z-index: 1;
+}
+
+.left-navbar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    width: 90%;
+    margin-left: 10px;
+    text-align: center;
+    line-height: 1.5;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    border-radius: 2px;
+    transition: box-shadow 0.3s;
+}
+
+.left-navbar a:first-child {
+    margin-top: 98px;
+}
+
+.left-navbar a:hover {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    color: rgb(5, 5, 70);
+    font-weight: bold;
+}
+
+.left-navbar #selected-btn {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    color: rgb(5, 5, 70);
+    font-weight: bold;
+}
+
+.students-page-cantainer {
+    background-color: rgba(15, 95, 199, 0.411);
+}
+
+.students-nav {
+    position: sticky;
+    top: 74px;
+    left: 220px;
+    width: calc(100% - 260px);
+    /* margin-left: 220px; */
+    background-color: lightsalmon;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 0 10px black;
+}
+
+.filter-and-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter-and-btn button,
+.filter-and-btn select {
+    font-size: 15px;
+    padding: 8px;
+    border-radius: 5px;
+    /* border: 1px solid grey; */
+    outline: none;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.add-student-btn {
+    padding: 10px;
+    background-color: whitesmoke;
+    margin-right: 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: 1px solid grey;
+    cursor: pointer;
+}
+
+.filter-and-btn input {
+    width: 130px;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 8px;
+    outline: none;
+    margin-right: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+
+.filter-and-btn input:focus {
+    box-shadow: 0 0 3px black;
+    border: 1px solid white;
+}
+
+.filter-and-btn a img {
+    width: 25px;
+}
+
+.filter-and-btn a img:hover {
+    filter: brightness(0) contrast(1);
+}
+
+
+/* .students-container {} */
+
+.students-grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: start; */
+    margin-left: 220px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    min-height: calc(100vh - 151px);
+    width: calc(100% - 220px);
+}
+
+.student-grid {
+    /* position: relative; */
+    display: flex;
+    width: 25%;
+    height: 20vh;
+    align-items: center;
+    background-color: whitesmoke;
+    padding: 20px;
+    margin: 20px;
+    transition: 0.3s;
+    border-radius: 4px;
+}
+
+.student-profile {
+    box-sizing: border-box;
+    width: 40%;
+    height: 100%;
+    padding: 5px;
+    /* align-items: center;
+    justify-content: center; */
+    /* display: flex; */
+    text-align: center;
+}
+
+.student-info {
+    box-sizing: border-box;
+    width: 70%;
+    /* background-color: blue; */
+}
+
+.student-info table {
+    width: 100%;
+    height: 20vh;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+.student-info table tr th {
+    width: 40%;
+    text-align: right;
+    padding: 3%;
+    border: 1px solid black;
+}
+
+.student-info table tr td {
+    text-align: left;
+    padding: 2%;
+    border: 1px solid black;
+}
+
+td:last-child {
+    width: 100%;
+    text-align: center;
+}
+
+.profile-img {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 10px;
+    width: 90%;
+    height: 60%;
+    border-radius: 60%;
+}
+
+.student-grid:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px black;
+}
+
+.student-profile-container {
+    /* height: calc(100vh - 74px); */
+    /* padding-bottom: 15px; */
+    width: calc(100% - 220px);
+    margin-left: 220px;
+    background-image: url("/assets/student-editor/cap-bg.jpg");
+    /* display: flex; */
+}
+
+.bg {
+    /* backdrop-filter: blur(5px); */
+    background-color: rgba(0, 0, 255, 0.534);
+    padding-bottom: 10px;
+}
+
+.student-nav {
+    position: sticky;
+    top: 74px;
+    /* margin-left: 220px; */
+    background-color: lightsalmon;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 0 10px black;
+}
+
+.back-btn,
+.edit-btn,
+.delete-btn {
+    width: 100px;
+    cursor: pointer;
+    margin-left: 20px;
+    border: none;
+    outline: none;
+    color: white;
+}
+
+.back-btn {
+    background-color: grey;
+}
+
+.edit-btn {
+    background-color: rgb(0, 119, 255);
+}
+
+.delete-btn {
+    background-color: rgb(255, 17, 0);
+}
+
+.student-sec-1,
+.student-sec-2 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 60%;
+    height: fit-content;
+    background-color: rgba(173, 216, 230, 0.678);
+    border-radius: 5px;
+    margin: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 1%;
+}
+
+.student-img-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.student-img {
+    box-sizing: border-box;
+    width: 30%;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+}
+
+.student-img img {
+    min-width: 100px;
+    max-width: 90%;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.id-table {
+    width: 80%;
+    margin: 2%;
+    /* margin-left: 10%; */
+    box-sizing: border-box;
+}
+
+.id-table table {
+    width: 50%;
+    text-wrap: nowrap;
+}
+
+.id-table th {
+    width: 30%;
+}
+
+.id-table table td,
+.id-table table th {
+    text-align: left;
+    padding: 3%;
+}
+
+#student-name {
+    font-size: 20px;
+}
+
+.student-info-table {
+    width: 100%;
+}
+
+.student-info-table table {
+    border-collapse: collapse;
+    border: 1px solid grey;
+    margin: 20px;
+    /* margin-bottom: 10px; */
+    border-radius: 5px;
+}
+
+.student-info-table tr,
+.student-info-table td,
+.student-info-table th {
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.student-info-table th {
+    width: 30%;
+}
+
+.student-info-table td {
+    text-align: left;
+    padding-left: 5%;
+}
+
+td span input,
+th span input,
+td span select {
+    height: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.575);
+    transition: 0.3s;
+}
+
+.student-img span input {
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+#studentName {
+    width: 96%;
+    font-weight: bold;
+}
+
+#address {
+    width: 80%;
+}
+
+.student-sec-2 .btns {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.btns button {
+    width: 90px;
+    padding: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: white;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    margin-right: 20px;
+    background-color: rgb(255, 27, 27);
+}
+
+.save-btn {
+    background-color: rgb(5, 158, 5);
+}
+
+button,
+input {
+    transition: 0.3s;
+    outline: none;
+    border: none;
+}
+
+button:hover,
+input:focus {
+    box-shadow: 0 0 5px black;
+}
+
+.empty-student-msg {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-student-msg p {
+    /* font-weight: bold; */
+    color: whitesmoke;
+}

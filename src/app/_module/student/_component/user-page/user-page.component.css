@@ -1,0 +1,356 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+}
+
+.top-navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 10px;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 20px; */
+    padding-left: 5%;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    z-index: 1000;
+}
+
+a,
+.top-nav-heading h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    color: rgb(5, 5, 70);
+}
+
+.top-nav-btns a,
+.top-nav-heading h1 {
+    position: relative;
+    width: fit-content;
+    color: rgb(5, 5, 70);
+    text-decoration: none;
+    padding-bottom: 5px;
+    transition: all 0.3s ease;
+    /* Adding a smooth transition effect */
+    cursor: pointer;
+}
+
+.top-nav-btns a::after,
+.top-nav-heading h1::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: darkblue;
+    bottom: 0;
+    left: 0;
+    transition: all 0.3s ease;
+    /* Adding a smooth transition effect */
+}
+
+.top-nav-btns a:hover::after,
+.top-nav-heading h1:hover::after {
+    width: 100%;
+}
+
+.top-nav-btns a:hover::after {
+    width: 100%;
+}
+
+.top-navbar .top-nav-heading a h1 {
+    margin-left: 20px;
+}
+
+#logout::after {
+    background-color: red;
+}
+
+#logout:hover {
+    color: red;
+}
+
+.top-nav-btns {
+    width: 15%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.top-nav-btns a:hover {
+    color: darkblue;
+    /* font-weight: bold; */
+}
+
+.student-profile {
+    width: 100%;
+    height: 100%;
+    margin-top: 78px;
+    background: #67B26F;
+    background: -webkit-linear-gradient(to right, tomato, rgb(22, 22, 141));
+    background: linear-gradient(to right, tomato, rgb(5, 5, 70));
+}
+
+.container {
+    align-items: center;
+    justify-content: center;
+}
+
+.student-profile .card {
+    border-radius: 10px;
+}
+
+.student-profile .card .card-header .profile_img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 10px auto;
+    border: 10px solid #ccc;
+    border-radius: 50%;
+}
+
+.student-profile .card h3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.student-profile .card p {
+    font-size: 16px;
+    color: #000;
+}
+
+.student-profile .table th,
+.student-profile .table td {
+    font-size: 16px;
+    padding: 5px 10px;
+    color: #000;
+}
+
+.election-button {
+    color: crimson;
+}
+
+.select-election-container {
+    margin: 20px;
+}
+
+.select-election-container img {
+    height: fit-content;
+    width: fit-content;
+    mask-repeat: no-repeat;
+}
+
+.election-list {
+    /* border: 1px solid black; */
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    padding: 20px;
+    margin: auto;
+    flex-direction: column;
+    background: -webkit-linear-gradient(to right, tomato, rgb(22, 22, 141));
+    background: linear-gradient(to right, tomato, rgb(5, 5, 70));
+    box-shadow: 0 0 5px black;
+    border-radius: 10px;
+}
+
+.election-list h1,
+.continue-btn,
+.election-list select,
+.election-list option {
+    margin: 10px;
+}
+
+.election-list h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.election-list select,
+option {
+    width: 40%;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5%;
+}
+
+.continue-btn {
+    width: 30%;
+    background-color: #67B26F;
+    padding: 8px;
+    color: whitesmoke;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.continue-btn:hover {
+    box-shadow: 0 0 5px black;
+}
+
+.voting-page {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+}
+
+.heading {
+    /* width: 100%; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.heading h2 {
+    color: black;
+    padding: 20px;
+}
+
+.back-btn {
+    width: 80px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    box-shadow: -2px 2px 0px black;
+}
+
+.table-container {
+    margin: auto;
+}
+
+.table td img {
+    width: 45%;
+}
+
+#voting-table td,
+#voting-table th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+td label {
+    display: block;
+    line-height: 40px;
+}
+
+.option-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    position: relative;
+    top: 13.33333px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 40px;
+    width: 40px;
+    transition: all 0.15s ease-out 0s;
+    background: #cbd1d8;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 0.5rem;
+    outline: none;
+    position: relative;
+    /* z-index: 1000; */
+}
+
+.option-input:hover {
+    background: #9faab7;
+}
+
+.option-input:checked {
+    background: rgb(1, 182, 1);
+}
+
+.option-input:checked::before {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    content: '\f00c';
+    font-size: 25px;
+    font-weight: bold;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Font Awesome 5 Free';
+}
+
+.option-input:checked::after {
+    -webkit-animation: click-wave 0.65s;
+    -moz-animation: click-wave 0.65s;
+    animation: click-wave 0.65s;
+    background: rgb(1, 182, 1);
+    content: '';
+    display: block;
+    position: relative;
+    /* z-index: 100; */
+}
+
+.option-input.radio {
+    border-radius: 50%;
+}
+
+.option-input.radio::after {
+    border-radius: 50%;
+}
+
+@keyframes click-wave {
+    0% {
+        height: 40px;
+        width: 40px;
+        opacity: 0.35;
+        position: relative;
+    }
+    100% {
+        height: 200px;
+        width: 200px;
+        margin-left: -80px;
+        margin-top: -80px;
+        opacity: 0;
+    }
+}
+
+.vote-btn {
+    margin-top: 1%;
+    margin-bottom: 2%;
+    width: 100%;
+    padding: 10px;
+    font-size: 35px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #67B26F;
+    color: whitesmoke;
+    transition: 0.3s;
+}
+
+.vote-btn:hover {
+    box-shadow: 0 0 8px grey;
+}
